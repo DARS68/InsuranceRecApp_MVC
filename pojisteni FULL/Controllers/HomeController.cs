@@ -18,22 +18,22 @@ namespace pojisteni_FULL.Controllers
             return View();
         }
 
-        public IActionResult Pojistenci()
+        public IActionResult InsuredPerson()
         {
             return View();
         }
 
-        public IActionResult Pojisteni()
+        public IActionResult Insurance()
         {
             return View();
         }
 
-        public IActionResult Udalosti()
+        public IActionResult Event()
         {
             return View();
         }
 
-        public IActionResult OAplikaci()
+        public IActionResult AboutApp()
         {
             return View();
         }
