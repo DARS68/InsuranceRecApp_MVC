@@ -18,7 +18,22 @@ namespace pojisteni_FULL.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Pojistenci()
+        {
+            return View();
+        }
+
+        public IActionResult Pojisteni()
+        {
+            return View();
+        }
+
+        public IActionResult Udalosti()
+        {
+            return View();
+        }
+
+        public IActionResult OAplikaci()
         {
             return View();
         }
