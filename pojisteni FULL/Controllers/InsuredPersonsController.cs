@@ -22,7 +22,7 @@ namespace pojisteni_FULL.Controllers
         // GET: InsuredPersons
         public async Task<IActionResult> Index()
         {
-              return View(await _context.InsuredPerson.ToListAsync());
+            return View(await _context.InsuredPerson.ToListAsync());
         }
 
         // GET: InsuredPersons/Details/5
@@ -33,8 +33,7 @@ namespace pojisteni_FULL.Controllers
                 return NotFound();
             }
 
-            var insuredPerson = await _context.InsuredPerson
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var insuredPerson = await _context.InsuredPerson.FirstOrDefaultAsync(m => m.Id == id);
             if (insuredPerson == null)
             {
                 return NotFound();
@@ -148,14 +147,14 @@ namespace pojisteni_FULL.Controllers
             {
                 _context.InsuredPerson.Remove(insuredPerson);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool InsuredPersonExists(int id)
         {
-          return _context.InsuredPerson.Any(e => e.Id == id);
+            return _context.InsuredPerson.Any(e => e.Id == id);
         }
     }
 }
