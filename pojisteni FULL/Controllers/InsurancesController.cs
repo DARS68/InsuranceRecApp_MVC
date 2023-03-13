@@ -10,84 +10,85 @@ using pojisteni_FULL.Models;
 
 namespace pojisteni_FULL.Controllers
 {
-    public class InsuredPersonsController : Controller
+    public class InsurancesController : Controller
     {
         private readonly ApplicationDbContext DB;
 
-        public InsuredPersonsController(ApplicationDbContext context)
+        public InsurancesController(ApplicationDbContext context)
         {
             DB = context;
         }
 
-        // GET: InsuredPersons
+        // GET: Insurances
         public async Task<IActionResult> Index()
         {
-            return View(await DB.InsuredPerson.ToListAsync());
+              return View(await DB.Insurance.ToListAsync());
         }
 
-        // GET: InsuredPersons/Details/5
+        // GET: Insurances/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || DB.InsuredPerson == null)
+            if (id == null || DB.Insurance == null)
             {
                 return NotFound();
             }
 
-            var insuredPerson = await DB.InsuredPerson.FirstOrDefaultAsync(m => m.Id == id);
-            if (insuredPerson == null)
+            var insurance = await DB.Insurance
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (insurance == null)
             {
                 return NotFound();
             }
 
-            return View(insuredPerson);
+            return View(insurance);
         }
 
-        // GET: InsuredPersons/Create
+        // GET: Insurances/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: InsuredPersons/Create
+        // POST: Insurances/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,Email,PhoneNumber,StreetAndNumber,City,ZipCode")] InsuredPerson insuredPerson)
+        public async Task<IActionResult> Create([Bind("Id,InsuranceName,InsuranceDescription,InsuranceAmount,SubjectOfInsurance,ValidFrom,ValidTo")] Insurance insurance)
         {
             if (ModelState.IsValid)
             {
-                DB.InsuredPerson.Add(insuredPerson);
+                DB.Add(insurance);
                 await DB.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(insuredPerson);
+            return View(insurance);
         }
 
-        // GET: InsuredPersons/Edit/5
+        // GET: Insurances/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || DB.InsuredPerson == null)
+            if (id == null || DB.Insurance == null)
             {
                 return NotFound();
             }
 
-            var insuredPerson = await DB.InsuredPerson.FindAsync(id);
-            if (insuredPerson == null)
+            var insurance = await DB.Insurance.FindAsync(id);
+            if (insurance == null)
             {
                 return NotFound();
             }
-            return View(insuredPerson);
+            return View(insurance);
         }
 
-        // POST: InsuredPersons/Edit/5
+        // POST: Insurances/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,Email,PhoneNumber,StreetAndNumber,City,ZipCode")] InsuredPerson insuredPerson)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,InsuranceName,InsuranceDescription,InsuranceAmount,SubjectOfInsurance,ValidFrom,ValidTo")] Insurance insurance)
         {
-            if (id != insuredPerson.Id)
+            if (id != insurance.Id)
             {
                 return NotFound();
             }
@@ -96,12 +97,12 @@ namespace pojisteni_FULL.Controllers
             {
                 try
                 {
-                    DB.Update(insuredPerson);
+                    DB.Update(insurance);
                     await DB.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!InsuredPersonExists(insuredPerson.Id))
+                    if (!InsuranceExists(insurance.Id))
                     {
                         return NotFound();
                     }
@@ -112,49 +113,49 @@ namespace pojisteni_FULL.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(insuredPerson);
+            return View(insurance);
         }
 
-        // GET: InsuredPersons/Delete/5
+        // GET: Insurances/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || DB.InsuredPerson == null)
+            if (id == null || DB.Insurance == null)
             {
                 return NotFound();
             }
 
-            var insuredPerson = await DB.InsuredPerson
+            var insurance = await DB.Insurance
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (insuredPerson == null)
+            if (insurance == null)
             {
                 return NotFound();
             }
 
-            return View(insuredPerson);
+            return View(insurance);
         }
 
-        // POST: InsuredPersons/Delete/5
+        // POST: Insurances/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (DB.InsuredPerson == null)
+            if (DB.Insurance == null)
             {
-                return Problem("Entity set 'ApplicationDbContext.InsuredPerson'  is null.");
+                return Problem("Entity set 'ApplicationDbContext.Insurance'  is null.");
             }
-            var insuredPerson = await DB.InsuredPerson.FindAsync(id);
-            if (insuredPerson != null)
+            var insurance = await DB.Insurance.FindAsync(id);
+            if (insurance != null)
             {
-                DB.InsuredPerson.Remove(insuredPerson);
+                DB.Insurance.Remove(insurance);
             }
-
+            
             await DB.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool InsuredPersonExists(int id)
+        private bool InsuranceExists(int id)
         {
-            return DB.InsuredPerson.Any(e => e.Id == id);
+          return DB.Insurance.Any(e => e.Id == id);
         }
     }
 }

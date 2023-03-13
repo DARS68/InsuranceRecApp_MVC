@@ -19,6 +19,7 @@ namespace pojisteni_FULL.Models
 		public string City { get; set; } = "";
 		[Display(Name = "PSČ")]
 		public string ZipCode { get; set; } = "";
+		public string InsuranceId { get; set; }
 
 	}
 }

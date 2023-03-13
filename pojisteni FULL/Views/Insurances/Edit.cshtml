@@ -1,0 +1,56 @@
+﻿@model pojisteni_FULL.Models.Insurance
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Insurance</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="InsuranceName" class="control-label"></label>
+                <input asp-for="InsuranceName" class="form-control" />
+                <span asp-validation-for="InsuranceName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="InsuranceDescription" class="control-label"></label>
+                <input asp-for="InsuranceDescription" class="form-control" />
+                <span asp-validation-for="InsuranceDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="InsuranceAmount" class="control-label"></label>
+                <input asp-for="InsuranceAmount" class="form-control" />
+                <span asp-validation-for="InsuranceAmount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SubjectOfInsurance" class="control-label"></label>
+                <input asp-for="SubjectOfInsurance" class="form-control" />
+                <span asp-validation-for="SubjectOfInsurance" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ValidFrom" class="control-label"></label>
+                <input asp-for="ValidFrom" class="form-control" />
+                <span asp-validation-for="ValidFrom" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ValidTo" class="control-label"></label>
+                <input asp-for="ValidTo" class="form-control" />
+                <span asp-validation-for="ValidTo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
