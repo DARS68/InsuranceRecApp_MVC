@@ -33,11 +33,15 @@ namespace pojisteni_FULL.Controllers
                 return NotFound();
             }
 
-            var insuredPerson = await DB.InsuredPerson.FirstOrDefaultAsync(m => m.Id == id);
+            var insuredPerson = await DB.InsuredPerson
+                .Include(i => i.Insurances)
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (insuredPerson == null)
             {
                 return NotFound();
             }
+
+            TempData["InsuredPersonId"] = (int)insuredPerson.Id;
 
             return View(insuredPerson);
         }
@@ -57,6 +61,7 @@ namespace pojisteni_FULL.Controllers
         {
             if (ModelState.IsValid)
             {
+                //DB.Add(insuredPerson);
                 DB.InsuredPerson.Add(insuredPerson);
                 await DB.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

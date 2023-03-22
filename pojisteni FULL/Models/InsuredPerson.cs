@@ -10,7 +10,8 @@ namespace pojisteni_FULL.Models
 		public string FirstName { get; set; } = "";
 		[Display(Name = "Příjmení")]
 		public string LastName { get; set; } = "";
-		public string Email { get; set; }
+		public string Email { get; set; } = "";
+
 		[Display(Name = "Telefonní číslo")]
 		public int PhoneNumber { get; set; }
 		[Display(Name = "Ulice a číslo popisné")]
@@ -19,7 +20,9 @@ namespace pojisteni_FULL.Models
 		public string City { get; set; } = "";
 		[Display(Name = "PSČ")]
 		public string ZipCode { get; set; } = "";
-		public string InsuranceId { get; set; }
+		//public string InsuranceId { get; set; }
+
+		public virtual ICollection<Insurance> Insurances { get; set; } = new HashSet<Insurance> ();
 
 	}
 }

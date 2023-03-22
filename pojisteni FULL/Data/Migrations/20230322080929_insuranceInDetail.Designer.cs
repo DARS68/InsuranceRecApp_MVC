@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using pojisteni_FULL.Data;
 
@@ -11,13 +12,14 @@ using pojisteni_FULL.Data;
 namespace pojisteni_FULL.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230322080929_insuranceInDetail")]
+    partial class insuranceInDetail
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.15")
+                .HasAnnotation("ProductVersion", "6.0.14")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -243,7 +245,7 @@ namespace pojisteni_FULL.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("InsuredPersonId")
+                    b.Property<int?>("InsuredPersonId")
                         .HasColumnType("int");
 
                     b.Property<string>("SubjectOfInsurance")
@@ -280,6 +282,10 @@ namespace pojisteni_FULL.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("InsuranceId")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -356,13 +362,9 @@ namespace pojisteni_FULL.Data.Migrations
 
             modelBuilder.Entity("pojisteni_FULL.Models.Insurance", b =>
                 {
-                    b.HasOne("pojisteni_FULL.Models.InsuredPerson", "InsuredPerson")
+                    b.HasOne("pojisteni_FULL.Models.InsuredPerson", null)
                         .WithMany("Insurances")
-                        .HasForeignKey("InsuredPersonId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("InsuredPerson");
+                        .HasForeignKey("InsuredPersonId");
                 });
 
             modelBuilder.Entity("pojisteni_FULL.Models.InsuredPerson", b =>

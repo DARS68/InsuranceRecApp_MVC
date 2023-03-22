@@ -10,152 +10,176 @@ using pojisteni_FULL.Models;
 
 namespace pojisteni_FULL.Controllers
 {
-    public class InsurancesController : Controller
-    {
-        private readonly ApplicationDbContext DB;
+	public class InsurancesController : Controller
+	{
+		private readonly ApplicationDbContext DB;
 
-        public InsurancesController(ApplicationDbContext context)
-        {
-            DB = context;
-        }
+		public InsurancesController(ApplicationDbContext context)
+		{
+			DB = context;
+		}
 
-        // GET: Insurances
-        public async Task<IActionResult> Index()
-        {
-              return View(await DB.Insurance.ToListAsync());
-        }
+		// GET: Insurances
+		public async Task<IActionResult> Index()
+		{
+			return View(await DB.Insurance.ToListAsync());
+		}
 
-        // GET: Insurances/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null || DB.Insurance == null)
-            {
-                return NotFound();
-            }
+		// GET: Insurances/Details/5
+		public async Task<IActionResult> Details(int? id)
+		{
+			if (id == null || DB.Insurance == null)
+			{
+				return NotFound();
+			}
 
-            var insurance = await DB.Insurance
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (insurance == null)
-            {
-                return NotFound();
-            }
+			var insurance = await DB.Insurance
+				.Include(i => i.InsuredPerson)
+				.FirstOrDefaultAsync(m => m.Id == id);
+			if (insurance == null)
+			{
+				return NotFound();
+			}
 
-            return View(insurance);
-        }
+			return View(insurance);
+		}
 
-        // GET: Insurances/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
+		// GET: Insurances/Create
+		public IActionResult Create()
+		{
+			if (TempData.ContainsKey("InsuredPersonId"))
+			{
+				int insuredPersonId = Convert.ToInt32(TempData["InsuredPersonId"].ToString());
 
-        // POST: Insurances/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,InsuranceName,InsuranceDescription,InsuranceAmount,SubjectOfInsurance,ValidFrom,ValidTo")] Insurance insurance)
-        {
-            if (ModelState.IsValid)
-            {
-                DB.Add(insurance);
-                await DB.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(insurance);
-        }
+				// Keep TempData alive
+				TempData.Keep();
 
-        // GET: Insurances/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null || DB.Insurance == null)
-            {
-                return NotFound();
-            }
+				var insuredPerson = DB.InsuredPerson.Find(insuredPersonId);
+				ViewBag.InsuredPerson = insuredPerson;
+			}
+			return View();
+		}
 
-            var insurance = await DB.Insurance.FindAsync(id);
-            if (insurance == null)
-            {
-                return NotFound();
-            }
-            return View(insurance);
-        }
+		// POST: Insurances/Create
+		// To protect from overposting attacks, enable the specific properties you want to bind to.
+		// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public async Task<IActionResult> Create([Bind("Id,InsuranceName,InsuranceDescription,InsuranceAmount,SubjectOfInsurance,ValidFrom,ValidTo,InsuredPersonId")] Insurance insurance)
+		{
+			if (ModelState.IsValid)
+			{
+				DB.Insurance.Add(insurance);
+				// DB.Add(insurance);
+				await DB.SaveChangesAsync();
+				return RedirectToAction(nameof(Index));
+			}
 
-        // POST: Insurances/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,InsuranceName,InsuranceDescription,InsuranceAmount,SubjectOfInsurance,ValidFrom,ValidTo")] Insurance insurance)
-        {
-            if (id != insurance.Id)
-            {
-                return NotFound();
-            }
+			if (TempData.ContainsKey("InsuredPersonId"))
+			{
+				int InsuredPersonId = Convert.ToInt32(TempData["InsuredPersonId"].ToString());
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    DB.Update(insurance);
-                    await DB.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!InsuranceExists(insurance.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(insurance);
-        }
+				// Keep TempData alive
+				TempData.Keep();
 
-        // GET: Insurances/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null || DB.Insurance == null)
-            {
-                return NotFound();
-            }
+				var InsuredPerson = await DB.InsuredPerson.FindAsync(InsuredPersonId);
+				ViewBag.InsuredPerson = InsuredPerson;
+			}
 
-            var insurance = await DB.Insurance
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (insurance == null)
-            {
-                return NotFound();
-            }
+			return View(insurance);
+		}
 
-            return View(insurance);
-        }
+		// GET: Insurances/Edit/5
+		public async Task<IActionResult> Edit(int? id)
+		{
+			if (id == null || DB.Insurance == null)
+			{
+				return NotFound();
+			}
 
-        // POST: Insurances/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            if (DB.Insurance == null)
-            {
-                return Problem("Entity set 'ApplicationDbContext.Insurance'  is null.");
-            }
-            var insurance = await DB.Insurance.FindAsync(id);
-            if (insurance != null)
-            {
-                DB.Insurance.Remove(insurance);
-            }
-            
-            await DB.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
+			var insurance = await DB.Insurance.FindAsync(id);
+			if (insurance == null)
+			{
+				return NotFound();
+			}
+			return View(insurance);
+		}
 
-        private bool InsuranceExists(int id)
-        {
-          return DB.Insurance.Any(e => e.Id == id);
-        }
-    }
+		// POST: Insurances/Edit/5
+		// To protect from overposting attacks, enable the specific properties you want to bind to.
+		// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public async Task<IActionResult> Edit(int id, [Bind("Id,InsuranceName,InsuranceDescription,InsuranceAmount,SubjectOfInsurance,ValidFrom,ValidTo")] Insurance insurance)
+		{
+			if (id != insurance.Id)
+			{
+				return NotFound();
+			}
+
+			if (ModelState.IsValid)
+			{
+				try
+				{
+					DB.Update(insurance);
+					await DB.SaveChangesAsync();
+				}
+				catch (DbUpdateConcurrencyException)
+				{
+					if (!InsuranceExists(insurance.Id))
+					{
+						return NotFound();
+					}
+					else
+					{
+						throw;
+					}
+				}
+				return RedirectToAction(nameof(Index));
+			}
+			return View(insurance);
+		}
+
+		// GET: Insurances/Delete/5
+		public async Task<IActionResult> Delete(int? id)
+		{
+			if (id == null || DB.Insurance == null)
+			{
+				return NotFound();
+			}
+
+			var insurance = await DB.Insurance
+				.FirstOrDefaultAsync(m => m.Id == id);
+			if (insurance == null)
+			{
+				return NotFound();
+			}
+
+			return View(insurance);
+		}
+
+		// POST: Insurances/Delete/5
+		[HttpPost, ActionName("Delete")]
+		[ValidateAntiForgeryToken]
+		public async Task<IActionResult> DeleteConfirmed(int id)
+		{
+			if (DB.Insurance == null)
+			{
+				return Problem("Entity set 'ApplicationDbContext.Insurance'  is null.");
+			}
+			var insurance = await DB.Insurance.FindAsync(id);
+			if (insurance != null)
+			{
+				DB.Insurance.Remove(insurance);
+			}
+
+			await DB.SaveChangesAsync();
+			return RedirectToAction(nameof(Index));
+		}
+
+		private bool InsuranceExists(int id)
+		{
+			return DB.Insurance.Any(e => e.Id == id);
+		}
+	}
 }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using pojisteni_FULL.Data;
 
@@ -11,9 +12,10 @@ using pojisteni_FULL.Data;
 namespace pojisteni_FULL.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230322123851_1338")]
+    partial class _1338
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -246,6 +248,9 @@ namespace pojisteni_FULL.Data.Migrations
                     b.Property<int>("InsuredPersonId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("InsuredPersonInsuranceViewModelId")
+                        .HasColumnType("int");
+
                     b.Property<string>("SubjectOfInsurance")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -259,6 +264,8 @@ namespace pojisteni_FULL.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("InsuredPersonId");
+
+                    b.HasIndex("InsuredPersonInsuranceViewModelId");
 
                     b.ToTable("Insurance");
                 });
@@ -301,6 +308,24 @@ namespace pojisteni_FULL.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("InsuredPerson");
+                });
+
+            modelBuilder.Entity("pojisteni_FULL.Models.InsuredPersonInsuranceViewModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("InsuredPersonId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("InsuredPersonId");
+
+                    b.ToTable("InsuredPersonInsuranceViewModel");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -362,12 +387,32 @@ namespace pojisteni_FULL.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("pojisteni_FULL.Models.InsuredPersonInsuranceViewModel", null)
+                        .WithMany("InsuranceList")
+                        .HasForeignKey("InsuredPersonInsuranceViewModelId");
+
+                    b.Navigation("InsuredPerson");
+                });
+
+            modelBuilder.Entity("pojisteni_FULL.Models.InsuredPersonInsuranceViewModel", b =>
+                {
+                    b.HasOne("pojisteni_FULL.Models.InsuredPerson", "InsuredPerson")
+                        .WithMany()
+                        .HasForeignKey("InsuredPersonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("InsuredPerson");
                 });
 
             modelBuilder.Entity("pojisteni_FULL.Models.InsuredPerson", b =>
                 {
                     b.Navigation("Insurances");
+                });
+
+            modelBuilder.Entity("pojisteni_FULL.Models.InsuredPersonInsuranceViewModel", b =>
+                {
+                    b.Navigation("InsuranceList");
                 });
 #pragma warning restore 612, 618
         }

@@ -51,7 +51,51 @@
 		</dd>
 	</dl>
 </div>
+
+
+@if (Model.Insurances.Count > 0)
+{
+	<div class="table-responsive">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Smlouva č.</th>
+					<th>Typ pojištění</th>
+					<th>Předmět</th>
+					<th>Částka</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var insurance in Model.Insurances)
+				{
+					<tr>
+						<td>
+							<a asp-controller="Insurances" asp-action="Details" asp-route-id="@insurance.Id">@insurance.Id</a>
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => insurance.InsuranceName)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => insurance.InsuranceDescription)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => insurance.InsuranceAmount)
+						</td>
+						<td>
+							<a asp-controller="Insurances" asp-action="Edit" asp-route-id="@insurance.Id" class="btn btn-sm btn-warning me-1">Editovat</a>
+							<a asp-controller="Insurances" asp-action="Delete" asp-route-id="@insurance.Id" class="btn btn-sm btn-danger">Odstranit</a>
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+}
+
+
 <div>
+	<a asp-controller="Insurances" asp-action="Create" asp-route-id="@Model.Id" class="btn btn-primary">Přidat pojištění</a>
 	<a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model?.Id">Upravit pojištěnce</a>
 	<a class="btn btn-danger" asp-action="Delete" asp-route-id="@Model?.Id">Odstranit pojištěnce</a>
 	<a class="btn btn-primary" asp-action="Index">Zpět na seznam</a>

@@ -12,5 +12,5 @@ namespace pojisteni_FULL.Data
         }
         public DbSet<pojisteni_FULL.Models.InsuredPerson> InsuredPerson { get; set; }
         public DbSet<pojisteni_FULL.Models.Insurance> Insurance { get; set; }
-    }
+        }
 }
