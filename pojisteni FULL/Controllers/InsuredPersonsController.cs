@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using pojisteni_FULL.Data;
+using pojisteni_FULL.Extensions.Alerts;
 using pojisteni_FULL.Models;
 
 namespace pojisteni_FULL.Controllers
@@ -64,8 +65,8 @@ namespace pojisteni_FULL.Controllers
                 //DB.Add(insuredPerson);
                 DB.InsuredPerson.Add(insuredPerson);
                 await DB.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
+                return RedirectToAction(nameof(Index)).WithSuccess("OK!", "Nový pojištěnec byl byla úspěšně založen!");
+			}
             return View(insuredPerson);
         }
 

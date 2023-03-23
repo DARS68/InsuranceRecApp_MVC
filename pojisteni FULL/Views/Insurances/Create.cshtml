@@ -1,15 +1,15 @@
-﻿@*@using pojisteni_FULL.Models*@
+﻿@using pojisteni_FULL.Models
 @model pojisteni_FULL.Models.Insurance
 
 @{
-	ViewData["Title"] = "Create";
+	ViewData["Title"] = "Založení nové pojistné smlouvy";
 }
 
-<h1>Založení nové pojistné smlouvy</h1>
-<h5 asp-controller ="InsuredPersons" asp-action="Details" asp-route-id="@ViewBag.InsuredPerson.Id">
+<h1>@ViewData["Title"]</h1>
+<h5 asp-controller="InsuredPersons" asp-action="Details" asp-route-id="@ViewBag.InsuredPerson.Id">
 	pro pojištěnce
 	@ViewBag.InsuredPerson.FirstName @ViewBag.InsuredPerson.LastName
-@*	@Html.DisplayFor(model => model.FirstName)
+	@*	@Html.DisplayFor(model => model.FirstName)
 	@Html.DisplayFor(model => model.LastName)*@
 </h5>
 
@@ -49,35 +49,15 @@
 				<input asp-for="ValidTo" class="form-control" />
 				<span asp-validation-for="ValidTo" class="text-danger"></span>
 			</div>
-			@*			<div class="form-group">
-			<label asp-for="InsuredPersonId" class="control-label"></label>
-			<select asp-controller="InsuredPersons" asp-action="Details" asp-route-id="@ViewBag.InsuredPerson.Id"
-			@ViewBag.InsuredPerson.FirstName @ViewBag.InsuredPerson.LastName class=" form-control" /></select>
-			<span asp-validation-for="InsuredPersonId" class="text-danger"></span>
-			@*asp-controller="Insurances" asp-action="Create" asp-route-id="@Model.Id" class="btn btn-primary">Přidat pojištění</a>
-
-			<a asp-controller="InsuredPersons" asp-action="Details" asp-route-id="@ViewBag.InsuredPerson.Id">
-			@ViewBag.InsuredPerson.FirstName @ViewBag.InsuredPerson.LastName
-			</a>
-
-			</div>*@
-
+			@*<input type="hidden" asp-for="InsuredPersonId" value="@ViewBag.InsuredPerson.Id" />*@
 			<div class="form-group">
 				<label asp-for="InsuredPersonId" class="control-label"></label>
 				<input asp-for="InsuredPersonId" value="@ViewBag.InsuredPerson.Id" class="form-control" />
 				<span asp-validation-for="InsuredPersonId" class="text-danger"></span>
-				@*@ViewBag.InsuredPerson.FirstName @ViewBag.InsuredPerson.LastName*@
-				@*<select asp-for="InsuranceName" class="form-control" asp-items="Insurance.GetInsuranceTypes()"></select>*@
-
-				@*	<input type="hidden" asp-for="InsuredPersonId" value="@ViewBag.InsuredPerson.Id" />*@
 			</div>
-
-
-
 			<div class="form-group">
 				<input type="submit" value="Založit smlouvu" class="btn btn-primary" />
-				<a asp-controller="InsuredPersons" class="btn btn-primary" asp-action="Details" asp-route-id="@ViewBag.InsuredPerson.Id">Zpět na seznam pojištěnců</a>
-	
+				@*<a asp-controller="InsuredPersons" class="btn btn-primary" asp-action="Details" asp-route-id="@ViewBag.InsuredPerson.Id">Zpět na seznam pojištěnců</a>*@
 			</div>
 		</form>
 	</div>

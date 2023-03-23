@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using pojisteni_FULL.Data;
+using pojisteni_FULL.Extensions.Alerts;
 using pojisteni_FULL.Models;
 
 namespace pojisteni_FULL.Controllers
@@ -36,6 +37,7 @@ namespace pojisteni_FULL.Controllers
 			var insurance = await DB.Insurance
 				.Include(i => i.InsuredPerson)
 				.FirstOrDefaultAsync(m => m.Id == id);
+
 			if (insurance == null)
 			{
 				return NotFound();
@@ -67,24 +69,25 @@ namespace pojisteni_FULL.Controllers
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> Create([Bind("Id,InsuranceName,InsuranceDescription,InsuranceAmount,SubjectOfInsurance,ValidFrom,ValidTo,InsuredPersonId")] Insurance insurance)
 		{
+			if (TempData.ContainsKey("InsuredPersonId"))
+			{
+				int insuredPersonId = Convert.ToInt32(TempData["InsuredPersonId"].ToString());
+
+				// Keep TempData alive
+				TempData.Keep();
+
+				var insuredPerson = await DB.InsuredPerson.FindAsync(insuredPersonId);
+				ViewBag.InsuredPerson = insuredPerson;
+			}
+
 			if (ModelState.IsValid)
 			{
 				DB.Insurance.Add(insurance);
 				// DB.Add(insurance);
 				await DB.SaveChangesAsync();
-				return RedirectToAction(nameof(Index));
+				return RedirectToAction(nameof(Index)).WithSuccess("OK!", "Nová pojistná smlouva byla úspěšně založena!");
 			}
 
-			if (TempData.ContainsKey("InsuredPersonId"))
-			{
-				int InsuredPersonId = Convert.ToInt32(TempData["InsuredPersonId"].ToString());
-
-				// Keep TempData alive
-				TempData.Keep();
-
-				var InsuredPerson = await DB.InsuredPerson.FindAsync(InsuredPersonId);
-				ViewBag.InsuredPerson = InsuredPerson;
-			}
 
 			return View(insurance);
 		}

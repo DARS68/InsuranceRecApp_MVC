@@ -18,6 +18,7 @@ namespace pojisteni_FULL.Models
 		public string SubjectOfInsurance { get; set; } = "";
 		[Display(Name = "Platné od")]
 		public DateTime ValidFrom { get; set;} = DateTime.Now;
+
         [Display(Name = "Platné do")] 
 		public DateTime ValidTo { get; set; } = DateTime.Now;
 
