@@ -1,22 +1,21 @@
 # projekt02
 Pojištění, plná verze
 
-FUNKCE DOPLNIT:
-  editace pojištění přes ViewModel
+FUNKCE DOPLNIT:</br>
+  editace pojištění přes ViewModel </br>
   editace pojištěnce přes ViewModel
   
-FUNKCE HOTOVO:
-  vytvoření pojištění přes ViewModel
+FUNKCE HOTOVO:</br>
+  vytvoření pojištění přes ViewModel</br>
   vytvoření pojištěnce přes ViewModel
+    
+GRAFIKA DOPLNIT:</br>
+  detail pojištěnce</br>
+  seznam pojištění</br>
+  detail pojištění</br>
+  stránka HOME</br>
+  stránka UDÁLOSTI</br>
+  stránka O APLIKACI</br>
   
-  
-GRAFIKA DOPLNIT:
-  detail pojištěnce
-  seznam pojištění
-  detail pojištění
-  stránka HOME
-  stránka UDÁLOSTI
-  stránka O APLIKACI
-  
-  GRAFIKA HOTOVO:
+  GRAFIKA HOTOVO:</br>
   seznam pojištěnců
