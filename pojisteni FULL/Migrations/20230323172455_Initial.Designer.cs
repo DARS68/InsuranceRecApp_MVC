@@ -9,17 +9,17 @@ using pojisteni_FULL.Data;
 
 #nullable disable
 
-namespace pojisteni_FULL.Data.Migrations
+namespace pojisteni_FULL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230322080929_insuranceInDetail")]
-    partial class insuranceInDetail
+    [Migration("20230323172455_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.14")
+                .HasAnnotation("ProductVersion", "6.0.15")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -228,28 +228,25 @@ namespace pojisteni_FULL.Data.Migrations
 
             modelBuilder.Entity("pojisteni_FULL.Models.Insurance", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("InsuranceID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InsuranceID"), 1L, 1);
 
                     b.Property<int>("InsuranceAmount")
                         .HasColumnType("int");
 
                     b.Property<string>("InsuranceDescription")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("InsuranceName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("InsuredPersonId")
+                    b.Property<int>("InsuredPersonId")
                         .HasColumnType("int");
 
                     b.Property<string>("SubjectOfInsurance")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("ValidFrom")
@@ -258,7 +255,7 @@ namespace pojisteni_FULL.Data.Migrations
                     b.Property<DateTime>("ValidTo")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("Id");
+                    b.HasKey("InsuranceID");
 
                     b.HasIndex("InsuredPersonId");
 
@@ -267,44 +264,34 @@ namespace pojisteni_FULL.Data.Migrations
 
             modelBuilder.Entity("pojisteni_FULL.Models.InsuredPerson", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("InsuredPersonID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InsuredPersonID"), 1L, 1);
 
                     b.Property<string>("City")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("InsuranceId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("PhoneNumber")
                         .HasColumnType("int");
 
                     b.Property<string>("StreetAndNumber")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ZipCode")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("InsuredPersonID");
 
                     b.ToTable("InsuredPerson");
                 });
@@ -362,9 +349,13 @@ namespace pojisteni_FULL.Data.Migrations
 
             modelBuilder.Entity("pojisteni_FULL.Models.Insurance", b =>
                 {
-                    b.HasOne("pojisteni_FULL.Models.InsuredPerson", null)
+                    b.HasOne("pojisteni_FULL.Models.InsuredPerson", "InsuredPerson")
                         .WithMany("Insurances")
-                        .HasForeignKey("InsuredPersonId");
+                        .HasForeignKey("InsuredPersonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("InsuredPerson");
                 });
 
             modelBuilder.Entity("pojisteni_FULL.Models.InsuredPerson", b =>

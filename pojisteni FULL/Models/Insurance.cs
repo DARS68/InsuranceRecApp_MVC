@@ -6,7 +6,7 @@ namespace pojisteni_FULL.Models
 {
     public class Insurance
     {
-        public int Id { get; set; }
+        public int InsuranceID { get; set; }
 		[Display(Name = "Název pojištění")]
 		public string InsuranceName { get; set; } = "";
 
@@ -25,8 +25,7 @@ namespace pojisteni_FULL.Models
 
 
         // Navigation - Relation 1:N between entities InsuredPerson <-- Insurance
-        [Display(Name = "Pojištěnec Id")]
-        [ForeignKey("InsuredPerson")]             // Foreign key from entity InsuredPerson
+        [Display(Name = "Pojištěnec")]       
 		public int InsuredPersonId { get; set; }  // Foreign key to entity InsuredPerson
 
 		// Virtual = won´t be in DB table

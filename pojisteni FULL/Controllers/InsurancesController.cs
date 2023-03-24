@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -8,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using pojisteni_FULL.Data;
 using pojisteni_FULL.Extensions.Alerts;
 using pojisteni_FULL.Models;
+using pojisteni_FULL.Models.ViewModels;
 
 namespace pojisteni_FULL.Controllers
 {
@@ -36,7 +38,7 @@ namespace pojisteni_FULL.Controllers
 
 			var insurance = await DB.Insurance
 				.Include(i => i.InsuredPerson)
-				.FirstOrDefaultAsync(m => m.Id == id);
+				.FirstOrDefaultAsync(m => m.InsuranceID == id);
 
 			if (insurance == null)
 			{
@@ -49,17 +51,27 @@ namespace pojisteni_FULL.Controllers
 		// GET: Insurances/Create
 		public IActionResult Create()
 		{
-			if (TempData.ContainsKey("InsuredPersonId"))
+			if (!TempData.ContainsKey("InsuredPersonID"))
 			{
-				int insuredPersonId = Convert.ToInt32(TempData["InsuredPersonId"].ToString());
-
-				// Keep TempData alive
-				TempData.Keep();
-
-				var insuredPerson = DB.InsuredPerson.Find(insuredPersonId);
-				ViewBag.InsuredPerson = insuredPerson;
+				return View();
 			}
-			return View();
+
+			int insuredPersonId = Convert.ToInt32(TempData["InsuredPersonID"].ToString());
+
+			// Keep TempData alive
+			TempData.Keep();
+
+			InsuredPerson insuredPerson = DB.InsuredPerson.Find(insuredPersonId);
+
+			// Another type of class initializaion, the Constructor is called implicitly
+			InsuredPersonInsuraceViewModel viewModel = new InsuredPersonInsuraceViewModel
+			{
+				InsuredPersonId = insuredPerson.InsuredPersonID,
+				FirstName = insuredPerson.FirstName,
+				LastName = insuredPerson.LastName
+			};
+
+			return View(viewModel);
 		}
 
 		// POST: Insurances/Create
@@ -67,30 +79,63 @@ namespace pojisteni_FULL.Controllers
 		// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> Create([Bind("Id,InsuranceName,InsuranceDescription,InsuranceAmount,SubjectOfInsurance,ValidFrom,ValidTo,InsuredPersonId")] Insurance insurance)
+		public async Task<IActionResult> Create(InsuredPersonInsuraceViewModel viewModel)
 		{
-			if (TempData.ContainsKey("InsuredPersonId"))
+			if (!ModelState.IsValid)
 			{
-				int insuredPersonId = Convert.ToInt32(TempData["InsuredPersonId"].ToString());
-
-				// Keep TempData alive
-				TempData.Keep();
-
-				var insuredPerson = await DB.InsuredPerson.FindAsync(insuredPersonId);
-				ViewBag.InsuredPerson = insuredPerson;
+				return View(viewModel);
 			}
 
-			if (ModelState.IsValid)
+			InsuredPerson insuredPerson = DB.InsuredPerson.Find(viewModel.InsuredPersonId);
+
+			Insurance insurance = new Insurance
 			{
-				DB.Insurance.Add(insurance);
-				// DB.Add(insurance);
-				await DB.SaveChangesAsync();
-				return RedirectToAction(nameof(Index)).WithSuccess("OK!", "Nová pojistná smlouva byla úspěšně založena!");
-			}
+				// Insurance data
+				InsuranceName = viewModel.InsuranceName,
+				InsuranceDescription = viewModel.InsuranceDescription,
+				InsuranceAmount = viewModel.InsuranceAmount,
+				SubjectOfInsurance = viewModel.SubjectOfInsurance,
+				ValidFrom = viewModel.ValidFrom,
+				ValidTo = viewModel.ValidTo				
+			};
 
+			DB.Insurance.Add(insurance);
 
-			return View(insurance);
+			insuredPerson.Insurances.Add(insurance);
+
+			await DB.SaveChangesAsync();
+
+			return RedirectToAction(nameof(Index)).WithSuccess("OK!", "Nová pojistná smlouva byla úspěšně založena!");
 		}
+
+		//// POST: Insurances/Create
+		//// To protect from overposting attacks, enable the specific properties you want to bind to.
+		//// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+		//[HttpPost]
+		//[ValidateAntiForgeryToken]
+		//public async Task<IActionResult> Create([Bind("InsuredPersonID,InsuranceName,InsuranceDescription,InsuranceAmount,SubjectOfInsurance,ValidFrom,ValidTo,InsuredPersonID")] Insurance insurance)
+		//{
+		//	if (TempData.ContainsKey("InsuredPersonID"))
+		//	{
+		//		int insuredPersonId = Convert.ToInt32(TempData["InsuredPersonID"].ToString());
+
+		//		// Keep TempData alive
+		//		TempData.Keep();
+
+		//		var insuredPerson = await DB.InsuredPerson.FindAsync(insuredPersonId);
+		//		ViewBag.InsuredPerson = insuredPerson;
+		//	}
+
+		//	if (ModelState.IsValid)
+		//	{
+		//		DB.Insurance.Add(insurance);
+		//		// DB.Add(insurance);
+		//		await DB.SaveChangesAsync();
+		//		return RedirectToAction(nameof(Index)).WithSuccess("OK!", "Nová pojistná smlouva byla úspěšně založena!");
+		//	}
+
+		//	return View(insurance);
+		//}
 
 		// GET: Insurances/Edit/5
 		public async Task<IActionResult> Edit(int? id)
@@ -113,9 +158,9 @@ namespace pojisteni_FULL.Controllers
 		// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> Edit(int id, [Bind("Id,InsuranceName,InsuranceDescription,InsuranceAmount,SubjectOfInsurance,ValidFrom,ValidTo")] Insurance insurance)
+		public async Task<IActionResult> Edit(int id, [Bind("InsuredPersonID,InsuranceName,InsuranceDescription,InsuranceAmount,SubjectOfInsurance,ValidFrom,ValidTo")] Insurance insurance)
 		{
-			if (id != insurance.Id)
+			if (id != insurance.InsuranceID)
 			{
 				return NotFound();
 			}
@@ -129,7 +174,7 @@ namespace pojisteni_FULL.Controllers
 				}
 				catch (DbUpdateConcurrencyException)
 				{
-					if (!InsuranceExists(insurance.Id))
+					if (!InsuranceExists(insurance.InsuranceID))
 					{
 						return NotFound();
 					}
@@ -152,7 +197,7 @@ namespace pojisteni_FULL.Controllers
 			}
 
 			var insurance = await DB.Insurance
-				.FirstOrDefaultAsync(m => m.Id == id);
+				.FirstOrDefaultAsync(m => m.InsuranceID == id);
 			if (insurance == null)
 			{
 				return NotFound();
@@ -182,7 +227,7 @@ namespace pojisteni_FULL.Controllers
 
 		private bool InsuranceExists(int id)
 		{
-			return DB.Insurance.Any(e => e.Id == id);
+			return DB.Insurance.Any(e => e.InsuranceID == id);
 		}
 	}
 }

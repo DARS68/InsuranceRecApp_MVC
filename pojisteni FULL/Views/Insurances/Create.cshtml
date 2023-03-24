@@ -1,16 +1,22 @@
-﻿@using pojisteni_FULL.Models
-@model pojisteni_FULL.Models.Insurance
+﻿@using pojisteni_FULL.Models.ViewModels
+@model pojisteni_FULL.Models.ViewModels.InsuredPersonInsuraceViewModel
 
 @{
 	ViewData["Title"] = "Založení nové pojistné smlouvy";
 }
 
 <h1>@ViewData["Title"]</h1>
-<h5 asp-controller="InsuredPersons" asp-action="Details" asp-route-id="@ViewBag.InsuredPerson.Id">
-	pro pojištěnce
-	@ViewBag.InsuredPerson.FirstName @ViewBag.InsuredPerson.LastName
-	@*	@Html.DisplayFor(model => model.FirstName)
-	@Html.DisplayFor(model => model.LastName)*@
+
+@*This block is currently not used because we are not using the view bag*@
+@*<h5 asp-controller="InsuredPersons" asp-action="Details" asp-route-id="@ViewBag.InsuredPerson.Id">*@
+	@*pro pojištěnce*@
+	@*We are not using Viewback right now --> @ViewBag.InsuredPerson.FirstName @ViewBag.InsuredPerson.LastName*@
+	@*@Html.DisplayFor(model => model.FirstName)*@
+	@*@Html.DisplayFor(model => model.LastName)*@
+@*</h5>*@
+
+<h5>
+	pro pojištěnce @Html.LabelFor(m => m.FirstName) @Html.LabelFor(m => m.LastName)
 </h5>
 
 @*<h4>Insurance</h4>*@
@@ -52,11 +58,12 @@
 			@*<input type="hidden" asp-for="InsuredPersonId" value="@ViewBag.InsuredPerson.Id" />*@
 			<div class="form-group">
 				<label asp-for="InsuredPersonId" class="control-label"></label>
-				<input asp-for="InsuredPersonId" value="@ViewBag.InsuredPerson.Id" class="form-control" />
+				<input asp-for="InsuredPersonId" value="@Model.InsuredPersonId" class="form-control" />
 				<span asp-validation-for="InsuredPersonId" class="text-danger"></span>
 			</div>
 			<div class="form-group">
 				<input type="submit" value="Založit smlouvu" class="btn btn-primary" />
+				<a class="btn btn-primary" onclick="javascript:history.back();">Zpět</a>
 				@*<a asp-controller="InsuredPersons" class="btn btn-primary" asp-action="Details" asp-route-id="@ViewBag.InsuredPerson.Id">Zpět na seznam pojištěnců</a>*@
 			</div>
 		</form>

@@ -36,13 +36,13 @@ namespace pojisteni_FULL.Controllers
 
             var insuredPerson = await DB.InsuredPerson
                 .Include(i => i.Insurances)
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.InsuredPersonID == id);
             if (insuredPerson == null)
             {
                 return NotFound();
             }
 
-            TempData["InsuredPersonId"] = (int)insuredPerson.Id;
+            TempData["InsuredPersonID"] = (int)insuredPerson.InsuredPersonID;
 
             return View(insuredPerson);
         }
@@ -58,7 +58,7 @@ namespace pojisteni_FULL.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,Email,PhoneNumber,StreetAndNumber,City,ZipCode")] InsuredPerson insuredPerson)
+        public async Task<IActionResult> Create([Bind("InsuredPersonID,FirstName,LastName,Email,PhoneNumber,StreetAndNumber,City,ZipCode")] InsuredPerson insuredPerson)
         {
             if (ModelState.IsValid)
             {
@@ -91,9 +91,9 @@ namespace pojisteni_FULL.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,Email,PhoneNumber,StreetAndNumber,City,ZipCode")] InsuredPerson insuredPerson)
+        public async Task<IActionResult> Edit(int id, [Bind("InsuredPersonID,FirstName,LastName,Email,PhoneNumber,StreetAndNumber,City,ZipCode")] InsuredPerson insuredPerson)
         {
-            if (id != insuredPerson.Id)
+            if (id != insuredPerson.InsuredPersonID)
             {
                 return NotFound();
             }
@@ -107,7 +107,7 @@ namespace pojisteni_FULL.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!InsuredPersonExists(insuredPerson.Id))
+                    if (!InsuredPersonExists(insuredPerson.InsuredPersonID))
                     {
                         return NotFound();
                     }
@@ -130,7 +130,7 @@ namespace pojisteni_FULL.Controllers
             }
 
             var insuredPerson = await DB.InsuredPerson
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.InsuredPersonID == id);
             if (insuredPerson == null)
             {
                 return NotFound();
@@ -160,7 +160,7 @@ namespace pojisteni_FULL.Controllers
 
         private bool InsuredPersonExists(int id)
         {
-            return DB.InsuredPerson.Any(e => e.Id == id);
+            return DB.InsuredPerson.Any(e => e.InsuredPersonID == id);
         }
     }
 }

@@ -4,7 +4,7 @@ namespace pojisteni_FULL.Models
 {
 	public class InsuredPerson
 	{
-		public int Id { get; set; }
+		public int InsuredPersonID { get; set; }
 
 		[Display(Name = "Jméno")]
 		public string FirstName { get; set; } = "";

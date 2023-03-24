@@ -3,23 +3,21 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using pojisteni_FULL.Data;
 
 #nullable disable
 
-namespace pojisteni_FULL.Data.Migrations
+namespace pojisteni_FULL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230309142853_Insurance")]
-    partial class Insurance
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.14")
+                .HasAnnotation("ProductVersion", "6.0.15")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -228,73 +226,95 @@ namespace pojisteni_FULL.Data.Migrations
 
             modelBuilder.Entity("pojisteni_FULL.Models.Insurance", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("InsuranceID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasComment("InsuranceID");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InsuranceID"), 1L, 1);
 
                     b.Property<int>("InsuranceAmount")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasComment("InsuranceAmount");
 
                     b.Property<string>("InsuranceDescription")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(2000)
+                        .HasColumnType("nvarchar(2000)")
+                        .HasComment("InsuranceDescription");
 
                     b.Property<string>("InsuranceName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasComment("InsuranceName");
+
+                    b.Property<int>("InsuredPersonId")
+                        .HasColumnType("int")
+                        .HasComment("InsuredPersonId");
 
                     b.Property<string>("SubjectOfInsurance")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)")
+                        .HasComment("SubjectOfInsurance");
 
                     b.Property<DateTime>("ValidFrom")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasComment("ValidFrom");
 
                     b.Property<DateTime>("ValidTo")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasComment("ValidTo");
 
-                    b.HasKey("Id");
+                    b.HasKey("InsuranceID");
+
+                    b.HasIndex("InsuredPersonId");
 
                     b.ToTable("Insurance");
                 });
 
             modelBuilder.Entity("pojisteni_FULL.Models.InsuredPerson", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("InsuredPersonID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasComment("InsuredPersonID");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InsuredPersonID"), 1L, 1);
 
                     b.Property<string>("City")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)")
+                        .HasComment("City");
 
-                    b.Property<int>("Email")
-                        .HasColumnType("int");
+                    b.Property<string>("Email")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)")
+                        .HasComment("Email");
 
                     b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)")
+                        .HasComment("FirstName");
 
                     b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)")
+                        .HasComment("LastName");
 
                     b.Property<int>("PhoneNumber")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasComment("PhoneNumber");
 
                     b.Property<string>("StreetAndNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasComment("StreetAndNumber");
 
                     b.Property<string>("ZipCode")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)")
+                        .HasComment("ZipCode");
 
-                    b.HasKey("Id");
+                    b.HasKey("InsuredPersonID");
 
                     b.ToTable("InsuredPerson");
                 });
@@ -348,6 +368,23 @@ namespace pojisteni_FULL.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("pojisteni_FULL.Models.Insurance", b =>
+                {
+                    b.HasOne("pojisteni_FULL.Models.InsuredPerson", "InsuredPerson")
+                        .WithMany("Insurances")
+                        .HasForeignKey("InsuredPersonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_InsuredPerson_Insurance");
+
+                    b.Navigation("InsuredPerson");
+                });
+
+            modelBuilder.Entity("pojisteni_FULL.Models.InsuredPerson", b =>
+                {
+                    b.Navigation("Insurances");
                 });
 #pragma warning restore 612, 618
         }
