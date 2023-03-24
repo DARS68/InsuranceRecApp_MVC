@@ -2,7 +2,7 @@
 Pojištění, plná verze
 
 FUNKCE DOPLNIT:</br>
-  editace pojištění přes ViewModel </br>
+  editace pojištění přes ViewModel (nedaří se) </br>
   editace pojištěnce přes ViewModel
   
 FUNKCE HOTOVO:</br>
