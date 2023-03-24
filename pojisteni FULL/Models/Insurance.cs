@@ -4,28 +4,26 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace pojisteni_FULL.Models
 {
-    public class Insurance
-    {
-        public int InsuranceID { get; set; }
+	public class Insurance
+	{
+		public int InsuranceID { get; set; }
 		[Display(Name = "Název pojištění")]
 		public string InsuranceName { get; set; } = "";
 
-		[Display(Name = "Popis")] 
-        public string InsuranceDescription { get; set; } = "";
+		[Display(Name = "Popis")]
+		public string InsuranceDescription { get; set; } = "";
 		[Display(Name = "Hodnota")]
 		public int InsuranceAmount { get; set; }
 		[Display(Name = "Předmět pojištění")]
 		public string SubjectOfInsurance { get; set; } = "";
 		[Display(Name = "Platné od")]
-		public DateTime ValidFrom { get; set;} = DateTime.Now;
+		public DateTime ValidFrom { get; set; } = DateTime.Now;
 
-        [Display(Name = "Platné do")] 
+		[Display(Name = "Platné do")]
 		public DateTime ValidTo { get; set; } = DateTime.Now;
 
-
-
-        // Navigation - Relation 1:N between entities InsuredPerson <-- Insurance
-        [Display(Name = "Pojištěnec")]       
+		// Navigation - Relation 1:N between entities InsuredPerson <-- Insurance
+		[Display(Name = "Pojištěnec")]
 		public int InsuredPersonId { get; set; }  // Foreign key to entity InsuredPerson
 
 		// Virtual = won´t be in DB table

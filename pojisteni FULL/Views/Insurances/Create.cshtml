@@ -1,4 +1,6 @@
-﻿@using pojisteni_FULL.Models.ViewModels
+﻿@* =========   toto jsem vymazal dočasně, abych zjistil, zda je to nezbytně nutné*@
+@*@using pojisteni_FULL.Models.ViewModels*@
+
 @model pojisteni_FULL.Models.ViewModels.InsuredPersonInsuraceViewModel
 
 @{
@@ -9,15 +11,17 @@
 
 @*This block is currently not used because we are not using the view bag*@
 @*<h5 asp-controller="InsuredPersons" asp-action="Details" asp-route-id="@ViewBag.InsuredPerson.Id">*@
-	@*pro pojištěnce*@
-	@*We are not using Viewback right now --> @ViewBag.InsuredPerson.FirstName @ViewBag.InsuredPerson.LastName*@
-	@*@Html.DisplayFor(model => model.FirstName)*@
-	@*@Html.DisplayFor(model => model.LastName)*@
+@*pro pojištěnce*@
+@*We are not using Viewback right now --> @ViewBag.InsuredPerson.FirstName @ViewBag.InsuredPerson.LastName*@
+@*@Html.DisplayFor(model => model.FirstName)*@
+@*@Html.DisplayFor(model => model.LastName)*@
 @*</h5>*@
 
 <h5>
-	pro pojištěnce @Html.LabelFor(m => m.FirstName) @Html.LabelFor(m => m.LastName)
+	pro pojištěnce @Html.DisplayFor(model => model.FirstName) @Html.DisplayFor(model => model.LastName)
+@*	@Html.LabelFor(m => m.FirstName) @Html.LabelFor(m => m.LastName)*@
 </h5>
+
 
 @*<h4>Insurance</h4>*@
 <hr />

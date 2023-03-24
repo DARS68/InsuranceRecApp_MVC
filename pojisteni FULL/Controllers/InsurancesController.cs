@@ -105,7 +105,7 @@ namespace pojisteni_FULL.Controllers
 
 			await DB.SaveChangesAsync();
 
-			return RedirectToAction(nameof(Index)).WithSuccess("OK!", "Nová pojistná smlouva byla úspěšně založena!");
+			return RedirectToAction(nameof(Index));
 		}
 
 		//// POST: Insurances/Create
