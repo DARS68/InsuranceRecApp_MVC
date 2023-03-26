@@ -5,6 +5,8 @@ namespace pojisteni_FULL.Models.ViewModels
 {
 	public class InsuredPersonInsuraceViewModel
 	{
+		public int InsuranceID { get; set; }
+
 		[Display(Name = "Typ pojištění")]
 		public string InsuranceName { get; set; }
 

@@ -150,43 +150,95 @@ namespace pojisteni_FULL.Controllers
 			{
 				return NotFound();
 			}
-			return View(insurance);
+
+			InsuredPersonInsuraceViewModel viewModel = new InsuredPersonInsuraceViewModel
+			{
+				InsuranceID = insurance.InsuranceID,
+				InsuranceName = insurance.InsuranceName,
+				InsuranceDescription = insurance.InsuranceDescription,
+				InsuranceAmount = insurance.InsuranceAmount,
+				SubjectOfInsurance = insurance.SubjectOfInsurance,
+				ValidFrom = insurance.ValidFrom,
+				ValidTo = insurance.ValidTo,
+				InsuredPersonId = insurance.InsuredPersonId
+			};
+
+			return View(viewModel);
+		}
+		
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public async Task<IActionResult> Edit(InsuredPersonInsuraceViewModel viewModel)
+		{
+			if (!ModelState.IsValid)
+			{
+				return View(viewModel);
+			}
+
+			//InsuredPerson insuredPerson = DB.InsuredPerson.Find(viewModel.InsuredPersonId);
+			InsuredPerson insuredPerson = DB.InsuredPerson.Find(viewModel.InsuredPersonId);
+
+			Insurance insurance = new Insurance
+			{
+				// Insurance data
+				InsuranceID = viewModel.InsuranceID,
+				InsuranceName = viewModel.InsuranceName,
+				InsuranceDescription = viewModel.InsuranceDescription,
+				InsuranceAmount = viewModel.InsuranceAmount,
+				SubjectOfInsurance = viewModel.SubjectOfInsurance,
+				ValidFrom = viewModel.ValidFrom,
+				ValidTo = viewModel.ValidTo,
+				InsuredPersonId = viewModel.InsuredPersonId
+			};
+
+			
+
+
+			DB.Insurance.Update(insurance);
+			
+			//insuredPerson.Update(insurance);
+
+			
+
+			await DB.SaveChangesAsync();
+
+			return RedirectToAction(nameof(Index));
 		}
 
 		// POST: Insurances/Edit/5
 		// To protect from overposting attacks, enable the specific properties you want to bind to.
 		// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-		[HttpPost]
-		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> Edit(int id, [Bind("InsuredPersonID,InsuranceName,InsuranceDescription,InsuranceAmount,SubjectOfInsurance,ValidFrom,ValidTo")] Insurance insurance)
-		{
-			if (id != insurance.InsuranceID)
-			{
-				return NotFound();
-			}
+		//[HttpPost]
+		//[ValidateAntiForgeryToken]
+		//public async Task<IActionResult> Edit(int id, [Bind("InsuranceID,InsuranceName,InsuranceDescription,InsuranceAmount,SubjectOfInsurance,ValidFrom,ValidTo, InsuredPersonId")] Insurance insurance)
+		//{
+		//	if (id != insurance.InsuranceID)
+		//	{
+		//		return NotFound();
+		//	}
 
-			if (ModelState.IsValid)
-			{
-				try
-				{
-					DB.Update(insurance);
-					await DB.SaveChangesAsync();
-				}
-				catch (DbUpdateConcurrencyException)
-				{
-					if (!InsuranceExists(insurance.InsuranceID))
-					{
-						return NotFound();
-					}
-					else
-					{
-						throw;
-					}
-				}
-				return RedirectToAction(nameof(Index));
-			}
-			return View(insurance);
-		}
+		//	if (ModelState.IsValid)
+		//	{
+		//		try
+		//		{
+		//			DB.Update(insurance);
+		//			await DB.SaveChangesAsync();
+		//		}
+		//		catch (DbUpdateConcurrencyException)
+		//		{
+		//			if (!InsuranceExists(insurance.InsuranceID))
+		//			{
+		//				return NotFound();
+		//			}
+		//			else
+		//			{
+		//				throw;
+		//			}
+		//		}
+		//		return RedirectToAction(nameof(Index));
+		//	}
+		//	return View(insurance);
+		//}
 
 		// GET: Insurances/Delete/5
 		public async Task<IActionResult> Delete(int? id)

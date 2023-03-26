@@ -12,7 +12,7 @@ namespace pojisteni_FULL.Models
 
 		[Display(Name = "Popis")]
 		public string InsuranceDescription { get; set; } = "";
-		[Display(Name = "Hodnota")]
+		[Display(Name = "Pojistná částka___")]
 		public int InsuranceAmount { get; set; }
 		[Display(Name = "Předmět pojištění")]
 		public string SubjectOfInsurance { get; set; } = "";

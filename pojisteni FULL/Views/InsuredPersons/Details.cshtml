@@ -61,7 +61,7 @@
 		<table class="table">
 			<thead>
 				<tr>
-					<th>Typ pojištění???</th>
+					<th>Druh pojištění</th>
 					<th>Pojistná částka</th>
 					<th></th>
 				</tr>
@@ -71,13 +71,15 @@
 				{
 					<tr>
 						<td>
-							@Html.DisplayFor(modelItem => insurance.InsuranceName)
+					@*		@Html.DisplayFor(modelItem => insurance.InsuranceName)*@
+							<a asp-controller="Insurances" asp-action="Details" asp-route-id="@insurance.InsuranceID">@insurance.InsuranceName</a>
 						</td>
 						<td>
 							@Html.DisplayFor(modelItem => insurance.InsuranceAmount)
+							Kč
 						</td>
 						<td>
-							<a asp-controller="Insurances" asp-action="Edit" asp-route-id="@insurance.InsuranceID" class="btn btn-sm btn-warning me-1">Editovat</a>
+							<a asp-controller="Insurances" asp-action="Edit" asp-route-id="@insurance.InsuranceID" class="btn btn-sm btn-warning me-1">Upravit</a>
 							<a asp-controller="Insurances" asp-action="Delete" asp-route-id="@insurance.InsuranceID" class="btn btn-sm btn-danger">Odstranit</a>
 						</td>
 					</tr>

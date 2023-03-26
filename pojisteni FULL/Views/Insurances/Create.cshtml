@@ -59,12 +59,13 @@
 				<input asp-for="ValidTo" class="form-control" />
 				<span asp-validation-for="ValidTo" class="text-danger"></span>
 			</div>
+			<input type="hidden" asp-for="InsuredPersonId" />
 			@*<input type="hidden" asp-for="InsuredPersonId" value="@ViewBag.InsuredPerson.Id" />*@
-			<div class="form-group">
+			@*<div class="form-group">
 				<label asp-for="InsuredPersonId" class="control-label"></label>
 				<input asp-for="InsuredPersonId" value="@Model.InsuredPersonId" class="form-control" />
 				<span asp-validation-for="InsuredPersonId" class="text-danger"></span>
-			</div>
+			</div>*@
 			<div class="form-group">
 				<input type="submit" value="Založit smlouvu" class="btn btn-primary" />
 				<a class="btn btn-primary" onclick="javascript:history.back();">Zpět</a>
