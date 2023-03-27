@@ -175,7 +175,6 @@ namespace pojisteni_FULL.Controllers
 				return View(viewModel);
 			}
 
-			//InsuredPerson insuredPerson = DB.InsuredPerson.Find(viewModel.InsuredPersonId);
 			InsuredPerson insuredPerson = DB.InsuredPerson.Find(viewModel.InsuredPersonId);
 
 			Insurance insurance = new Insurance
@@ -191,14 +190,7 @@ namespace pojisteni_FULL.Controllers
 				InsuredPersonId = viewModel.InsuredPersonId
 			};
 
-			
-
-
 			DB.Insurance.Update(insurance);
-			
-			//insuredPerson.Update(insurance);
-
-			
 
 			await DB.SaveChangesAsync();
 

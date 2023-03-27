@@ -82,8 +82,6 @@ namespace pojisteni_FULL.Controllers
 				return View(viewModel);
 			}
 
-			//InsuredPerson insuredPerson = DB.InsuredPerson.Find(viewModel.InsuredPersonId);
-
 			InsuredPerson insuredPerson = new InsuredPerson
 			{
 				// InsuredPerson data
@@ -98,8 +96,6 @@ namespace pojisteni_FULL.Controllers
 
 
 			DB.InsuredPerson.Add(insuredPerson);
-
-			//insuredPerson.Insurances.Add(insurance);
 
 			await DB.SaveChangesAsync();
 
