@@ -55,27 +55,9 @@ namespace pojisteni_FULL.Controllers
 			return View();
 		}
 
-		// POST: InsuredPersons/Create
-		// To protect from overposting attacks, enable the specific properties you want to bind to.
-		// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-		//[HttpPost]
-		//[ValidateAntiForgeryToken]
-		//public async Task<IActionResult> Create([Bind("InsuredPersonID,FirstName,LastName,Email,PhoneNumber,StreetAndNumber,City,ZipCode")] InsuredPerson insuredPerson)
-		//{
-		//    if (ModelState.IsValid)
-		//    {
-		//        //DB.Add(insuredPerson);
-		//        DB.InsuredPerson.Add(insuredPerson);
-		//        await DB.SaveChangesAsync();
-		//        return RedirectToAction(nameof(Index)).WithSuccess("OK!", "Nový pojištěnec byl byla úspěšně založen!");
-		//	}
-		//    return View(insuredPerson);
-		//}
-		//
-
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> Create(InsuredPersonInsuraceViewModel viewModel)
+		public async Task<IActionResult> Create(InsuredPersonViewModel viewModel)
 		{
 			if (!ModelState.IsValid)
 			{
@@ -116,43 +98,86 @@ namespace pojisteni_FULL.Controllers
 			{
 				return NotFound();
 			}
-			return View(insuredPerson);
+
+			InsuredPersonViewModel viewModel = new InsuredPersonViewModel
+			{
+				// InsuredPerson data
+				InsuredPersonID = insuredPerson.InsuredPersonID,
+				FirstName = insuredPerson.FirstName,
+				LastName = insuredPerson.LastName,
+				Email = insuredPerson.Email,
+				PhoneNumber = insuredPerson.PhoneNumber,
+				StreetAndNumber = insuredPerson.StreetAndNumber,
+				City = insuredPerson.City,
+				ZipCode = insuredPerson.ZipCode
+			};
+
+
+			return View(viewModel);
 		}
 
-		// POST: InsuredPersons/Edit/5
-		// To protect from overposting attacks, enable the specific properties you want to bind to.
-		// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> Edit(int id, [Bind("InsuredPersonID,FirstName,LastName,Email,PhoneNumber,StreetAndNumber,City,ZipCode")] InsuredPerson insuredPerson)
+		public async Task<IActionResult> Edit(InsuredPersonViewModel viewModel)
 		{
-			if (id != insuredPerson.InsuredPersonID)
+			if (!ModelState.IsValid)
 			{
-				return NotFound();
+				return View(viewModel);
 			}
 
-			if (ModelState.IsValid)
+			//	InsuredPerson insuredPerson = DB.InsuredPerson.Find(viewModel.InsuredPersonID);
+
+			InsuredPerson insuredPerson = new InsuredPerson
 			{
-				try
-				{
-					DB.Update(insuredPerson);
-					await DB.SaveChangesAsync();
-				}
-				catch (DbUpdateConcurrencyException)
-				{
-					if (!InsuredPersonExists(insuredPerson.InsuredPersonID))
-					{
-						return NotFound();
-					}
-					else
-					{
-						throw;
-					}
-				}
-				return RedirectToAction(nameof(Index));
-			}
-			return View(insuredPerson);
+				// InsuredPerson data
+				InsuredPersonID = viewModel.InsuredPersonID,
+				FirstName = viewModel.FirstName,
+				LastName = viewModel.LastName,
+				Email = viewModel.Email,
+				PhoneNumber = viewModel.PhoneNumber,
+				StreetAndNumber = viewModel.StreetAndNumber,
+				City = viewModel.City,
+				ZipCode = viewModel.ZipCode
+			};
+
+			DB.InsuredPerson.Update(insuredPerson);
+			await DB.SaveChangesAsync();
+
+			return RedirectToAction(nameof(Index));
 		}
+
+
+		//[HttpPost]
+		//[ValidateAntiForgeryToken]
+		//public async Task<IActionResult> Edit(int id, [Bind("InsuredPersonID,FirstName,LastName,Email,PhoneNumber,StreetAndNumber,City,ZipCode")] InsuredPerson insuredPerson)
+		//{
+		//	if (id != insuredPerson.InsuredPersonID)
+		//	{
+		//		return NotFound();
+		//	}
+
+		//	if (ModelState.IsValid)
+		//	{
+		//		try
+		//		{
+		//			DB.Update(insuredPerson);
+		//			await DB.SaveChangesAsync();
+		//		}
+		//		catch (DbUpdateConcurrencyException)
+		//		{
+		//			if (!InsuredPersonExists(insuredPerson.InsuredPersonID))
+		//			{
+		//				return NotFound();
+		//			}
+		//			else
+		//			{
+		//				throw;
+		//			}
+		//		}
+		//		return RedirectToAction(nameof(Index));
+		//	}
+		//	return View(insuredPerson);
+		//}
 
 		// GET: InsuredPersons/Delete/5
 		public async Task<IActionResult> Delete(int? id)

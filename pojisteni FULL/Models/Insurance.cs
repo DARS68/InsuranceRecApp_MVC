@@ -32,8 +32,6 @@ namespace pojisteni_FULL.Models
 
 
 
-
-
 		public static List<SelectListItem> GetInsuranceTypes()
 		{
 			var insuranceTypes = new List<SelectListItem>();

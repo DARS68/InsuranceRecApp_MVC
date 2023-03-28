@@ -3,32 +3,10 @@ using System.Xml.Linq;
 
 namespace pojisteni_FULL.Models.ViewModels
 {
-	public class InsuredPersonInsuraceViewModel
+	public class InsuredPersonViewModel
 	{
-		public int InsuranceID { get; set; }
-
-		[Display(Name = "Typ pojištění")]
-		public string InsuranceName { get; set; }
-
-		[Display(Name = "Popis")]
-		public string InsuranceDescription { get; set; }
-
-		[Display(Name = "Pojistná částka")]
-		public int InsuranceAmount { get; set; }
-
-		[Display(Name = "Předmět pojištění")]
-		public string SubjectOfInsurance { get; set; }
-
-		[Display(Name = "Platné od")]
-		[DataType(DataType.DateTime)]  // DateTime limits only to Date
-		public DateTime ValidFrom { get; set; } = DateTime.Today.AddHours(24).AddMinutes(01);
-
-		[Display(Name = "Platné do")]
-		[DataType(DataType.DateTime)]  // DateTime limits only to Date
-		public DateTime ValidTo { get; set; } = DateTime.Today.AddHours(23).AddMinutes(59);
-
 		[Display(Name = "Pojištěnec")]
-		public int InsuredPersonId { get; set; }
+		public int InsuredPersonID { get; set; }
 
 		[Display(Name = "Jméno")]
 		public string FirstName { get; set; }

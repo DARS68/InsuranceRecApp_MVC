@@ -1,5 +1,5 @@
 ﻿@*@model pojisteni_FULL.Models.Insurance*@
-@model pojisteni_FULL.Models.ViewModels.InsuredPersonInsuraceViewModel
+@model pojisteni_FULL.Models.ViewModels.InsuranceViewModel
 
 
 @{
@@ -50,7 +50,7 @@
 				<input asp-for="ValidTo" class="form-control" />
 				<span asp-validation-for="ValidTo" class="text-danger"></span>
 			</div>
-			<input type="hidden" asp-for="InsuredPersonId" value="@ViewBag.InsuredPerson.Id" />
+			<input type="hidden" asp-for="InsuredPersonID" />
 			@*<div class="form-group">
 				<label asp-for="InsuredPersonId" class="control-label"></label>
 				<input asp-for="InsuredPersonId" value="@Model.InsuredPersonId" class="form-control" />

@@ -1,7 +1,7 @@
 ﻿@* =========   toto jsem vymazal dočasně, abych zjistil, zda je to nezbytně nutné*@
 @*@using pojisteni_FULL.Models.ViewModels*@
 
-@model pojisteni_FULL.Models.ViewModels.InsuredPersonInsuraceViewModel
+@model pojisteni_FULL.Models.ViewModels.InsuranceViewModel
 
 @{
 	ViewData["Title"] = "Založení nové pojistné smlouvy";
@@ -59,8 +59,7 @@
 				<input asp-for="ValidTo" class="form-control" />
 				<span asp-validation-for="ValidTo" class="text-danger"></span>
 			</div>
-			@*<input type="hidden" asp-for="InsuredPersonId" />*@
-			<input type="hidden" asp-for="InsuredPersonId" value="@ViewBag.InsuredPerson.Id" />
+			<input type="hidden" asp-for="InsuredPersonID" />
 			@*<div class="form-group">
 				<label asp-for="InsuredPersonId" class="control-label"></label>
 				<input asp-for="InsuredPersonId" value="@Model.InsuredPersonId" class="form-control" />
