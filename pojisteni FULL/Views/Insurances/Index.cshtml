@@ -1,5 +1,5 @@
-﻿@*@model IEnumerable<pojisteni_FULL.Models.Insurance>*@
-@model IEnumerable<pojisteni_FULL.Models.ViewModels.InsuranceListViewModel>
+﻿@model IEnumerable<pojisteni_FULL.Models.Insurance>
+@*@model IEnumerable<pojisteni_FULL.Models.ViewModels.InsuranceViewModel>*@
 
 @{
 	ViewData["Title"] = "Seznam pojištění";
@@ -63,12 +63,12 @@
 					@Html.DisplayFor(modelItem => item.ValidTo)
 				</td>*@
 				<th>
-					@Html.DisplayFor(modelItem => item.InsuredPersonId)
-					@*@Html.DisplayFor(modelItem => item.InsuredPerson.FirstName)
-					@Html.DisplayFor(modelItem => item.InsuredPerson.LastName)*@
+				@*	@Html.DisplayFor(modelItem => item.InsuredPersonId)*@
+					@Html.DisplayFor(modelItem => item.InsuredPerson.FirstName)
+					@Html.DisplayFor(modelItem => item.InsuredPerson.LastName)
 				</th>
 				<td>
-					<a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.InsuranceID">Upravit</a>
+					<a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.InsuranceID">Upravit</a>
 					<a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.InsuranceID">Odstranit</a>
 				</td>
 			</tr>

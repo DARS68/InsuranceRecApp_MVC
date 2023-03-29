@@ -3,20 +3,27 @@
 Pojištění, plná verze
 
 FUNKCE DOPLNIT:</br>
-  editace pojištění přes ViewModel (nedaří se) </br>
-  editace pojištěnce přes ViewModel
-  
+  smazání pojištěnce, včetně pojištění</br>
+  výpis pojištěnců přes viewModel</br>
+  výpis pojištění přes viewModel</br>
+  potvrzenní akcí (uloženo, smazáno)</br>
+  přihlášení (admin vs. user)</br>
+  pojistné události</br>
+
 FUNKCE HOTOVO:</br>
   vytvoření pojištění přes ViewModel</br>
-  vytvoření pojištěnce přes ViewModel
+  vytvoření pojištěnce přes ViewModel</br>
+  editace pojištění přes ViewModel (nedaří se) </br>
+  editace pojištěnce přes ViewModel</br>
+  smazání pojištění + confirm</br>
     
 GRAFIKA DOPLNIT:</br>
-  detail pojištěnce</br>
-  seznam pojištění</br>
-  detail pojištění</br>
-  stránka HOME</br>
+  seznam pojištění (popisky)</br>
   stránka UDÁLOSTI</br>
   stránka O APLIKACI</br>
   
   GRAFIKA HOTOVO:</br>
-  seznam pojištěnců
+  seznam pojištěnců</br>
+  HOME stránka, tlačítka</br>
+  detail pojištění</br>
+  detail pojištěnce</br>

@@ -18,27 +18,18 @@ namespace pojisteni_FULL.Controllers
             return View();
         }
 
-        //public IActionResult InsuredPerson()
-        //{
-        //    return View();
-        //}
+		public IActionResult Event()
+		{
+		    return View();
+		}
 
-        //public IActionResult Insurance()
-        //{
-        //    return View();
-        //}
+		public IActionResult AboutApp()
+		{
+		    return View();
+		}
 
-        //public IActionResult Event()
-        //{
-        //    return View();
-        //}
 
-        //public IActionResult AboutApp()
-        //{
-        //    return View();
-        //}
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });

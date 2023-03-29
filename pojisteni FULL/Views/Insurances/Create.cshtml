@@ -17,10 +17,10 @@
 @*@Html.DisplayFor(model => model.LastName)*@
 @*</h5>*@
 
-<h5>
-	pro pojištěnce @Html.DisplayFor(model => model.FirstName) @Html.DisplayFor(model => model.LastName)
+<p>
+	« pro pojištěnce @Html.DisplayFor(model => model.FirstName) @Html.DisplayFor(model => model.LastName) »
 @*	@Html.LabelFor(m => m.FirstName) @Html.LabelFor(m => m.LastName)*@
-</h5>
+</p>
 
 
 @*<h4>Insurance</h4>*@
@@ -31,7 +31,7 @@
 			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
 			<div class="form-group">
 				<label asp-for="InsuranceName" class="control-label"></label>
-				<select asp-for="InsuranceName" class="form-control" asp-items="Insurance.GetInsuranceTypes()"></select>
+				<select asp-for="InsuranceName" class="form-control btn-outline-secondary" asp-items="Insurance.GetInsuranceTypes()"></select>
 				@* <span asp-validation-for="InsuranceName" class="text-danger"></span>*@
 			</div>
 			<div class="form-group">
@@ -66,7 +66,7 @@
 				<span asp-validation-for="InsuredPersonId" class="text-danger"></span>
 			</div>*@
 			<div class="form-group">
-				<input type="submit" value="Založit smlouvu" class="btn btn-primary" />
+				<input type="submit" value="Založit smlouvu" class="btn btn-success" />
 				<a class="btn btn-primary" onclick="javascript:history.back();">Zpět</a>
 				@*<a asp-controller="InsuredPersons" class="btn btn-primary" asp-action="Details" asp-route-id="@ViewBag.InsuredPerson.Id">Zpět na seznam pojištěnců</a>*@
 			</div>

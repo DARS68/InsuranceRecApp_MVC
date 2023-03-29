@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System.ComponentModel.DataAnnotations;
 
 namespace pojisteni_FULL.Models
 {
@@ -26,8 +27,6 @@ namespace pojisteni_FULL.Models
 		
 		[Display(Name = "PSČ")]
 		public string ZipCode { get; set; } = "";
-		
-		
 
 
 		public virtual ICollection<Insurance> Insurances { get; set; } = new HashSet<Insurance>();

@@ -1,18 +1,19 @@
 ﻿@*@model pojisteni_FULL.Models.Insurance*@
 @model pojisteni_FULL.Models.ViewModels.InsuranceViewModel
 
-
 @{
-	ViewData["Title"] = "Upravit pojištění";
+	ViewData["Title"] = "Úprava pojištění";
 }
 
 <h1>@ViewData["Title"]</h1>
 
-@*<h5>
+<p>
+	« 
 	pro pojištěnce
-	@Html.DisplayFor(model => model.InsuredPerson.FirstName)
-	@Html.DisplayFor(model => model.InsuredPerson.LastName)
-</h5>*@
+	@Html.DisplayFor(model => model.FirstName)
+	@Html.DisplayFor(model => model.LastName)
+	 »</>
+</p>
 
 <hr />
 <div class="row">
@@ -52,12 +53,12 @@
 			</div>
 			<input type="hidden" asp-for="InsuredPersonID" />
 			@*<div class="form-group">
-				<label asp-for="InsuredPersonId" class="control-label"></label>
-				<input asp-for="InsuredPersonId" value="@Model.InsuredPersonId" class="form-control" />
-				<span asp-validation-for="InsuredPersonId" class="text-danger"></span>
+			<label asp-for="InsuredPersonId" class="control-label"></label>
+			<input asp-for="InsuredPersonId" value="@Model.InsuredPersonId" class="form-control" />
+			<span asp-validation-for="InsuredPersonId" class="text-danger"></span>
 			</div>*@
 			<div class="form-group">
-				<input type="submit" value="Uložit" class="btn btn-primary" />
+				<input type="submit" value="Uložit" class="btn btn-success" />
 				<a class="btn btn-primary" onclick="javascript:history.back();">Zpět</a>
 			</div>
 		</form>

@@ -125,8 +125,6 @@ namespace pojisteni_FULL.Controllers
 				return View(viewModel);
 			}
 
-			//	InsuredPerson insuredPerson = DB.InsuredPerson.Find(viewModel.InsuredPersonID);
-
 			InsuredPerson insuredPerson = new InsuredPerson
 			{
 				// InsuredPerson data
@@ -146,38 +144,6 @@ namespace pojisteni_FULL.Controllers
 			return RedirectToAction(nameof(Index));
 		}
 
-
-		//[HttpPost]
-		//[ValidateAntiForgeryToken]
-		//public async Task<IActionResult> Edit(int id, [Bind("InsuredPersonID,FirstName,LastName,Email,PhoneNumber,StreetAndNumber,City,ZipCode")] InsuredPerson insuredPerson)
-		//{
-		//	if (id != insuredPerson.InsuredPersonID)
-		//	{
-		//		return NotFound();
-		//	}
-
-		//	if (ModelState.IsValid)
-		//	{
-		//		try
-		//		{
-		//			DB.Update(insuredPerson);
-		//			await DB.SaveChangesAsync();
-		//		}
-		//		catch (DbUpdateConcurrencyException)
-		//		{
-		//			if (!InsuredPersonExists(insuredPerson.InsuredPersonID))
-		//			{
-		//				return NotFound();
-		//			}
-		//			else
-		//			{
-		//				throw;
-		//			}
-		//		}
-		//		return RedirectToAction(nameof(Index));
-		//	}
-		//	return View(insuredPerson);
-		//}
 
 		// GET: InsuredPersons/Delete/5
 		public async Task<IActionResult> Delete(int? id)

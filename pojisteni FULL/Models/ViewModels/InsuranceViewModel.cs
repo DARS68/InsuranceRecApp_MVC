@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System.ComponentModel.DataAnnotations;
 using System.Xml.Linq;
 
 namespace pojisteni_FULL.Models.ViewModels
@@ -7,7 +8,7 @@ namespace pojisteni_FULL.Models.ViewModels
 	{
 		public int InsuranceID { get; set; }
 
-		[Display(Name = "Typ pojištění")]
+		[Display(Name = "Název pojištění")]
 		public string InsuranceName { get; set; }
 
 		[Display(Name = "Popis")]
@@ -29,11 +30,14 @@ namespace pojisteni_FULL.Models.ViewModels
 
 		[Display(Name = "Pojištěnec")]
 		public int InsuredPersonID { get; set; }
+
 		[Display(Name = "Jméno")]
 		public string FirstName { get; set; }
 
 		[Display(Name = "Příjmení")]
 		public string LastName { get; set; }
+
+
 
 		// This must not be define if the model is used in a View 
 		//public InsuredPersonInsuraceViewModel(InsuredPerson insuredPerson)

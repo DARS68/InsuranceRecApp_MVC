@@ -1,4 +1,5 @@
-﻿@model pojisteni_FULL.Models.Insurance
+﻿@model pojisteni_FULL.Models.ViewModels.InsuranceViewModel
+@*@model pojisteni_FULL.Models.Insurance*@
 
 
 
@@ -8,11 +9,12 @@
 
 <h1>@ViewData["Title"]</h1>
 
-<h5>
-	pro
-	@Html.DisplayFor(model => model.InsuredPerson.FirstName)
-	@Html.DisplayFor(model => model.InsuredPerson.LastName)
-</h5>
+<p>
+	« pro
+	@Html.DisplayFor(model => model.FirstName)
+	@Html.DisplayFor(model => model.LastName)
+	 »</>
+</p>
 
 <div>
 
@@ -57,7 +59,8 @@
 	</dl>
 </div>
 <div>
-	<a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model?.InsuranceID">Upravit</a>
+	<a class="btn btn-warning" asp-action="Edit" asp-route-id="@Model?.InsuranceID">Upravit</a>
+	<a class="btn btn-danger" asp-action="Delete" asp-route-id="@Model?.InsuranceID">Odstranit</a>
 	<a class="btn btn-primary" onclick="javascript:history.back();">Zpět</a>
 	@*<a asp-action="Index">Back to List</a>*@
 </div>
