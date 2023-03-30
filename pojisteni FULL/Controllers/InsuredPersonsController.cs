@@ -29,6 +29,52 @@ namespace pojisteni_FULL.Controllers
 		}
 
 		// GET: InsuredPersons/Details/5
+		//public async Task<IActionResult> Details(int? id)
+		//{
+		//	//OK
+		//	if (id == null || DB.InsuredPerson == null)
+		//	{
+		//		return NotFound();
+		//	}
+
+		//	InsuredPerson insuredPerson = await DB.InsuredPerson
+		//		.Include(i => i.Insurances)
+		//		.FirstOrDefaultAsync(m => m.InsuredPersonID == id);
+
+		//	//OK
+		//	if (insuredPerson == null)
+		//	{
+		//		return NotFound();
+		//	}
+
+		//	int insuredPersonId = Convert.ToInt32(TempData["InsuredPersonID"].ToString());
+
+		//	// Keep TempData alive
+		//	TempData.Keep();
+		//	List<Insurance> insurance = new List<Insurance>();
+		//		insurance.Add(new DB.Insurance.Find(insuredPersonId));
+		//	//TempData["InsuredPersonID"] = (int)insuredPerson.InsuredPersonID;
+
+		//	InsuredPersonViewModel viewModel = new InsuredPersonViewModel
+		//	{
+		//		InsuredPersonID = insuredPerson.InsuredPersonID,
+		//		FirstName = insuredPerson.FirstName,
+		//		LastName = insuredPerson.LastName,
+		//		Email = insuredPerson.Email,
+		//		PhoneNumber = insuredPerson.PhoneNumber,
+		//		StreetAndNumber = insuredPerson.StreetAndNumber,
+		//		City = insuredPerson.City,
+		//		ZipCode = insuredPerson.ZipCode,
+		//		InsuranceID = insurance.InsuranceID,
+		//		InsuranceName = insurance.InsuranceName,
+		//		InsuranceAmount = insurance.InsuranceAmount
+
+		//	};
+
+		//	return View(viewModel);
+		//}
+
+		// GET: InsuredPersons/Details/5
 		public async Task<IActionResult> Details(int? id)
 		{
 			if (id == null || DB.InsuredPerson == null)

@@ -25,12 +25,12 @@ namespace pojisteni_FULL.Models.ViewModels
 		[Display(Name = "Pojištěnec")]
 		public int InsuredPersonId { get; set; }
 
-		public InsuranceListViewModel(int insuranceAmount, string subjectOfInsurance, int insuredPersonId)
-		{
-			InsuranceAmount = insuranceAmount;
-			SubjectOfInsurance = subjectOfInsurance;
-			InsuredPersonId = insuredPersonId;
-		}
+		//public InsuranceListViewModel(int insuranceAmount, string subjectOfInsurance, int insuredPersonId)
+		//{
+		//	InsuranceAmount = insuranceAmount;
+		//	SubjectOfInsurance = subjectOfInsurance;
+		//	InsuredPersonId = insuredPersonId;
+		//}
 	}
 	
 	

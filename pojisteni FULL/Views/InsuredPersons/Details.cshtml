@@ -1,6 +1,6 @@
 ﻿@using pojisteni_FULL.Models
 @model pojisteni_FULL.Models.InsuredPerson
-@*@model pojisteni_FULL.Models.ViewModels.InsuredPersonInsuraceViewModel*@
+@*@model pojisteni_FULL.Models.ViewModels.InsuredPersonViewModel*@
 
 @{
 	ViewData["Title"] = "Pojištěnec detail";
@@ -97,6 +97,7 @@
 						</td>
 						<td>
 							@Html.DisplayFor(modelItem => insurance.InsuranceAmount)
+							@*<a asp-controller="Insurances" asp-action="Details" asp-route-id="@insurance.InsuranceAmount">@insurance.InsuranceAmount</a>*@
 							Kč
 						</td>
 						<td>

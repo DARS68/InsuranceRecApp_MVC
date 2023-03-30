@@ -19,7 +19,7 @@ namespace pojisteni_FULL.Models
 		[Display(Name = "Telefonní číslo")]
 		public int PhoneNumber { get; set; }
 		
-		[Display(Name = "Ulice a číslo popisné")]
+		[Display(Name = "Ulice + číslo popisné")]
 		public string StreetAndNumber { get; set; } = "";
 		
 		[Display(Name = "Město")]

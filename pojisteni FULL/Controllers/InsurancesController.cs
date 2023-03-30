@@ -69,6 +69,7 @@ namespace pojisteni_FULL.Controllers
 				ValidFrom = insurance.ValidFrom,
 				ValidTo = insurance.ValidTo,
 				InsuredPersonID = insurance.InsuredPersonId,
+				//InsuredPersonID = insuredPerson.InsuredPersonID,
 				FirstName = insuredPerson.FirstName,
 				LastName = insuredPerson.LastName,
 			};
@@ -257,9 +258,7 @@ namespace pojisteni_FULL.Controllers
 			{
 				return Problem("Entity set 'ApplicationDbContext.Insurance'  is null.");
 			}
-			
-			//InsuredPerson insuredPerson = DB.InsuredPerson.Find(insuredPersonId);
-
+					
 			Insurance insurance = new Insurance
 			{
 				InsuranceID = viewModel.InsuranceID,
@@ -274,8 +273,6 @@ namespace pojisteni_FULL.Controllers
 				//LastName = viewModel.LastName,
 			};
 
-			//var insurance = await DB.Insurance.FindAsync(id);
-			
 			if (insurance != null)
 			{
 				DB.Insurance.Remove(insurance);

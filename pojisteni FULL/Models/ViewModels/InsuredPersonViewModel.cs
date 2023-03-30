@@ -36,5 +36,16 @@ namespace pojisteni_FULL.Models.ViewModels
 		//	FirstName = insuredPerson.FirstName;
 		//	LastName = insuredPerson.LastName;
 		//}
+
+		public static object Insurances(Insurance insurance)
+		{
+			return insurance;
+		}
+
+		public int InsuranceID { get; set; }
+
+		public string InsuranceName { get; set; }
+
+		public int InsuranceAmount { get; set; }
 	}
 }

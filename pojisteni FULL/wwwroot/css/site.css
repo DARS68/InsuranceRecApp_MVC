@@ -13,6 +13,27 @@ html {
   min-height: 100%;
 }
 
+
+/*body {
+    height: 100vh;*/ /* Nastavuje výšku tìla na 100% výšky viewportu */
+    /*margin: 0;*/ /* Odstraní odsazení okrajù tìla */
+    /*margin-bottom: 60px;
+}*/
+
+
+
 body {
-  margin-bottom: 60px;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+main {
+    flex-grow: 1;
+}
+
+footer {
+    flex-shrink: 0;
+    margin-top: auto;
+    height: 40px; /* nastavte výšku patièky podle potøeby */
 }
