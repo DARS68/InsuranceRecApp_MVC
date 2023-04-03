@@ -10,10 +10,12 @@ using pojisteni_FULL.Data;
 using pojisteni_FULL.Extensions.Alerts;
 using pojisteni_FULL.Models;
 using pojisteni_FULL.Models.ViewModels;
+using pojisteni_FULL.Models.ViewModels.Items;
+using pojisteni_FULL.Utils;
 
 namespace pojisteni_FULL.Controllers
 {
-	public class InsuredPersonsController : Controller
+    public class InsuredPersonsController : Controller
 	{
 		private readonly ApplicationDbContext DB;
 
@@ -32,13 +34,13 @@ namespace pojisteni_FULL.Controllers
 		//public async Task<IActionResult> Details(int? id)
 		//{
 		//	//OK
-		//	if (id == null || DB.InsuredPerson == null)
+		//	if (id == null || DB.InsuredPersonItem == null)
 		//	{
 		//		return NotFound();
 		//	}
 
-		//	InsuredPerson insuredPerson = await DB.InsuredPerson
-		//		.Include(i => i.Insurances)
+		//	InsuredPersonItem insuredPerson = await DB.InsuredPersonItem
+		//		.Include(i => i.InsuranceItems)
 		//		.FirstOrDefaultAsync(m => m.InsuredPersonID == id);
 
 		//	//OK
@@ -77,13 +79,13 @@ namespace pojisteni_FULL.Controllers
 		// GET: InsuredPersons/Details/5
 		public async Task<IActionResult> Details(int? id)
 		{
-			if (id == null || DB.InsuredPerson == null)
+			/*if (id == null || DB.InsuredPersonItem == null)
 			{
 				return NotFound();
 			}
 
-			var insuredPerson = await DB.InsuredPerson
-				.Include(i => i.Insurances)
+			InsuredPersonItem insuredPerson = await DB.InsuredPersonItem
+				.Include(i => i.InsuranceItems)
 				.FirstOrDefaultAsync(m => m.InsuredPersonID == id);
 			if (insuredPerson == null)
 			{
@@ -91,6 +93,20 @@ namespace pojisteni_FULL.Controllers
 			}
 
 			TempData["InsuredPersonID"] = (int)insuredPerson.InsuredPersonID;
+			*/
+
+			InsuredPerson insuredPerson = DB.InsuredPerson.FirstOrDefault(p => p.InsuredPersonID == id);
+
+			if (insuredPerson.IsNull()) // if (insurance == null) or if (insurance is null)
+			{
+				return NotFound();
+			}
+
+			InsuredPersonInsuranceListViewModel viewModel = new InsuredPersonInsuranceListViewModel
+			{
+				InsuredPersonItem = InsuredPersonItem.GetInsuredPersonItem(insuredPerson),
+				InsuranceItems = insuredPerson.Insurances.Select(i => InsuranceItem.GetInsuranceItem(i)).ToList()
+			};
 
 			return View(insuredPerson);
 		}
@@ -112,7 +128,7 @@ namespace pojisteni_FULL.Controllers
 
 			InsuredPerson insuredPerson = new InsuredPerson
 			{
-				// InsuredPerson data
+				// InsuredPersonItem data
 				FirstName = viewModel.FirstName,
 				LastName = viewModel.LastName,
 				Email = viewModel.Email,
@@ -147,7 +163,7 @@ namespace pojisteni_FULL.Controllers
 
 			InsuredPersonViewModel viewModel = new InsuredPersonViewModel
 			{
-				// InsuredPerson data
+				// InsuredPersonItem data
 				InsuredPersonID = insuredPerson.InsuredPersonID,
 				FirstName = insuredPerson.FirstName,
 				LastName = insuredPerson.LastName,
@@ -173,7 +189,7 @@ namespace pojisteni_FULL.Controllers
 
 			InsuredPerson insuredPerson = new InsuredPerson
 			{
-				// InsuredPerson data
+				// InsuredPersonItem data
 				InsuredPersonID = viewModel.InsuredPersonID,
 				FirstName = viewModel.FirstName,
 				LastName = viewModel.LastName,
@@ -216,7 +232,7 @@ namespace pojisteni_FULL.Controllers
 		{
 			if (DB.InsuredPerson == null)
 			{
-				return Problem("Entity set 'ApplicationDbContext.InsuredPerson'  is null.");
+				return Problem("Entity set 'ApplicationDbContext.InsuredPersonItem'  is null.");
 			}
 			var insuredPerson = await DB.InsuredPerson.FindAsync(id);
 			if (insuredPerson != null)

@@ -262,7 +262,7 @@ namespace pojisteni_FULL.Migrations
                     b.ToTable("Insurance");
                 });
 
-            modelBuilder.Entity("pojisteni_FULL.Models.InsuredPerson", b =>
+            modelBuilder.Entity("pojisteni_FULL.Models.InsuredPersonItem", b =>
                 {
                     b.Property<int>("InsuredPersonID")
                         .ValueGeneratedOnAdd()
@@ -293,7 +293,7 @@ namespace pojisteni_FULL.Migrations
 
                     b.HasKey("InsuredPersonID");
 
-                    b.ToTable("InsuredPerson");
+                    b.ToTable("InsuredPersonItem");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -349,18 +349,18 @@ namespace pojisteni_FULL.Migrations
 
             modelBuilder.Entity("pojisteni_FULL.Models.Insurance", b =>
                 {
-                    b.HasOne("pojisteni_FULL.Models.InsuredPerson", "InsuredPerson")
-                        .WithMany("Insurances")
+                    b.HasOne("pojisteni_FULL.Models.InsuredPersonItem", "InsuredPersonItem")
+                        .WithMany("InsuranceItems")
                         .HasForeignKey("InsuredPersonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("InsuredPerson");
+                    b.Navigation("InsuredPersonItem");
                 });
 
-            modelBuilder.Entity("pojisteni_FULL.Models.InsuredPerson", b =>
+            modelBuilder.Entity("pojisteni_FULL.Models.InsuredPersonItem", b =>
                 {
-                    b.Navigation("Insurances");
+                    b.Navigation("InsuranceItems");
                 });
 #pragma warning restore 612, 618
         }

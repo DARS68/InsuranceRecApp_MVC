@@ -20,12 +20,12 @@ namespace pojisteni_FULL.Models
 
 		public DateTime ValidTo { get; set; } = DateTime.Now;
 
-		// Navigation - Relation 1:N between entities InsuredPerson <-- Insurance
+		// Navigation - Relation 1:N between entities InsuredPersonItem <-- Insurance
 		[Display(Name = "Pojištěnec")]
-		public int InsuredPersonId { get; set; }  // Foreign key to entity InsuredPerson
+		public int InsuredPersonId { get; set; }  // Foreign key to entity InsuredPersonItem
 
 		// Virtual = won´t be in DB table
-		public virtual InsuredPerson InsuredPerson { get; set; }  // Link to InsuredPerson
+		public virtual InsuredPerson InsuredPerson { get; set; }  // Link to InsuredPersonItem
 
 
 

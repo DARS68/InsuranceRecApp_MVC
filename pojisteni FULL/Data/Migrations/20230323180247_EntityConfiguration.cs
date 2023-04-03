@@ -15,7 +15,7 @@ namespace pojisteni_FULL.Migrations
 
             migrationBuilder.AlterColumn<string>(
                 name: "ZipCode",
-                table: "InsuredPerson",
+                table: "InsuredPersonItem",
                 type: "nvarchar(20)",
                 maxLength: 20,
                 nullable: true,
@@ -26,7 +26,7 @@ namespace pojisteni_FULL.Migrations
 
             migrationBuilder.AlterColumn<string>(
                 name: "StreetAndNumber",
-                table: "InsuredPerson",
+                table: "InsuredPersonItem",
                 type: "nvarchar(500)",
                 maxLength: 500,
                 nullable: true,
@@ -37,7 +37,7 @@ namespace pojisteni_FULL.Migrations
 
             migrationBuilder.AlterColumn<int>(
                 name: "PhoneNumber",
-                table: "InsuredPerson",
+                table: "InsuredPersonItem",
                 type: "int",
                 nullable: false,
                 comment: "PhoneNumber",
@@ -46,7 +46,7 @@ namespace pojisteni_FULL.Migrations
 
             migrationBuilder.AlterColumn<string>(
                 name: "LastName",
-                table: "InsuredPerson",
+                table: "InsuredPersonItem",
                 type: "nvarchar(100)",
                 maxLength: 100,
                 nullable: true,
@@ -57,7 +57,7 @@ namespace pojisteni_FULL.Migrations
 
             migrationBuilder.AlterColumn<string>(
                 name: "FirstName",
-                table: "InsuredPerson",
+                table: "InsuredPersonItem",
                 type: "nvarchar(100)",
                 maxLength: 100,
                 nullable: true,
@@ -68,7 +68,7 @@ namespace pojisteni_FULL.Migrations
 
             migrationBuilder.AlterColumn<string>(
                 name: "Email",
-                table: "InsuredPerson",
+                table: "InsuredPersonItem",
                 type: "nvarchar(200)",
                 maxLength: 200,
                 nullable: true,
@@ -79,7 +79,7 @@ namespace pojisteni_FULL.Migrations
 
             migrationBuilder.AlterColumn<string>(
                 name: "City",
-                table: "InsuredPerson",
+                table: "InsuredPersonItem",
                 type: "nvarchar(100)",
                 maxLength: 100,
                 nullable: true,
@@ -90,7 +90,7 @@ namespace pojisteni_FULL.Migrations
 
             migrationBuilder.AlterColumn<int>(
                 name: "InsuredPersonID",
-                table: "InsuredPerson",
+                table: "InsuredPersonItem",
                 type: "int",
                 nullable: false,
                 comment: "InsuredPersonID",
@@ -183,7 +183,7 @@ namespace pojisteni_FULL.Migrations
                 name: "FK_InsuredPerson_Insurance",
                 table: "Insurance",
                 column: "InsuredPersonId",
-                principalTable: "InsuredPerson",
+                principalTable: "InsuredPersonItem",
                 principalColumn: "InsuredPersonID",
                 onDelete: ReferentialAction.Cascade);
         }
@@ -196,7 +196,7 @@ namespace pojisteni_FULL.Migrations
 
             migrationBuilder.AlterColumn<string>(
                 name: "ZipCode",
-                table: "InsuredPerson",
+                table: "InsuredPersonItem",
                 type: "nvarchar(max)",
                 nullable: true,
                 oldClrType: typeof(string),
@@ -207,7 +207,7 @@ namespace pojisteni_FULL.Migrations
 
             migrationBuilder.AlterColumn<string>(
                 name: "StreetAndNumber",
-                table: "InsuredPerson",
+                table: "InsuredPersonItem",
                 type: "nvarchar(max)",
                 nullable: true,
                 oldClrType: typeof(string),
@@ -218,7 +218,7 @@ namespace pojisteni_FULL.Migrations
 
             migrationBuilder.AlterColumn<int>(
                 name: "PhoneNumber",
-                table: "InsuredPerson",
+                table: "InsuredPersonItem",
                 type: "int",
                 nullable: false,
                 oldClrType: typeof(int),
@@ -227,7 +227,7 @@ namespace pojisteni_FULL.Migrations
 
             migrationBuilder.AlterColumn<string>(
                 name: "LastName",
-                table: "InsuredPerson",
+                table: "InsuredPersonItem",
                 type: "nvarchar(max)",
                 nullable: true,
                 oldClrType: typeof(string),
@@ -238,7 +238,7 @@ namespace pojisteni_FULL.Migrations
 
             migrationBuilder.AlterColumn<string>(
                 name: "FirstName",
-                table: "InsuredPerson",
+                table: "InsuredPersonItem",
                 type: "nvarchar(max)",
                 nullable: true,
                 oldClrType: typeof(string),
@@ -249,7 +249,7 @@ namespace pojisteni_FULL.Migrations
 
             migrationBuilder.AlterColumn<string>(
                 name: "Email",
-                table: "InsuredPerson",
+                table: "InsuredPersonItem",
                 type: "nvarchar(max)",
                 nullable: true,
                 oldClrType: typeof(string),
@@ -260,7 +260,7 @@ namespace pojisteni_FULL.Migrations
 
             migrationBuilder.AlterColumn<string>(
                 name: "City",
-                table: "InsuredPerson",
+                table: "InsuredPersonItem",
                 type: "nvarchar(max)",
                 nullable: true,
                 oldClrType: typeof(string),
@@ -271,7 +271,7 @@ namespace pojisteni_FULL.Migrations
 
             migrationBuilder.AlterColumn<int>(
                 name: "InsuredPersonID",
-                table: "InsuredPerson",
+                table: "InsuredPersonItem",
                 type: "int",
                 nullable: false,
                 oldClrType: typeof(int),
@@ -364,7 +364,7 @@ namespace pojisteni_FULL.Migrations
                 name: "FK_Insurance_InsuredPerson_InsuredPersonId",
                 table: "Insurance",
                 column: "InsuredPersonId",
-                principalTable: "InsuredPerson",
+                principalTable: "InsuredPersonItem",
                 principalColumn: "InsuredPersonID",
                 onDelete: ReferentialAction.Cascade);
         }

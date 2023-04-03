@@ -49,7 +49,7 @@ namespace pojisteni_FULL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "InsuredPerson",
+                name: "InsuredPersonItem",
                 columns: table => new
                 {
                     InsuredPersonID = table.Column<int>(type: "int", nullable: false)
@@ -193,7 +193,7 @@ namespace pojisteni_FULL.Migrations
                     table.ForeignKey(
                         name: "FK_Insurance_InsuredPerson_InsuredPersonId",
                         column: x => x.InsuredPersonId,
-                        principalTable: "InsuredPerson",
+                        principalTable: "InsuredPersonItem",
                         principalColumn: "InsuredPersonID",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -270,7 +270,7 @@ namespace pojisteni_FULL.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "InsuredPerson");
+                name: "InsuredPersonItem");
         }
     }
 }

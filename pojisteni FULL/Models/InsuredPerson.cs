@@ -13,7 +13,7 @@ namespace pojisteni_FULL.Models
 		[Display(Name = "Příjmení")]
 		public string LastName { get; set; } = "";
 
-		[Display(Name = "Email___")]
+		[Display(Name = "Email")]
 		public string Email { get; set; } = "";
 
 		[Display(Name = "Telefonní číslo")]
