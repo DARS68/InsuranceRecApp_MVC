@@ -3,7 +3,7 @@ using System.Xml.Linq;
 
 namespace pojisteni_FULL.Models.ViewModels.Items
 {
-    // TOto není databázová tabulka, pouze se na instanci
+    // Toto není databázová tabulka, pouze se na instanci
     // této třídy databázová tabulka mapuje
     public class InsuredPersonItem
     {

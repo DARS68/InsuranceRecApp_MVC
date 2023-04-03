@@ -1,7 +1,9 @@
 ﻿@*@model pojisteni_FULL.Models.InsuredPerson*@
-
-@using pojisteni_FULL.Models.ViewModels
-@model pojisteni_FULL.Models.ViewModels.InsuredPersonInsuranceViewModel
+@*@model pojisteni_FULL.Models.ViewModels.Items.InsuredPersonItem*@
+@*@model pojisteni_FULL.Models.ViewModels.Items.InsuredPersonItem*@
+@*@model IEnumerable<InsuredPersonInsuranceViewModel>*@
+@model IEnumerable<pojisteni_FULL.Models.ViewModels.Items.InsuranceItem>
+@using pojisteni_FULL.Models.ViewModels.Items
 
 @{
 	ViewData["Title"] = "Pojištěnec detail";
@@ -15,17 +17,17 @@
 			<img src="~/images/avatar.png" alt="Obrázek" class="img-fluid img-thumbnail" />
 		</div>
 		<div class="col-md-10 pe-5">
-			<h1>@Model.FirstName @Model.LastName</h1>
+			<h1>FirstName LastName</h1>
 
 			<div class="d-flex justify-content-start flex-wrap">
 				<div class="col-md-6 pe-5">
-					<p class="mb-1">@Model.StreetAndNumber</p>
-					<p class="mb-1">@Model.City</p>
-					<p class="mb-1">@Model.ZipCode</p>
+					<p class="mb-1">StreetAndNumber</p>
+					<p class="mb-1">City</p>
+					<p class="mb-1">ZipCode</p>
 				</div>
 				<div class="col-md-6">
-					<p class="mb-1 me-1">@Model.Email</p>
-					<p class="mb-1">@Model.PhoneNumber</p>
+					<p class="mb-1 me-1">Email</p>
+					<p class="mb-1">PhoneNumber</p>
 				</div>
 			</div>
 		</div>
@@ -77,7 +79,7 @@
 </div>
 
 
-@if (Model.Insurances.Count > 0)
+@if (Model.Count() > 0)
 {
 	<div class="table-responsive">
 		<table class="table">
@@ -89,7 +91,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				@foreach (var insurance in Model.Insurances)
+				@foreach (var insurance in Model)
 				{
 					<tr>
 						<td>

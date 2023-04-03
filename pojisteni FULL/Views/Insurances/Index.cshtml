@@ -1,4 +1,5 @@
-﻿@model IEnumerable<pojisteni_FULL.Models.Insurance>
+﻿@*@model IEnumerable<pojisteni_FULL.Models.Insurance>*@
+@model IEnumerable<pojisteni_FULL.Models.ViewModels.Items.InsuranceItem>
 
 @{
 	ViewData["Title"] = "Seznam pojištění";
@@ -6,9 +7,9 @@
 
 <h1>@ViewData["Title"]</h1>
 
-<p>
+@*<p>
 	<a class="btn btn-primary" asp-action="Create">Nové pojištění</a>
-</p>
+</p>*@
 <table class="table">
 	<thead>
 		<tr>

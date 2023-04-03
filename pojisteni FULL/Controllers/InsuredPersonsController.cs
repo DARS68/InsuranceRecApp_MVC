@@ -27,7 +27,12 @@ namespace pojisteni_FULL.Controllers
 		// GET: InsuredPersons
 		public async Task<IActionResult> Index()
 		{
-			return View(await DB.InsuredPerson.ToListAsync());
+			InsuredPersonListViewModel viewModel = new InsuredPersonListViewModel
+			{
+				InsuredPersonItems = DB.InsuredPerson.Select((InsuredPerson i) => InsuredPersonItem.GetInsuredPersonItem(i)).ToList()
+			};
+
+			return View(viewModel);
 		}
 
 		// GET: InsuredPersons/Details/5
@@ -108,13 +113,27 @@ namespace pojisteni_FULL.Controllers
 				InsuranceItems = insuredPerson.Insurances.Select(i => InsuranceItem.GetInsuranceItem(i)).ToList()
 			};
 
-			return View(insuredPerson);
+			return View(viewModel);
+			//return View(insuredPerson);
 		}
 
 		// GET: InsuredPersons/Create
 		public IActionResult Create()
 		{
-			return View();
+			//if (insuredPerson.IsNull()) // if (insurance == null) or if (insurance is null)
+			//{
+			//	return View();
+			//	// Considet this: return NotFound();
+			//}
+
+			InsuredPersonInsuranceViewModel viewModel = new InsuredPersonInsuranceViewModel
+			{
+				//InsuranceItem = new InsuranceItem(),
+				InsuredPersonItem = new InsuredPersonItem()
+			};
+
+			return View(viewModel);
+			//return View();
 		}
 
 		[HttpPost]
@@ -129,13 +148,13 @@ namespace pojisteni_FULL.Controllers
 			InsuredPerson insuredPerson = new InsuredPerson
 			{
 				// InsuredPersonItem data
-				FirstName = viewModel.FirstName,
-				LastName = viewModel.LastName,
-				Email = viewModel.Email,
-				PhoneNumber = viewModel.PhoneNumber,
-				StreetAndNumber = viewModel.StreetAndNumber,
-				City = viewModel.City,
-				ZipCode = viewModel.ZipCode
+				FirstName = viewModel.InsuredPersonItem.FirstName,
+				LastName = viewModel.InsuredPersonItem.LastName,
+				Email = viewModel.InsuredPersonItem.Email,
+				PhoneNumber = viewModel.InsuredPersonItem.PhoneNumber,
+				StreetAndNumber = viewModel.InsuredPersonItem.StreetAndNumber,
+				City = viewModel.InsuredPersonItem.City,
+				ZipCode = viewModel.InsuredPersonItem.ZipCode
 			};
 
 
@@ -150,30 +169,18 @@ namespace pojisteni_FULL.Controllers
 		// GET: InsuredPersons/Edit/5
 		public async Task<IActionResult> Edit(int? id)
 		{
-			if (id == null || DB.InsuredPerson == null)
+			InsuredPerson insuredPerson = DB.InsuredPerson.FirstOrDefault(p => p.InsuredPersonID == id);
+
+			if (insuredPerson.IsNull()) // if (insurance == null) or if (insurance is null)
 			{
 				return NotFound();
 			}
 
-			var insuredPerson = await DB.InsuredPerson.FindAsync(id);
-			if (insuredPerson == null)
+			InsuredPersonInsuranceListViewModel viewModel = new InsuredPersonInsuranceListViewModel
 			{
-				return NotFound();
-			}
-
-			InsuredPersonViewModel viewModel = new InsuredPersonViewModel
-			{
-				// InsuredPersonItem data
-				InsuredPersonID = insuredPerson.InsuredPersonID,
-				FirstName = insuredPerson.FirstName,
-				LastName = insuredPerson.LastName,
-				Email = insuredPerson.Email,
-				PhoneNumber = insuredPerson.PhoneNumber,
-				StreetAndNumber = insuredPerson.StreetAndNumber,
-				City = insuredPerson.City,
-				ZipCode = insuredPerson.ZipCode
+				InsuredPersonItem = InsuredPersonItem.GetInsuredPersonItem(insuredPerson),
+				//InsuranceItems = insuredPerson.Insurances.Select(i => InsuranceItem.GetInsuranceItem(i)).ToList()
 			};
-
 
 			return View(viewModel);
 		}
@@ -190,14 +197,14 @@ namespace pojisteni_FULL.Controllers
 			InsuredPerson insuredPerson = new InsuredPerson
 			{
 				// InsuredPersonItem data
-				InsuredPersonID = viewModel.InsuredPersonID,
-				FirstName = viewModel.FirstName,
-				LastName = viewModel.LastName,
-				Email = viewModel.Email,
-				PhoneNumber = viewModel.PhoneNumber,
-				StreetAndNumber = viewModel.StreetAndNumber,
-				City = viewModel.City,
-				ZipCode = viewModel.ZipCode
+				InsuredPersonID = viewModel.InsuredPersonItem.InsuredPersonID,
+				FirstName = viewModel.InsuredPersonItem.FirstName,
+				LastName = viewModel.InsuredPersonItem.LastName,
+				Email = viewModel.InsuredPersonItem.Email,
+				PhoneNumber = viewModel.InsuredPersonItem.PhoneNumber,
+				StreetAndNumber = viewModel.InsuredPersonItem.StreetAndNumber,
+				City = viewModel.InsuredPersonItem.City,
+				ZipCode = viewModel.InsuredPersonItem.ZipCode
 			};
 
 			DB.InsuredPerson.Update(insuredPerson);
@@ -210,32 +217,66 @@ namespace pojisteni_FULL.Controllers
 		// GET: InsuredPersons/Delete/5
 		public async Task<IActionResult> Delete(int? id)
 		{
-			if (id == null || DB.InsuredPerson == null)
+			//if (id == null || DB.InsuredPerson == null)
+			//{
+			//	return NotFound();
+			//}
+
+			//var insuredPerson = await DB.InsuredPerson
+			//	.FirstOrDefaultAsync(m => m.InsuredPersonID == id);
+			//if (insuredPerson == null)
+			//{
+			//	return NotFound();
+			//}
+
+			//return View(insuredPerson);
+
+			InsuredPerson insuredPerson = DB.InsuredPerson.FirstOrDefault(p => p.InsuredPersonID == id);
+
+			if (insuredPerson.IsNull()) // if (insurance == null) or if (insurance is null)
 			{
 				return NotFound();
 			}
 
-			var insuredPerson = await DB.InsuredPerson
-				.FirstOrDefaultAsync(m => m.InsuredPersonID == id);
-			if (insuredPerson == null)
+			InsuredPersonInsuranceListViewModel viewModel = new InsuredPersonInsuranceListViewModel
 			{
-				return NotFound();
-			}
+				InsuredPersonItem = InsuredPersonItem.GetInsuredPersonItem(insuredPerson),
+				//InsuranceItems = insuredPerson.Insurances.Select(i => InsuranceItem.GetInsuranceItem(i)).ToList()
+			};
 
-			return View(insuredPerson);
+			return View(viewModel);
 		}
 
 		// POST: InsuredPersons/Delete/5
 		[HttpPost, ActionName("Delete")]
 		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> DeleteConfirmed(int id)
+		public async Task<IActionResult> DeleteConfirmed(InsuredPersonViewModel viewModel)
 		{
-			if (DB.InsuredPerson == null)
+			//if (DB.InsuredPerson == null)
+			//{
+			//	return Problem("Entity set 'ApplicationDbContext.InsuredPersonItem'  is null.");
+			//}
+			//var insuredPerson = await DB.InsuredPerson.FindAsync(id);
+
+			if (!ModelState.IsValid)
 			{
-				return Problem("Entity set 'ApplicationDbContext.InsuredPersonItem'  is null.");
+				return View(viewModel);
 			}
-			var insuredPerson = await DB.InsuredPerson.FindAsync(id);
-			if (insuredPerson != null)
+
+			InsuredPerson insuredPerson = new InsuredPerson
+			{
+				// InsuredPersonItem data
+				InsuredPersonID = viewModel.InsuredPersonItem.InsuredPersonID,
+				FirstName = viewModel.InsuredPersonItem.FirstName,
+				LastName = viewModel.InsuredPersonItem.LastName,
+				Email = viewModel.InsuredPersonItem.Email,
+				PhoneNumber = viewModel.InsuredPersonItem.PhoneNumber,
+				StreetAndNumber = viewModel.InsuredPersonItem.StreetAndNumber,
+				City = viewModel.InsuredPersonItem.City,
+				ZipCode = viewModel.InsuredPersonItem.ZipCode
+			};
+
+				if (insuredPerson != null)
 			{
 				DB.InsuredPerson.Remove(insuredPerson);
 			}
