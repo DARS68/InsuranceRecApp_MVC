@@ -1,5 +1,8 @@
-﻿@*@model IEnumerable<pojisteni_FULL.Models.Insurance>*@
-@model IEnumerable<pojisteni_FULL.Models.ViewModels.Items.InsuranceItem>
+﻿@using pojisteni_FULL.Models.ViewModels;
+@model InsuranceListViewModel
+
+
+@*@model IEnumerable<pojisteni_FULL.Models.Insurance>*@
 
 @{
 	ViewData["Title"] = "Seznam pojištění";
@@ -7,23 +10,23 @@
 
 <h1>@ViewData["Title"]</h1>
 
-@*<p>
+<p>
 	<a class="btn btn-primary" asp-action="Create">Nové pojištění</a>
-</p>*@
+</p>
 <table class="table">
 	<thead>
 		<tr>
 			<th>
-				@Html.DisplayNameFor(model => model.InsuranceName)
+				@Html.DisplayNameFor(model => model.InsuranceItem.InsuranceName)
 			</th>
 @*			<th>
 				@Html.DisplayNameFor(model => model.InsuranceDescription)
 			</th>*@
 			<th>
-				@Html.DisplayNameFor(model => model.InsuranceAmount)
+				@Html.DisplayNameFor(model => model.InsuranceItem.InsuranceAmount)
 			</th>
 			<th>
-				@Html.DisplayNameFor(model => model.SubjectOfInsurance)
+				@Html.DisplayNameFor(model => model.InsuranceItem.SubjectOfInsurance)
 			</th>
 @*			<th>
 				@Html.DisplayNameFor(model => model.ValidFrom)
@@ -40,7 +43,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		@foreach (var item in Model)
+		@foreach (var item in Model.InsuranceItems)
 		{
 			<tr>
 				<td>
@@ -63,9 +66,10 @@
 					@Html.DisplayFor(modelItem => item.ValidTo)
 				</td>*@
 				<th>
-				@*	@Html.DisplayFor(modelItem => item.InsuredPersonId)*@
-					@Html.DisplayFor(modelItem => item.InsuredPerson.FirstName)
-					@Html.DisplayFor(modelItem => item.InsuredPerson.LastName)
+
+@*					@Html.DisplayFor(modelItem => item.InsuredPersonId)
+					@Html.DisplayFor(modelItem => item.InsuredPersonItem.FirstName)
+					@Html.DisplayFor(modelItem => item.InsuredPersonItem.LastName)*@
 				</th>
 				<td>
 					<a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.InsuranceID">Upravit</a>

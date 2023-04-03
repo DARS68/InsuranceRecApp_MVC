@@ -10,7 +10,7 @@ namespace pojisteni_FULL.Models.ViewModels
 
         // === Nahrazeno:  public InsuredPersonItem InsuredPersonItem { get; set; } == 
         //[Display(Name = "Pojištěnec")]
-        //public int InsuredPersonID { get; set; }
+       //public int InsuredPersonID { get; set; }
 
         //[Display(Name = "Jméno")]
         //public string FirstName { get; set; }

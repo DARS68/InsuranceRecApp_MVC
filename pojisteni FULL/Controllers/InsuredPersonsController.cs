@@ -126,7 +126,7 @@ namespace pojisteni_FULL.Controllers
 			//	// Considet this: return NotFound();
 			//}
 
-			InsuredPersonInsuranceViewModel viewModel = new InsuredPersonInsuranceViewModel
+			InsuredPersonViewModel viewModel = new InsuredPersonViewModel
 			{
 				//InsuranceItem = new InsuranceItem(),
 				InsuredPersonItem = new InsuredPersonItem()
@@ -176,7 +176,7 @@ namespace pojisteni_FULL.Controllers
 				return NotFound();
 			}
 
-			InsuredPersonInsuranceListViewModel viewModel = new InsuredPersonInsuranceListViewModel
+			InsuredPersonViewModel viewModel = new InsuredPersonViewModel
 			{
 				InsuredPersonItem = InsuredPersonItem.GetInsuredPersonItem(insuredPerson),
 				//InsuranceItems = insuredPerson.Insurances.Select(i => InsuranceItem.GetInsuranceItem(i)).ToList()
@@ -238,7 +238,7 @@ namespace pojisteni_FULL.Controllers
 				return NotFound();
 			}
 
-			InsuredPersonInsuranceListViewModel viewModel = new InsuredPersonInsuranceListViewModel
+			InsuredPersonViewModel viewModel = new InsuredPersonViewModel
 			{
 				InsuredPersonItem = InsuredPersonItem.GetInsuredPersonItem(insuredPerson),
 				//InsuranceItems = insuredPerson.Insurances.Select(i => InsuranceItem.GetInsuranceItem(i)).ToList()

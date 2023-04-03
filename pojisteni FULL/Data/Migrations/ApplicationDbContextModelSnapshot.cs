@@ -268,7 +268,7 @@ namespace pojisteni_FULL.Migrations
 
                     b.HasIndex("InsuredPersonId");
 
-                    b.ToTable("Insurance");
+                    b.ToTable("Insurance", (string)null);
                 });
 
             modelBuilder.Entity("pojisteni_FULL.Models.InsuredPersonItem", b =>
@@ -316,7 +316,7 @@ namespace pojisteni_FULL.Migrations
 
                     b.HasKey("InsuredPersonID");
 
-                    b.ToTable("InsuredPersonItem");
+                    b.ToTable("InsuredPersonItem", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

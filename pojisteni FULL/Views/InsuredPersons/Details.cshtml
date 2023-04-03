@@ -1,9 +1,5 @@
-﻿@*@model pojisteni_FULL.Models.InsuredPerson*@
-@*@model pojisteni_FULL.Models.ViewModels.Items.InsuredPersonItem*@
-@*@model pojisteni_FULL.Models.ViewModels.Items.InsuredPersonItem*@
-@*@model IEnumerable<InsuredPersonInsuranceViewModel>*@
-@model IEnumerable<pojisteni_FULL.Models.ViewModels.Items.InsuranceItem>
-@using pojisteni_FULL.Models.ViewModels.Items
+﻿@using pojisteni_FULL.Models.ViewModels;
+@model InsuredPersonInsuranceListViewModel
 
 @{
 	ViewData["Title"] = "Pojištěnec detail";
@@ -17,69 +13,25 @@
 			<img src="~/images/avatar.png" alt="Obrázek" class="img-fluid img-thumbnail" />
 		</div>
 		<div class="col-md-10 pe-5">
-			<h1>FirstName LastName</h1>
+			<h1>@Model.InsuredPersonItem.FirstName @Model.InsuredPersonItem.LastName</h1>
 
 			<div class="d-flex justify-content-start flex-wrap">
 				<div class="col-md-6 pe-5">
-					<p class="mb-1">StreetAndNumber</p>
-					<p class="mb-1">City</p>
-					<p class="mb-1">ZipCode</p>
+					<p class="mb-1">@Model.InsuredPersonItem.StreetAndNumber</p>
+					<p class="mb-1">@Model.InsuredPersonItem.City</p>
+					<p class="mb-1">@Model.InsuredPersonItem.ZipCode</p>
 				</div>
 				<div class="col-md-6">
-					<p class="mb-1 me-1">Email</p>
-					<p class="mb-1">PhoneNumber</p>
+					<p class="mb-1 me-1">@Model.InsuredPersonItem.Email</p>
+					<p class="mb-1">@Model.InsuredPersonItem.PhoneNumber</p>
 				</div>
 			</div>
 		</div>
 	</div>
-
-	@*<div>
-		<img src="~/images/avatar.png" alt="avatar" />
-
-		<h4>
-			@Html.DisplayFor(model => model.FirstName)
-			@Html.DisplayFor(model => model.LastName)
-
-		</h4>
-
-	</div>
-	<hr />
-	<dl class="row">
-		<dt class="col-sm-2">
-			@Html.DisplayNameFor(model => model.Email)
-		</dt>
-		<dd class="col-sm-10">
-			@Html.DisplayFor(model => model.Email)
-		</dd>
-		<dt class="col-sm-2">
-			@Html.DisplayNameFor(model => model.PhoneNumber)
-		</dt>
-		<dd class="col-sm-10">
-			@Html.DisplayFor(model => model.PhoneNumber)
-		</dd>
-		<dt class="col-sm-2">
-			@Html.DisplayNameFor(model => model.StreetAndNumber)
-		</dt>
-		<dd class="col-sm-10">
-			@Html.DisplayFor(model => model.StreetAndNumber)
-		</dd>
-		<dt class="col-sm-2">
-			@Html.DisplayNameFor(model => model.City)
-		</dt>
-		<dd class="col-sm-10">
-			@Html.DisplayFor(model => model.City)
-		</dd>
-		<dt class="col-sm-2">
-			@Html.DisplayNameFor(model => model.ZipCode)
-		</dt>
-		<dd class="col-sm-10">
-			@Html.DisplayFor(model => model.ZipCode)
-		</dd>
-	</dl>*@
 </div>
 
 
-@if (Model.Count() > 0)
+@if (Model.InsuranceItems.Count > 0) 
 {
 	<div class="table-responsive">
 		<table class="table">
@@ -91,11 +43,11 @@
 				</tr>
 			</thead>
 			<tbody>
-				@foreach (var insurance in Model)
+				@foreach (var insurance in Model.InsuranceItems)
 				{
 					<tr>
 						<td>
-							@Html.DisplayFor(modelItem => insurance.InsuranceName)
+							@*@Html.DisplayFor(modelItem => insurance.InsuranceName)*@
 							<a asp-controller="Insurances" asp-action="Details" asp-route-id="@insurance.InsuranceID">@insurance.InsuranceName</a>
 						</td>
 						<td>
@@ -117,8 +69,8 @@
 <div>
 	<a asp-controller="Insurances" asp-action="Create" class="btn btn-primary">Přidat pojištění</a>
 	@*	<a asp-controller="Insurances" asp-action="Create" asp-route-id="Insurances.Id" class="btn btn-primary">Přidat pojištění</a>*@
-	<a class="btn btn-warning" asp-action="Edit" asp-route-id="@Model?.InsuredPersonID">Upravit pojištěnce</a>
-	<a class="btn btn-danger" asp-action="Delete" asp-route-id="@Model?.InsuredPersonID">Odstranit pojištěnce</a>
+	<a class="btn btn-warning" asp-action="Edit" asp-route-id="@Model?.InsuredPersonItem.InsuredPersonID">Upravit pojištěnce</a>
+	<a class="btn btn-danger" asp-action="Delete" asp-route-id="@Model?.InsuredPersonItem.InsuredPersonID">Odstranit pojištěnce</a>
 	<a class="btn btn-primary" asp-action="Index">Zpět na seznam</a>
 </div>
 

@@ -1,4 +1,5 @@
-﻿@model pojisteni_FULL.Models.ViewModels.Items.InsuredPersonItem
+﻿@using pojisteni_FULL.Models.ViewModels;
+@model InsuredPersonViewModel
 
 @{
 	ViewData["Title"] = "Vytvoření";
@@ -18,39 +19,39 @@
 		<form asp-action="Create">
 			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
 			<div class="form-group">
-				<label asp-for="FirstName" class="control-label"></label>
-				<input asp-for="FirstName" class="form-control" />
-				<span asp-validation-for="FirstName" class="text-danger"></span>
+				<label asp-for="InsuredPersonItem.FirstName" class="control-label"></label>
+				<input asp-for="InsuredPersonItem.FirstName" class="form-control" />
+				<span asp-validation-for="InsuredPersonItem.FirstName" class="text-danger"></span>
 			</div>
 			<div class="form-group">
-				<label asp-for="LastName" class="control-label"></label>
-				<input asp-for="LastName" class="form-control" />
-				<span asp-validation-for="LastName" class="text-danger"></span>
+				<label asp-for="InsuredPersonItem.LastName" class="control-label"></label>
+				<input asp-for="InsuredPersonItem.LastName" class="form-control" />
+				<span asp-validation-for="InsuredPersonItem.LastName" class="text-danger"></span>
 			</div>
 			<div class="form-group">
-				<label asp-for="Email" class="control-label"></label>
-				<input asp-for="Email" class="form-control" />
-				<span asp-validation-for="Email" class="text-danger"></span>
+				<label asp-for="InsuredPersonItem.Email" class="control-label"></label>
+				<input asp-for="InsuredPersonItem.Email" class="form-control" />
+				<span asp-validation-for="InsuredPersonItem.Email" class="text-danger"></span>
 			</div>
 			<div class="form-group">
-				<label asp-for="PhoneNumber" class="control-label"></label>
-				<input asp-for="PhoneNumber" class="form-control" />
-				<span asp-validation-for="PhoneNumber" class="text-danger"></span>
+				<label asp-for="InsuredPersonItem.PhoneNumber" class="control-label"></label>
+				<input asp-for="InsuredPersonItem.PhoneNumber" class="form-control" />
+				<span asp-validation-for="InsuredPersonItem.PhoneNumber" class="text-danger"></span>
 			</div>
 			<div class="form-group">
-				<label asp-for="StreetAndNumber" class="control-label"></label>
-				<input asp-for="StreetAndNumber" class="form-control" />
-				<span asp-validation-for="StreetAndNumber" class="text-danger"></span>
+				<label asp-for="InsuredPersonItem.StreetAndNumber" class="control-label"></label>
+				<input asp-for="InsuredPersonItem.StreetAndNumber" class="form-control" />
+				<span asp-validation-for="InsuredPersonItem.StreetAndNumber" class="text-danger"></span>
 			</div>
 			<div class="form-group">
-				<label asp-for="City" class="control-label"></label>
-				<input asp-for="City" class="form-control" />
-				<span asp-validation-for="City" class="text-danger"></span>
+				<label asp-for="InsuredPersonItem.City" class="control-label"></label>
+				<input asp-for="InsuredPersonItem.City" class="form-control" />
+				<span asp-validation-for="InsuredPersonItem.City" class="text-danger"></span>
 			</div>
 			<div class="form-group">
-				<label asp-for="ZipCode" class="control-label"></label>
-				<input asp-for="ZipCode" class="form-control" />
-				<span asp-validation-for="ZipCode" class="text-danger"></span>
+				<label asp-for="InsuredPersonItem.ZipCode" class="control-label"></label>
+				<input asp-for="InsuredPersonItem.ZipCode" class="form-control" />
+				<span asp-validation-for="InsuredPersonItem.ZipCode" class="text-danger"></span>
 			</div>
 			<div class="form-group">
 				<input type="submit" value="Uložit nového pojištěnce" class="btn btn-success" />

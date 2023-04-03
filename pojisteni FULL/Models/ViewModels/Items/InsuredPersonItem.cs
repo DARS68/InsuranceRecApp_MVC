@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Xml.Linq;
+using pojisteni_FULL.Models;
 
 namespace pojisteni_FULL.Models.ViewModels.Items
 {

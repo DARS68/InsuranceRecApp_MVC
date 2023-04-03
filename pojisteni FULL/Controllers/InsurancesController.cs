@@ -127,7 +127,7 @@ namespace pojisteni_FULL.Controllers
 
 
 		// GET: InsuranceItems/Create
-		public IActionResult Create()
+		public IActionResult Create(int? id)
 		{
 			/*
 			if (!TempData.ContainsKey("InsuredPersonID"))
@@ -152,19 +152,19 @@ namespace pojisteni_FULL.Controllers
 			*/
 
 			// Suggestion -> see method detail but instead of InsuranceId get the InsuredPersonId
-			if (!TempData.ContainsKey("InsuredPersonID"))
-			{
-				return View();
-				// Considet this: return NotFound();
-			}
+			//if (!TempData.ContainsKey("InsuredPersonID"))
+			//{
+			//	return View();
+			//	// Considet this: return NotFound();
+			//}
 
-			int insuredPersonId = Convert.ToInt32(TempData["InsuredPersonID"].ToString());
+			//int insuredPersonId = Convert.ToInt32(TempData["InsuredPersonID"].ToString());
 
-			// Keep TempData alive
-			TempData.Keep();
+			//// Keep TempData alive
+			//TempData.Keep();
 
 			// Access the database and get the insured person for whom we are creating the insurance
-			InsuredPerson insuredPerson = DB.InsuredPerson.FirstOrDefault(p => p.InsuredPersonID == insuredPersonId);
+			InsuredPerson insuredPerson = DB.InsuredPerson.FirstOrDefault(p => p.InsuredPersonID == id);
 
 			// Check if the the insured person is in the database
 			if (insuredPerson.IsNull()) // if (insurance == null) or if (insurance is null)
@@ -194,7 +194,7 @@ namespace pojisteni_FULL.Controllers
 				return View(viewModel);
 			}
 
-			InsuredPerson insuredPerson = DB.InsuredPerson.Find(viewModel.InsuredPersonItem.InsuredPersonID);
+			//InsuredPerson insuredPerson = DB.InsuredPerson.Find(viewModel.InsuredPersonItem.InsuredPersonID);
 
 			Insurance insurance = new Insurance
 			{
@@ -204,12 +204,13 @@ namespace pojisteni_FULL.Controllers
 				InsuranceAmount = viewModel.InsuranceItem.InsuranceAmount,
 				SubjectOfInsurance = viewModel.InsuranceItem.SubjectOfInsurance,
 				ValidFrom = viewModel.InsuranceItem.ValidFrom,
-				ValidTo = viewModel.InsuranceItem.ValidTo
+				ValidTo = viewModel.InsuranceItem.ValidTo,
+				InsuredPersonId = viewModel.InsuredPersonItem.InsuredPersonID
 			};
 
 			DB.Insurance.Add(insurance);
 
-			insuredPerson.Insurances.Add(insurance);
+			//insuredPerson.Insurances.Add(insurance);
 
 			await DB.SaveChangesAsync();
 
@@ -291,7 +292,7 @@ namespace pojisteni_FULL.Controllers
 				SubjectOfInsurance = viewModel.InsuranceItem.SubjectOfInsurance,
 				ValidFrom = viewModel.InsuranceItem.ValidFrom,
 				ValidTo = viewModel.InsuranceItem.ValidTo,
-				//InsuredPersonId = viewModel.InsuranceItem.InsuredPersonID
+				InsuredPersonId = viewModel.InsuredPersonItem.InsuredPersonID
 			};
 
 			DB.Insurance.Update(insurance);
@@ -330,7 +331,7 @@ namespace pojisteni_FULL.Controllers
 			{
 				return View(viewModel);
 			}
-			InsuredPerson insuredPerson = DB.InsuredPerson.Find(viewModel.InsuredPersonItem.InsuredPersonID);
+			//InsuredPerson insuredPerson = DB.InsuredPerson.Find(viewModel.InsuredPersonItem.InsuredPersonID);
 
 			Insurance insurance = new Insurance
 			{
@@ -341,13 +342,13 @@ namespace pojisteni_FULL.Controllers
 				SubjectOfInsurance = viewModel.InsuranceItem.SubjectOfInsurance,
 				ValidFrom = viewModel.InsuranceItem.ValidFrom,
 				ValidTo = viewModel.InsuranceItem.ValidTo,
-				//InsuredPersonId = viewModel.InsuranceItem.InsuredPersonID,
+				//InsuredPersonId = viewModel.InsuredPersonItem.InsuredPersonID,
 			};
 
 			if (insurance != null)
 			{
 				DB.Insurance.Remove(insurance);
-				insuredPerson.Insurances.Remove(insurance);
+				//insuredPerson.Insurances.Remove(insurance);
 			}
 
 			await DB.SaveChangesAsync();

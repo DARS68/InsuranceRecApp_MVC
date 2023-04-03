@@ -1,5 +1,8 @@
-﻿@*@model IEnumerable<pojisteni_FULL.Models.InsuredPersonItem>*@
-@model IEnumerable<pojisteni_FULL.Models.ViewModels.Items.InsuredPersonItem>
+﻿@using pojisteni_FULL.Models.ViewModels;
+@model InsuredPersonListViewModel
+
+
+@*@model IEnumerable<pojisteni_FULL.Models.ViewModels.InsuredPersonViewModel>*@
 
 @{
 	ViewData["Title"] = "Pojištěnci";
@@ -14,30 +17,34 @@
 	<thead>
 		<tr>
 			<th>
-					@Html.DisplayNameFor(model => model.FirstName) a 
-				@Html.DisplayNameFor(model => model.LastName)
+				@Html.DisplayNameFor(model => model.InsuredPersonItem.FirstName) a
+				@Html.DisplayNameFor(model => model.InsuredPersonItem.LastName)
 			</th>
 			<th>
-				@Html.DisplayNameFor(model => model.StreetAndNumber) a 
-				@Html.DisplayNameFor(model => model.City)
+				@Html.DisplayNameFor(model => model.InsuredPersonItem.StreetAndNumber) a
+				@Html.DisplayNameFor(model => model.InsuredPersonItem.City)
 			</th>
 			<th></th>
 		</tr>
 	</thead>
 	<tbody>
-		@foreach (var item in Model)
+		@foreach (var item in Model.InsuredPersonItems)
 		{
 			<tr>
 				<td>
-					<a asp-action="Details" asp-route-id="@item.InsuredPersonID">@item.FirstName @item.LastName</a>
+					<a asp-action="Details" asp-route-id="@item.InsuredPersonID">
+						@item.FirstName @item.LastName
+					</a>
 				</td>
 				<td>
 					@Html.DisplayFor(modelItem => item.StreetAndNumber)
 					@Html.DisplayFor(modelItem => item.City)
 				</td>
 				<td>
-					<a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.InsuredPersonID">Upravit</a> 
-					<a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.InsuredPersonID">Odstranit</a>
+					<a class="btn btn-warning" asp-action="Edit"
+				   asp-route-id="@item.InsuredPersonID">Upravit</a>
+					<a class="btn btn-danger" asp-action="Delete"
+				   asp-route-id="@item.InsuredPersonID">Odstranit</a>
 				</td>
 			</tr>
 		}

@@ -1,5 +1,5 @@
-﻿@using pojisteni_FULL.Models.ViewModels.Items
-@model pojisteni_FULL.Models.ViewModels.InsuredPersonInsuranceViewModel
+﻿@using pojisteni_FULL.Models.ViewModels;
+@model InsuredPersonInsuranceViewModel
 
 @{
 	ViewData["Title"] = "Úprava pojištění";
@@ -10,8 +10,8 @@
 <p>
 	« 
 	pro pojištěnce
-	@Html.DisplayFor(model => model.FirstName)
-	@Html.DisplayFor(model => model.LastName)
+	@Html.DisplayFor(model => model.InsuredPersonItem.FirstName)
+	@Html.DisplayFor(model => model.InsuredPersonItem.LastName)
 	 »</>
 </p>
 
@@ -20,38 +20,38 @@
 	<div class="col-md-4">
 		<form asp-action="Edit">
 			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
-			<input type="hidden" asp-for="InsuranceID" />
+			<input type="hidden" asp-for="InsuranceItem.InsuranceID" />
 			<div class="form-group">
-				<label asp-for="InsuranceName" class="control-label"></label>
-				<input asp-for="InsuranceName" class="form-control" />
-				<span asp-validation-for="InsuranceName" class="text-danger"></span>
+				<label asp-for="InsuranceItem.InsuranceName" class="control-label"></label>
+				<input asp-for="InsuranceItem.InsuranceName" class="form-control" />
+				<span asp-validation-for="InsuranceItem.InsuranceName" class="text-danger"></span>
 			</div>
 			<div class="form-group">
-				<label asp-for="InsuranceDescription" class="control-label"></label>
-				<input asp-for="InsuranceDescription" class="form-control" />
-				<span asp-validation-for="InsuranceDescription" class="text-danger"></span>
+				<label asp-for="InsuranceItem.InsuranceDescription" class="control-label"></label>
+				<input asp-for="InsuranceItem.InsuranceDescription" class="form-control" />
+				<span asp-validation-for="InsuranceItem.InsuranceDescription" class="text-danger"></span>
 			</div>
 			<div class="form-group">
-				<label asp-for="InsuranceAmount" class="control-label"></label>
-				<input asp-for="InsuranceAmount" class="form-control" />
-				<span asp-validation-for="InsuranceAmount" class="text-danger"></span>
+				<label asp-for="InsuranceItem.InsuranceAmount" class="control-label"></label>
+				<input asp-for="InsuranceItem.InsuranceAmount" class="form-control" />
+				<span asp-validation-for="InsuranceItem.InsuranceAmount" class="text-danger"></span>
 			</div>
 			<div class="form-group">
-				<label asp-for="SubjectOfInsurance" class="control-label"></label>
-				<input asp-for="SubjectOfInsurance" class="form-control" />
-				<span asp-validation-for="SubjectOfInsurance" class="text-danger"></span>
+				<label asp-for="InsuranceItem.SubjectOfInsurance" class="control-label"></label>
+				<input asp-for="InsuranceItem.SubjectOfInsurance" class="form-control" />
+				<span asp-validation-for="InsuranceItem.SubjectOfInsurance" class="text-danger"></span>
 			</div>
 			<div class="form-group">
-				<label asp-for="ValidFrom" class="control-label"></label>
-				<input asp-for="ValidFrom" class="form-control" />
-				<span asp-validation-for="ValidFrom" class="text-danger"></span>
+				<label asp-for="InsuranceItem.ValidFrom" class="control-label"></label>
+				<input asp-for="InsuranceItem.ValidFrom" class="form-control" />
+				<span asp-validation-for="InsuranceItem.ValidFrom" class="text-danger"></span>
 			</div>
 			<div class="form-group">
-				<label asp-for="ValidTo" class="control-label"></label>
-				<input asp-for="ValidTo" class="form-control" />
-				<span asp-validation-for="ValidTo" class="text-danger"></span>
+				<label asp-for="InsuranceItem.ValidTo" class="control-label"></label>
+				<input asp-for="InsuranceItem.ValidTo" class="form-control" />
+				<span asp-validation-for="InsuranceItem.ValidTo" class="text-danger"></span>
 			</div>
-			<input type="hidden" asp-for="InsuredPersonId" />
+			<input type="hidden" asp-for="InsuredPersonItem.InsuredPersonID" />
 			@*<div class="form-group">
 			<label asp-for="InsuredPersonId" class="control-label"></label>
 			<input asp-for="InsuredPersonId" value="@Model.InsuredPersonId" class="form-control" />

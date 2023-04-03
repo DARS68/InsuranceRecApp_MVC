@@ -7,5 +7,7 @@ namespace pojisteni_FULL.Models.ViewModels
         public InsuredPersonItem InsuredPersonItem { get; set; }
 
         public List<InsuranceItem> InsuranceItems { get; set; }
-    }
+		//public InsuranceItem InsuranceItem { get; set; }
+
+	}
 }
