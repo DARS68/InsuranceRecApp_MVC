@@ -67,8 +67,9 @@
 }
 
 <div>
-	<a asp-controller="Insurances" asp-action="Create" class="btn btn-primary">Přidat pojištění</a>
-	@*	<a asp-controller="Insurances" asp-action="Create" asp-route-id="Insurances.Id" class="btn btn-primary">Přidat pojištění</a>*@
+	<a asp-controller="Insurances" asp-action="Create" asp-route-id="@Model?.InsuredPersonItem.InsuredPersonID" class="btn btn-primary">Přidat pojištění</a>
+	@*<a asp-controller="Insurances" asp-action="Create" class="btn btn-primary">Přidat pojištění</a>*@
+	@*<a asp-controller="Insurances" asp-action="Create" asp-route-id="InsuredPersonItem.InsuredPersonID" class="btn btn-primary">Přidat pojištění</a>*@
 	<a class="btn btn-warning" asp-action="Edit" asp-route-id="@Model?.InsuredPersonItem.InsuredPersonID">Upravit pojištěnce</a>
 	<a class="btn btn-danger" asp-action="Delete" asp-route-id="@Model?.InsuredPersonItem.InsuredPersonID">Odstranit pojištěnce</a>
 	<a class="btn btn-primary" asp-action="Index">Zpět na seznam</a>

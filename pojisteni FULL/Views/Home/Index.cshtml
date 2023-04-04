@@ -2,7 +2,7 @@
 	ViewData["Title"] = "aplikace Pojištění";
 }
 
-<h1>@ViewData["Title"]</h1>
+<h1 class ="display-5">@ViewData["Title"]</h1>
 
 <p>« správa pojištěnců a pojištění »</></p>
 @*<ul>
@@ -21,16 +21,16 @@
 
 
 <div class="row">
-	<div class="col-md-5">
+	<div class="col-md-6">
 		<div class="my-3 p-4 bg-light rounded">
-			<h2>Pojištěnci</h2>
+			<h2 class="display-6">Pojištěnci</h2>
 			<p>Přehled a správa pojištěnců</p>
 			<p><a class="btn btn-default btn-outline-primary" asp-area="" asp-controller="InsuredPersons" asp-action="Index">Pojištěnci &raquo;</a></p>
 		</div>
 	</div>
-	<div class="col-md-5">
+	<div class="col-md-6">
 		<div class="my-3 p-4 bg-light rounded">
-			<h2>Pojištění</h2>
+			<h2 class="display-6">Pojištění</h2>
 			<p>Přehled a správa pojištění</p>
 			<p><a class="btn btn-default btn-outline-secondary" asp-area="" asp-controller="Insurances" asp-action="Index">Pojištění &raquo;</a></p>
 		</div>

@@ -1,5 +1,5 @@
 ﻿@using pojisteni_FULL.Models.ViewModels;
-@model InsuranceListViewModel
+@model InsuredPersonInsuranceListViewModel
 
 
 @*@model IEnumerable<pojisteni_FULL.Models.Insurance>*@
@@ -10,17 +10,17 @@
 
 <h1>@ViewData["Title"]</h1>
 
-<p>
+@*<p>
 	<a class="btn btn-primary" asp-action="Create">Nové pojištění</a>
-</p>
+</p>*@
 <table class="table">
 	<thead>
 		<tr>
 			<th>
 				@Html.DisplayNameFor(model => model.InsuranceItem.InsuranceName)
 			</th>
-@*			<th>
-				@Html.DisplayNameFor(model => model.InsuranceDescription)
+			@*			<th>
+			@Html.DisplayNameFor(model => model.InsuranceDescription)
 			</th>*@
 			<th>
 				@Html.DisplayNameFor(model => model.InsuranceItem.InsuranceAmount)
@@ -28,15 +28,15 @@
 			<th>
 				@Html.DisplayNameFor(model => model.InsuranceItem.SubjectOfInsurance)
 			</th>
-@*			<th>
-				@Html.DisplayNameFor(model => model.ValidFrom)
+			@*			<th>
+			@Html.DisplayNameFor(model => model.ValidFrom)
 			</th>
 			<th>
-				@Html.DisplayNameFor(model => model.ValidTo)
+			@Html.DisplayNameFor(model => model.ValidTo)
 			</th>*@
 			<th>
 				Pro pojištěnce
-@*				@Html.DisplayNameFor(model => model.InsuredPerson.FirstName) a
+				@*				@Html.DisplayNameFor(model => model.InsuredPerson.FirstName) a
 				@Html.DisplayNameFor(model => model.InsuredPerson.LastName)*@
 			</th>
 			<th></th>
@@ -49,9 +49,9 @@
 				<td>
 					<a asp-action="Details" asp-route-id="@item.InsuranceID">@item.InsuranceName</a>
 				</td>
-@*				<td>
-					@Html.DisplayFor(modelItem => item.InsuranceDescription)
-				</td>*@
+				@*				<td>
+			@Html.DisplayFor(modelItem => item.InsuranceDescription)
+			</td>*@
 				<td>
 					@Html.DisplayFor(modelItem => item.InsuranceAmount)
 					Kč
@@ -59,18 +59,19 @@
 				<td>
 					@Html.DisplayFor(modelItem => item.SubjectOfInsurance)
 				</td>
-@*				<td>
-					@Html.DisplayFor(modelItem => item.ValidFrom)
-				</td>
+				@*				<td>
+			@Html.DisplayFor(modelItem => item.ValidFrom)
+			</td>
+			<td>
+			@Html.DisplayFor(modelItem => item.ValidTo)
+			</td>*@
 				<td>
-					@Html.DisplayFor(modelItem => item.ValidTo)
-				</td>*@
-				<th>
-
-@*					@Html.DisplayFor(modelItem => item.InsuredPersonId)
-					@Html.DisplayFor(modelItem => item.InsuredPersonItem.FirstName)
-					@Html.DisplayFor(modelItem => item.InsuredPersonItem.LastName)*@
-				</th>
+					@Html.DisplayFor(modelItem => item.InsuredPersonId)
+					@*@Html.DisplayFor(Model.InsuredPersonItem.FirstName)
+				@Html.DisplayFor(Model.InsuredPersonItem.LastName)*@
+					@*<a asp-controller="InsuredPerson" asp-action="Details" asp-route-id="InsuredPersonItem.InsuredPersonID"
+				>Přidat pojištění</a>*@
+				</td>
 				<td>
 					<a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.InsuranceID">Upravit</a>
 					<a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.InsuranceID">Odstranit</a>

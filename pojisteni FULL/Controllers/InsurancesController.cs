@@ -58,7 +58,7 @@ namespace pojisteni_FULL.Controllers
 			 */
 
 			// === Option 3 ====
-			InsuranceListViewModel viewModel = new InsuranceListViewModel
+			InsuredPersonInsuranceListViewModel viewModel = new InsuredPersonInsuranceListViewModel
 			{
 				InsuranceItems = DB.Insurance.Select((Insurance i) => InsuranceItem.GetInsuranceItem(i)).ToList()
 			};

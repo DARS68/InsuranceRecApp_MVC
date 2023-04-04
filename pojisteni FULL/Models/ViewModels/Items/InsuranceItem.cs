@@ -25,8 +25,10 @@ namespace pojisteni_FULL.Models.ViewModels.Items
         [Display(Name = "Platné do")]
         public DateTime ValidTo { get; set; } = DateTime.Today.AddHours(23).AddMinutes(59);
 
+		[Display(Name = "Pojištěnec")]
+		public int InsuredPersonId { get; set; }  // Foreign key to entity InsuredPersonItem
 
-        public static InsuranceItem GetInsuranceItem(Insurance dbInsurance)
+		public static InsuranceItem GetInsuranceItem(Insurance dbInsurance)
         {
             return new InsuranceItem
             {
@@ -37,7 +39,7 @@ namespace pojisteni_FULL.Models.ViewModels.Items
                 SubjectOfInsurance = dbInsurance.SubjectOfInsurance,
                 ValidFrom = dbInsurance.ValidFrom,
                 ValidTo = dbInsurance.ValidTo,
-                //Fullname = dbInsurance.InsuredPerson"${FirstName }"
+                InsuredPersonId = dbInsurance.InsuredPersonId
 			};
         }
     }
