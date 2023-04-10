@@ -1,4 +1,6 @@
-﻿@using pojisteni_FULL.Models.ViewModels;
+﻿@using pojisteni_FULL.Utils;
+@using pojisteni_FULL.Models.ViewModels;
+@using pojisteni_FULL.Models.ViewModels.Items;
 @model InsuredPersonInsuranceListViewModel
 
 @{
@@ -37,8 +39,14 @@
 		<table class="table">
 			<thead>
 				<tr>
-					<th>Druh pojištění</th>
-					<th>Pojistná částka</th>
+					<th>
+						@*Druh pojištění*@
+						@Extensions.GetDisplayName(typeof(InsuranceItem), nameof(InsuranceItem.InsuranceName))
+					</th>
+					<th>
+						@*Pojistná částka*@
+						@Extensions.GetDisplayName(typeof(InsuranceItem), nameof(InsuranceItem.InsuranceAmount))
+					</th>
 					<th></th>
 				</tr>
 			</thead>

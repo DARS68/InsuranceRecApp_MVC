@@ -58,9 +58,9 @@ namespace pojisteni_FULL.Controllers
 			 */
 
 			// === Option 3 ====
-			InsuredPersonInsuranceListViewModel viewModel = new InsuredPersonInsuranceListViewModel
+			InsuranceListViewModel viewModel = new InsuranceListViewModel
 			{
-				InsuranceItems = DB.Insurance.Select((Insurance i) => InsuranceItem.GetInsuranceItem(i)).ToList()
+				InsuranceItems = await DB.Insurance.Select((Insurance i) => InsuranceItem.GetInsuranceItem(i)).ToListAsync()
 			};
 
 			return View(viewModel);
@@ -109,7 +109,7 @@ namespace pojisteni_FULL.Controllers
 			//};
 			*/
 
-			Insurance insurance = DB.Insurance.FirstOrDefault(i => i.InsuranceID == id);
+			Insurance insurance = await DB.Insurance.FirstOrDefaultAsync(i => i.InsuranceID == id);
 
 			if (insurance.IsNull()) // if (insurance == null) or if (insurance is null)
 			{
@@ -255,7 +255,7 @@ namespace pojisteni_FULL.Controllers
 			return View(viewModel);
 			*/
 
-			Insurance insurance = DB.Insurance.FirstOrDefault(i => i.InsuranceID == id);
+			Insurance insurance = await DB.Insurance.FirstOrDefaultAsync(i => i.InsuranceID == id);
 
 			if (insurance.IsNull()) // if (insurance == null) or if (insurance is null)
 			{
@@ -305,7 +305,7 @@ namespace pojisteni_FULL.Controllers
 		// GET: InsuranceItems/Delete/5
 		public async Task<IActionResult> Delete(int? id)
 		{
-			Insurance insurance = DB.Insurance.FirstOrDefault(i => i.InsuranceID == id);
+			Insurance insurance = await DB.Insurance.FirstOrDefaultAsync(i => i.InsuranceID == id);
 
 			if (insurance.IsNull()) // if (insurance == null) or if (insurance is null)
 			{

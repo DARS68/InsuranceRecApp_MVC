@@ -1,5 +1,8 @@
-﻿@using pojisteni_FULL.Models.ViewModels;
-@model InsuredPersonInsuranceListViewModel
+﻿@using pojisteni_FULL.Utils;
+@using pojisteni_FULL.Models.ViewModels;
+@using pojisteni_FULL.Models.ViewModels.Items;
+
+@model InsuranceListViewModel
 
 
 @*@model IEnumerable<pojisteni_FULL.Models.Insurance>*@
@@ -17,16 +20,19 @@
 	<thead>
 		<tr>
 			<th>
-				@Html.DisplayNameFor(model => model.InsuranceItem.InsuranceName)
+				@*@Html.DisplayNameFor(model => model.InsuranceItem.InsuranceName)											*@
+				@Extensions.GetDisplayName(typeof(InsuranceItem), nameof(InsuranceItem.InsuranceName))
 			</th>
 			@*			<th>
 			@Html.DisplayNameFor(model => model.InsuranceDescription)
 			</th>*@
 			<th>
-				@Html.DisplayNameFor(model => model.InsuranceItem.InsuranceAmount)
+				@*@Html.DisplayNameFor(model => model.InsuranceItem.InsuranceAmount)*@
+				@Extensions.GetDisplayName(typeof(InsuranceItem), nameof(InsuranceItem.InsuranceAmount))
 			</th>
 			<th>
-				@Html.DisplayNameFor(model => model.InsuranceItem.SubjectOfInsurance)
+				@*@Html.DisplayNameFor(model => model.InsuranceItem.SubjectOfInsurance)*@
+				@Extensions.GetDisplayName(typeof(InsuranceItem), nameof(InsuranceItem.SubjectOfInsurance))
 			</th>
 			@*			<th>
 			@Html.DisplayNameFor(model => model.ValidFrom)
@@ -35,11 +41,14 @@
 			@Html.DisplayNameFor(model => model.ValidTo)
 			</th>*@
 			<th>
-				Pro pojištěnce
-				@*				@Html.DisplayNameFor(model => model.InsuredPerson.FirstName) a
+				@*Pro pojištěnce (ID)*@
+				@Extensions.GetDisplayName(typeof(InsuranceItem), nameof(InsuranceItem.InsuredPersonId))
+				@*@Html.DisplayNameFor(model => model.InsuredPerson.FirstName) a
 				@Html.DisplayNameFor(model => model.InsuredPerson.LastName)*@
 			</th>
-			<th></th>
+			<th>
+				@Extensions.GetDisplayName(typeof(InsuranceItem), nameof(InsuranceItem.InsuredPersonName))
+			</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -66,11 +75,19 @@
 			@Html.DisplayFor(modelItem => item.ValidTo)
 			</td>*@
 				<td>
+					@*@Model.InsuredPersonItem.FirstName @Model.InsuredPersonItem.LastName*@
+					
 					@Html.DisplayFor(modelItem => item.InsuredPersonId)
+			
+					@*	@Html.DisplayFor(model => model.InsuredPersonItem.FirstName)*@
+					@*@Html.DisplayFor(modelItem => item.InsuredPerson.FirstName)*@
 					@*@Html.DisplayFor(Model.InsuredPersonItem.FirstName)
 				@Html.DisplayFor(Model.InsuredPersonItem.LastName)*@
 					@*<a asp-controller="InsuredPerson" asp-action="Details" asp-route-id="InsuredPersonItem.InsuredPersonID"
 				>Přidat pojištění</a>*@
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.InsuredPersonName)
 				</td>
 				<td>
 					<a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.InsuranceID">Upravit</a>

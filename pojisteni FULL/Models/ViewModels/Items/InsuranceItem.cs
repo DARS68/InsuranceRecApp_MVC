@@ -3,7 +3,8 @@ using System.Xml.Linq;
 
 namespace pojisteni_FULL.Models.ViewModels.Items
 {
-    public class InsuranceItem
+	[Display(Name = "Název pojištění")]
+	public class InsuranceItem
     {
         public int InsuranceID { get; set; }
 
@@ -25,8 +26,11 @@ namespace pojisteni_FULL.Models.ViewModels.Items
         [Display(Name = "Platné do")]
         public DateTime ValidTo { get; set; } = DateTime.Today.AddHours(23).AddMinutes(59);
 
-		[Display(Name = "Pojištěnec")]
+		[Display(Name = "Pro pojištěnce (ID)")]
 		public int InsuredPersonId { get; set; }  // Foreign key to entity InsuredPersonItem
+		
+        [Display(Name = "Pro pojištěnce (Jméno)")]
+		public string InsuredPersonName { get; set; }
 
 		public static InsuranceItem GetInsuranceItem(Insurance dbInsurance)
         {
@@ -39,7 +43,8 @@ namespace pojisteni_FULL.Models.ViewModels.Items
                 SubjectOfInsurance = dbInsurance.SubjectOfInsurance,
                 ValidFrom = dbInsurance.ValidFrom,
                 ValidTo = dbInsurance.ValidTo,
-                InsuredPersonId = dbInsurance.InsuredPersonId
+                InsuredPersonId = dbInsurance.InsuredPersonId,
+                InsuredPersonName = $"Jméno: {dbInsurance.InsuredPerson.FirstName}, Přijmení: {dbInsurance.InsuredPerson.LastName}"
 			};
         }
     }

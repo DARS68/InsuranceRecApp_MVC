@@ -29,7 +29,7 @@ namespace pojisteni_FULL.Controllers
 		{
 			InsuredPersonListViewModel viewModel = new InsuredPersonListViewModel
 			{
-				InsuredPersonItems = DB.InsuredPerson.Select((InsuredPerson i) => InsuredPersonItem.GetInsuredPersonItem(i)).ToList()
+				InsuredPersonItems = await DB.InsuredPerson.Select((InsuredPerson i) => InsuredPersonItem.GetInsuredPersonItem(i)).ToListAsync()
 			};
 
 			return View(viewModel);
@@ -100,7 +100,7 @@ namespace pojisteni_FULL.Controllers
 			TempData["InsuredPersonID"] = (int)insuredPerson.InsuredPersonID;
 			*/
 
-			InsuredPerson insuredPerson = DB.InsuredPerson.FirstOrDefault(p => p.InsuredPersonID == id);
+			InsuredPerson insuredPerson = await DB.InsuredPerson.FirstOrDefaultAsync(p => p.InsuredPersonID == id);
 
 			if (insuredPerson.IsNull()) // if (insurance == null) or if (insurance is null)
 			{
@@ -169,7 +169,7 @@ namespace pojisteni_FULL.Controllers
 		// GET: InsuredPersons/Edit/5
 		public async Task<IActionResult> Edit(int? id)
 		{
-			InsuredPerson insuredPerson = DB.InsuredPerson.FirstOrDefault(p => p.InsuredPersonID == id);
+			InsuredPerson insuredPerson = await DB.InsuredPerson.FirstOrDefaultAsync(p => p.InsuredPersonID == id);
 
 			if (insuredPerson.IsNull()) // if (insurance == null) or if (insurance is null)
 			{
@@ -231,7 +231,7 @@ namespace pojisteni_FULL.Controllers
 
 			//return View(insuredPerson);
 
-			InsuredPerson insuredPerson = DB.InsuredPerson.FirstOrDefault(p => p.InsuredPersonID == id);
+			InsuredPerson insuredPerson = await DB.InsuredPerson.FirstOrDefaultAsync(p => p.InsuredPersonID == id);
 
 			if (insuredPerson.IsNull()) // if (insurance == null) or if (insurance is null)
 			{
