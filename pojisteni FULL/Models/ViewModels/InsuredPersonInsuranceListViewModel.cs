@@ -2,14 +2,12 @@
 
 namespace pojisteni_FULL.Models.ViewModels
 {
-    public class InsuredPersonInsuranceListViewModel
-    {
-        public InsuredPersonItem InsuredPersonItem { get; set; }
+	public class InsuredPersonInsuranceListViewModel
+	{
+		public InsuredPersonItem InsuredPersonItem { get; set; }
 
-        // public InsuranceItem InsuranceItem { get; set; }
+		public List<InsuranceItem> InsuranceItems { get; set; }
 
-        public List<InsuranceItem> InsuranceItems { get; set; }
-		
 
 	}
 }

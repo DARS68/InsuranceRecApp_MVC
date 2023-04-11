@@ -5,18 +5,21 @@
 @{
     ViewData["Title"] = "Vymazání";
 }
+<div class="col">
+    <div class="my-3 p-4 bg-light rounded">
+        <h1 class="display-6">@ViewData["Title"]</h1>
+        <div class="col-6 bg-default text-succes text-left">
+            «
+            Opravdu si přejete vymazat pojištěnce
+            @Html.DisplayFor(model => model.InsuredPersonItem.FirstName)
+            @Html.DisplayFor(model => model.InsuredPersonItem.LastName)?
+            »</>
+        </div>
+    </div>
+</div>
 
-<h1>@ViewData["Title"]</h1>
-
-<div>
-    <p>
-        « 
-        Opravdu si přejete vymazat pojištěnce
-        @Html.DisplayFor(model => model.InsuredPersonItem.FirstName)
-        @Html.DisplayFor(model => model.InsuredPersonItem.LastName)?
-         »</«>
-    </p>
     <hr />
+
     <dl class="row">
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.InsuredPersonItem.FirstName)

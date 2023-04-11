@@ -26,21 +26,5 @@ namespace pojisteni_FULL.Models
 
 		// Virtual = won´t be in DB table
 		public virtual InsuredPerson InsuredPerson { get; set; }  // Link to InsuredPersonItem
-
-
-
-
-		public static List<SelectListItem> GetInsuranceTypes()
-		{
-			var insuranceTypes = new List<SelectListItem>();
-			insuranceTypes.Add(new SelectListItem { Text = "Pojištění osob", Value = "Pojištění osob", Selected = true });
-			insuranceTypes.Add(new SelectListItem { Text = "Pojištění majetku", Value = "Pojištění majetku" });
-			insuranceTypes.Add(new SelectListItem { Text = "Pojištění vozidel", Value = "Pojištění vozidel" });
-			insuranceTypes.Add(new SelectListItem { Text = "Životní pojištění", Value = "Životní pojištění" });
-			return insuranceTypes;
-		}
-
 	}
-
-
 }

@@ -4,16 +4,19 @@
 @{
 	ViewData["Title"] = "Úprava";
 }
+<div class="col">
+	<div class="my-3 p-4 bg-light rounded">
+		<h1 class="display-6">@ViewData["Title"]</h1>
+		<div class="col-6 bg-default text-succes text-left">
+			«
+			pojištěnce
+			@Html.DisplayFor(model => model.InsuredPersonItem.FirstName)
+			@Html.DisplayFor(model => model.InsuredPersonItem.LastName)
+			»</>
+		</div>
+	</div>
+</div>
 
-<h1>@ViewData["Title"]</h1>
-
-<p>
-	« 
-	pojištěnce
-	@Html.DisplayFor(model => model.InsuredPersonItem.FirstName)
-	@Html.DisplayFor(model => model.InsuredPersonItem.LastName)
-	 »</>
-</p>
 <hr />
 
 <div class="row">
@@ -56,11 +59,11 @@
 				<input asp-for="InsuredPersonItem.ZipCode" class="form-control" />
 				<span asp-validation-for="InsuredPersonItem.ZipCode" class="text-danger"></span>
 			</div>
-			<div class="form-group">
+			<div class="form-group py-2">
 				<input type="submit" value="Uložit" class="btn btn-success" />
-				<a class="btn btn-primary" onclick="javascript:history.back();">Zpět</a>
+				<a class="btn btn-primary" onclick="javascript:history.back();">Zpět na pojištěnce</a>
 				@*<a class="btn btn-primary" asp-action="Details" asp-route-id="@Model.Id">Zpět na pojištěnce</a>*@
-				
+
 			</div>
 		</form>
 	</div>

@@ -1,6 +1,31 @@
 ﻿@{
-    ViewData["Title"] = "O aplikaci ...";
+	ViewData["Title1"] = "... o mně ...";
+	ViewData["Title2"] = "... o aplikaci ...";
 }
-<h1>@ViewData["Title"]</h1>
 
-<p>krátký popis - historie</p>
+<div class="col">
+	<div class="my-3 p-4 bg-light rounded">
+		<h1 class="display-6">@ViewData["Title1"]</h1>
+		<div class="col bg-default text-succes text-left">
+			<ul>
+				<li>jmenuji se David Ranš, 10 let jsem pracoval jako Account Manager v softwarové firmě,</li>
+				<ul>
+					<li> která vytvářela ekonomický informační systém (ERP)</li>
+				</ul>
+				<li>nyní se připravuji v rámci rekvalifikačního kurzu na práci programátora webových aplikací</li></>
+				<li>mým hlavním programovacím jazykem je C# .NET</li>
+			</ul>
+		</div>
+		<div>
+			<h1 class="display-6">@ViewData["Title2"]</h1>
+			<div class="col bg-default text-succes text-left">
+				<ul>
+					<li>aplikaci "Pojištění" jsem vytvořil jako projekt k absolvování rekvalifikačníh kurzu</li>
+					<li>použitá technologie C# .NET ASP.NET Core MVC, Entity framework, LINQ, Bootstrap</li>
+					<li>aplikaci průběžně rozšířím o správu pojistných událostí a jejich odbavení</li>
+					<li>a přídám správu uživatelů, reporty</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>

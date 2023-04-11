@@ -1,17 +1,18 @@
 ﻿@using pojisteni_FULL.Utils;
 @using pojisteni_FULL.Models.ViewModels;
 @using pojisteni_FULL.Models.ViewModels.Items;
-
 @model InsuranceListViewModel
-
-
-@*@model IEnumerable<pojisteni_FULL.Models.Insurance>*@
 
 @{
 	ViewData["Title"] = "Seznam pojištění";
 }
 
-<h1>@ViewData["Title"]</h1>
+<div class="col">
+	<div class="my-3 p-4 bg-light rounded">
+		<h1 class="display-6">@ViewData["Title"]</h1>
+	</div>
+</div>
+
 
 @*<p>
 	<a class="btn btn-primary" asp-action="Create">Nové pojištění</a>
@@ -49,6 +50,10 @@
 			<th>
 				@Extensions.GetDisplayName(typeof(InsuranceItem), nameof(InsuranceItem.InsuredPersonName))
 			</th>
+
+			<th>
+				 
+			</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -76,9 +81,9 @@
 			</td>*@
 				<td>
 					@*@Model.InsuredPersonItem.FirstName @Model.InsuredPersonItem.LastName*@
-					
+
 					@Html.DisplayFor(modelItem => item.InsuredPersonId)
-			
+
 					@*	@Html.DisplayFor(model => model.InsuredPersonItem.FirstName)*@
 					@*@Html.DisplayFor(modelItem => item.InsuredPerson.FirstName)*@
 					@*@Html.DisplayFor(Model.InsuredPersonItem.FirstName)

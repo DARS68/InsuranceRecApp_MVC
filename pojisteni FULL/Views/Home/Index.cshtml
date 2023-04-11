@@ -2,23 +2,14 @@
 	ViewData["Title"] = "aplikace Pojištění";
 }
 
-<h1 class ="display-5">@ViewData["Title"]</h1>
-
-<p>« správa pojištěnců a pojištění »</></p>
-@*<ul>
-	rozcestník:
-	<li>
-		<a class="btn btn-primary" asp-area="" asp-controller="InsuredPersons" asp-action="Index">Pojištěnci</a>
-		
-	</li>
-	<li>
-	</li>
-	<li>
-		<a class="btn btn-primary" asp-controller="Insurances" asp-action="Index">Seznam pojištění</a>
-	</li>
-
-</ul>*@
-
+<div class="col">
+	<div class="my-3 p-4 bg-light rounded">
+		<h1 class="display-4">@ViewData["Title"]</h1>
+		<div class="col-6 bg-default text-succes text-left">
+			<p>« správa pojištěnců a pojištění »</></p>
+		</div>
+	</div>
+</div>
 
 <div class="row">
 	<div class="col-md-6">
