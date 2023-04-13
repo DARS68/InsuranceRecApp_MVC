@@ -162,7 +162,7 @@ namespace pojisteni_FULL.Controllers
 
 			await DB.SaveChangesAsync();
 
-			return RedirectToAction(nameof(Index));
+			return RedirectToAction(nameof(Index)).WithSuccess("Pojištěnec", "bylo úspěšně přidán.");
 		}
 
 
@@ -210,7 +210,7 @@ namespace pojisteni_FULL.Controllers
 			DB.InsuredPerson.Update(insuredPerson);
 			await DB.SaveChangesAsync();
 
-			return RedirectToAction(nameof(Index));
+			return RedirectToAction(nameof(Index)).WithSuccess("Data pojištěnce", "byla úspěšně upravena.");
 		}
 
 
@@ -282,7 +282,7 @@ namespace pojisteni_FULL.Controllers
 			}
 
 			await DB.SaveChangesAsync();
-			return RedirectToAction(nameof(Index));
+			return RedirectToAction(nameof(Index)).WithSuccess("Všechna data pojištěnce", "byla úspěšně odstraněna, včetně pojištění.");
 		}
 
 		private bool InsuredPersonExists(int id)

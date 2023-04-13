@@ -37,3 +37,15 @@ footer {
     margin-top: auto;
     height: 40px; /* nastavte výšku patièky podle potøeby */
 }
+.nav-item:hover{
+    background-color: lightgray;
+    border-radius: 5px;
+    color: white
+    
+}
+
+.btn-default:hover {
+    background-color: lightgray;
+    border-radius: 5px;
+    color: white
+}

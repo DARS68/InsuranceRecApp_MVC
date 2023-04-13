@@ -175,7 +175,7 @@ namespace pojisteni_FULL.Controllers
 
 			await DB.SaveChangesAsync();
 
-			return RedirectToAction(nameof(Index));
+			return RedirectToAction(nameof(Index)).WithSuccess("Pojištění", "bylo úspěšně přidáno.");
 		}
 
 
@@ -224,7 +224,7 @@ namespace pojisteni_FULL.Controllers
 
 			await DB.SaveChangesAsync();
 
-			return RedirectToAction(nameof(Index));
+			return RedirectToAction(nameof(Index)).WithSuccess("Pojištění", "bylo úspěšně upraveno.");
 		}
 
 		// GET: InsuranceItems/Delete/5
@@ -274,7 +274,7 @@ namespace pojisteni_FULL.Controllers
 			}
 
 			await DB.SaveChangesAsync();
-			return RedirectToAction(nameof(Index));
+			return RedirectToAction(nameof(Index)).WithSuccess("Pojištění", "bylo úspěšně odstraněno.");
 		}
 
 
