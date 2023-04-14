@@ -22,7 +22,9 @@ namespace pojisteni_FULL.Models
 		public string ZipCode { get; set; } = "";
 
 
-		public virtual ICollection<Insurance> Insurances { get; set; } = new HashSet<Insurance>();
+		public virtual ICollection<Insurance> Insurances { get; set; }
+		//public virtual Insurance Insurances { get; set; }  // Link to InsuranceItem
+
 
 	}
 }

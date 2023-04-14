@@ -171,10 +171,10 @@ namespace pojisteni_FULL.Controllers
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> Edit(InsuredPersonInsuranceViewModel viewModel)
 		{
-			//if (!ModelState.IsValid)
-			//{
-			//	return View(viewModel);
-			//}
+			if (!ModelState.IsValid)
+			{
+				return View(viewModel);
+			}
 
 			Insurance insurance = new Insurance
 			{
