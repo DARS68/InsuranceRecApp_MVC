@@ -27,37 +27,6 @@ namespace pojisteni_FULL.Controllers
 		// GET: InsuranceItems
 		public async Task<IActionResult> Index()
 		{
-			// ===== Option 1 ========
-			/*
-			 			// Zobrazíme seznam všech pojištění
-			List<InsuranceItem> insurances = new List<InsuranceItem>();
-
-			foreach (Insurance dbInsurance in db.Insurance)
-			{
-				insurances.Add(InsuranceItem.GetInsuranceItem(dbInsurance));
-			}
-
-			InsuranceListViewModel viewModel = new InsuranceListViewModel
-			{
-				Insuraces = insurances
-			};
-
-			return View(viewModel);
-			 */
-
-			// === Option 2 ===
-			/*
-			List<InsuranceItem> insurances = db.Insurance.Select((Insurance i) => InsuranceItem.GetInsuranceItem(i)).ToList();
-
-			InsuranceListViewModel viewModel = new InsuranceListViewModel
-			{
-				Insuraces = insurances
-			};
-
-			return View(viewModel);
-			 */
-
-			// === Option 3 ====
 			InsuranceListViewModel viewModel = new InsuranceListViewModel
 			{
 				InsuranceItems = await db.Insurance.Select((Insurance i) => InsuranceItem.GetInsuranceItem(i)).ToListAsync()
@@ -154,10 +123,10 @@ namespace pojisteni_FULL.Controllers
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> Create(InsuredPersonInsuranceViewModel viewModel)
 		{
-			if (!ModelState.IsValid)
-			{
-				return View(viewModel);
-			}
+			//if (!ModelState.IsValid)
+			//{
+			//	return View(viewModel);
+			//}
 
 			Insurance insurance = new Insurance
 			{
@@ -184,7 +153,7 @@ namespace pojisteni_FULL.Controllers
 		{
 			Insurance insurance = await db.Insurance.FirstOrDefaultAsync(i => i.InsuranceID == id);
 
-			if (insurance.IsNull()) // if (insurance == null) or if (insurance is null)
+			if (insurance.IsNull()) 
 			{
 				return NotFound();
 			}
@@ -202,10 +171,10 @@ namespace pojisteni_FULL.Controllers
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> Edit(InsuredPersonInsuranceViewModel viewModel)
 		{
-			if (!ModelState.IsValid)
-			{
-				return View(viewModel);
-			}
+			//if (!ModelState.IsValid)
+			//{
+			//	return View(viewModel);
+			//}
 
 			Insurance insurance = new Insurance
 			{
@@ -252,10 +221,10 @@ namespace pojisteni_FULL.Controllers
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> DeleteConfirmed(InsuredPersonInsuranceViewModel viewModel)
 		{
-			if (!ModelState.IsValid)
-			{
-				return View(viewModel);
-			}
+			//if (!ModelState.IsValid)
+			//{
+			//	return View(viewModel);
+			//}
 
 			Insurance insurance = new Insurance
 			{

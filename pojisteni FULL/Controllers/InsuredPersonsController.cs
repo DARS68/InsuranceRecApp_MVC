@@ -31,264 +31,185 @@ namespace pojisteni_FULL.Controllers
 			InsuredPersonListViewModel viewModel = new InsuredPersonListViewModel
 			{
 				InsuredPersonItems = await db.InsuredPerson.Select((InsuredPerson i) => InsuredPersonItem.GetInsuredPersonItem(i)).ToListAsync(),
-		};
+			};
 
 			return View(viewModel);
-	}
-
-	// GET: InsuredPersons/Details/5
-	//public async Task<IActionResult> Details(int? id)
-	//{
-	//	//OK
-	//	if (id == null || db.InsuredPersonItem == null)
-	//	{
-	//		return NotFound();
-	//	}
-
-	//	InsuredPersonItem insuredPerson = await db.InsuredPersonItem
-	//		.Include(i => i.InsuranceItems)
-	//		.FirstOrDefaultAsync(m => m.InsuredPersonID == id);
-
-	//	//OK
-	//	if (insuredPerson == null)
-	//	{
-	//		return NotFound();
-	//	}
-
-	//	int insuredPersonId = Convert.ToInt32(TempData["InsuredPersonID"].ToString());
-
-	//	// Keep TempData alive
-	//	TempData.Keep();
-	//	List<Insurance> insurance = new List<Insurance>();
-	//		insurance.Add(new db.Insurance.Find(insuredPersonId));
-	//	//TempData["InsuredPersonID"] = (int)insuredPerson.InsuredPersonID;
-
-	//	InsuredPersonViewModel viewModel = new InsuredPersonViewModel
-	//	{
-	//		InsuredPersonID = insuredPerson.InsuredPersonID,
-	//		FirstName = insuredPerson.FirstName,
-	//		LastName = insuredPerson.LastName,
-	//		Email = insuredPerson.Email,
-	//		PhoneNumber = insuredPerson.PhoneNumber,
-	//		StreetAndNumber = insuredPerson.StreetAndNumber,
-	//		City = insuredPerson.City,
-	//		ZipCode = insuredPerson.ZipCode,
-	//		InsuranceID = insurance.InsuranceID,
-	//		InsuranceName = insurance.InsuranceName,
-	//		InsuranceAmount = insurance.InsuranceAmount
-
-	//	};
-
-	//	return View(viewModel);
-	//}
-
-	// GET: InsuredPersons/Details/5
-	public async Task<IActionResult> Details(int? id)
-	{
-		/*if (id == null || db.InsuredPersonItem == null)
-		{
-			return NotFound();
 		}
 
-		InsuredPersonItem insuredPerson = await db.InsuredPersonItem
-			.Include(i => i.InsuranceItems)
-			.FirstOrDefaultAsync(m => m.InsuredPersonID == id);
-		if (insuredPerson == null)
+
+		// GET: InsuredPersons/Details/5
+		public async Task<IActionResult> Details(int? id)
 		{
-			return NotFound();
-		}
+			InsuredPerson insuredPerson = await db.InsuredPerson.FirstOrDefaultAsync(p => p.InsuredPersonID == id);
 
-		TempData["InsuredPersonID"] = (int)insuredPerson.InsuredPersonID;
-		*/
+			if (insuredPerson.IsNull())
+			{
+				return NotFound();
+			}
 
-		InsuredPerson insuredPerson = await db.InsuredPerson.FirstOrDefaultAsync(p => p.InsuredPersonID == id);
+			InsuredPersonInsuranceListViewModel viewModel = new InsuredPersonInsuranceListViewModel
+			{
+				InsuredPersonItem = InsuredPersonItem.GetInsuredPersonItem(insuredPerson),
+				InsuranceItems = insuredPerson.Insurances.Select(i => InsuranceItem.GetInsuranceItem(i)).ToList()
+			};
 
-		if (insuredPerson.IsNull()) // if (insurance == null) or if (insurance is null)
-		{
-			return NotFound();
-		}
-
-		InsuredPersonInsuranceListViewModel viewModel = new InsuredPersonInsuranceListViewModel
-		{
-			InsuredPersonItem = InsuredPersonItem.GetInsuredPersonItem(insuredPerson),
-			InsuranceItems = insuredPerson.Insurances.Select(i => InsuranceItem.GetInsuranceItem(i)).ToList()
-		};
-
-		return View(viewModel);
-		//return View(insuredPerson);
-	}
-
-	// GET: InsuredPersons/Create
-	public IActionResult Create()
-	{
-		//if (insuredPerson.IsNull()) // if (insurance == null) or if (insurance is null)
-		//{
-		//	return View();
-		//	// Considet this: return NotFound();
-		//}
-
-		InsuredPersonViewModel viewModel = new InsuredPersonViewModel
-		{
-			//InsuranceItem = new InsuranceItem(),
-			InsuredPersonItem = new InsuredPersonItem()
-		};
-
-		return View(viewModel);
-		//return View();
-	}
-
-	[HttpPost]
-	[ValidateAntiForgeryToken]
-	public async Task<IActionResult> Create(InsuredPersonViewModel viewModel)
-	{
-		if (!ModelState.IsValid)
-		{
 			return View(viewModel);
 		}
 
-		InsuredPerson insuredPerson = new InsuredPerson
+		// GET: InsuredPersons/Create
+		public IActionResult Create()
 		{
-			// InsuredPersonItem data
-			FirstName = viewModel.InsuredPersonItem.FirstName,
-			LastName = viewModel.InsuredPersonItem.LastName,
-			Email = viewModel.InsuredPersonItem.Email,
-			PhoneNumber = viewModel.InsuredPersonItem.PhoneNumber,
-			StreetAndNumber = viewModel.InsuredPersonItem.StreetAndNumber,
-			City = viewModel.InsuredPersonItem.City,
-			ZipCode = viewModel.InsuredPersonItem.ZipCode
-		};
+			//if (insuredPerson.IsNull())
+			//{
+			//	return View();
+			//	// Considet this: return NotFound();
+			//}
 
+			InsuredPersonViewModel viewModel = new InsuredPersonViewModel
+			{
+				InsuredPersonItem = new InsuredPersonItem()
+			};
 
-		db.InsuredPerson.Add(insuredPerson);
-
-		await db.SaveChangesAsync();
-
-		return RedirectToAction(nameof(Index)).WithSuccess("Pojištěnec", "bylo úspěšně přidán.");
-	}
-
-
-	// GET: InsuredPersons/Edit/5
-	public async Task<IActionResult> Edit(int? id)
-	{
-		InsuredPerson insuredPerson = await db.InsuredPerson.FirstOrDefaultAsync(p => p.InsuredPersonID == id);
-
-		if (insuredPerson.IsNull()) // if (insurance == null) or if (insurance is null)
-		{
-			return NotFound();
-		}
-
-		InsuredPersonViewModel viewModel = new InsuredPersonViewModel
-		{
-			InsuredPersonItem = InsuredPersonItem.GetInsuredPersonItem(insuredPerson),
-			//InsuranceItems = insuredPerson.Insurances.Select(i => InsuranceItem.GetInsuranceItem(i)).ToList()
-		};
-
-		return View(viewModel);
-	}
-
-	[HttpPost]
-	[ValidateAntiForgeryToken]
-	public async Task<IActionResult> Edit(InsuredPersonViewModel viewModel)
-	{
-		if (!ModelState.IsValid)
-		{
 			return View(viewModel);
 		}
 
-		InsuredPerson insuredPerson = new InsuredPerson
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public async Task<IActionResult> Create(InsuredPersonViewModel viewModel)
 		{
-			// InsuredPersonItem data
-			InsuredPersonID = viewModel.InsuredPersonItem.InsuredPersonID,
-			FirstName = viewModel.InsuredPersonItem.FirstName,
-			LastName = viewModel.InsuredPersonItem.LastName,
-			Email = viewModel.InsuredPersonItem.Email,
-			PhoneNumber = viewModel.InsuredPersonItem.PhoneNumber,
-			StreetAndNumber = viewModel.InsuredPersonItem.StreetAndNumber,
-			City = viewModel.InsuredPersonItem.City,
-			ZipCode = viewModel.InsuredPersonItem.ZipCode
-		};
+			if (!ModelState.IsValid)
+			{
+				return View(viewModel);
+			}
 
-		db.InsuredPerson.Update(insuredPerson);
-		await db.SaveChangesAsync();
+			InsuredPerson insuredPerson = new InsuredPerson
+			{
+				// InsuredPersonItem data
+				FirstName = viewModel.InsuredPersonItem.FirstName,
+				LastName = viewModel.InsuredPersonItem.LastName,
+				Email = viewModel.InsuredPersonItem.Email,
+				PhoneNumber = viewModel.InsuredPersonItem.PhoneNumber,
+				StreetAndNumber = viewModel.InsuredPersonItem.StreetAndNumber,
+				City = viewModel.InsuredPersonItem.City,
+				ZipCode = viewModel.InsuredPersonItem.ZipCode
+			};
 
-		return RedirectToAction(nameof(Index)).WithSuccess("Data pojištěnce", "byla úspěšně upravena.");
-	}
 
+			db.InsuredPerson.Add(insuredPerson);
 
-	// GET: InsuredPersons/Delete/5
-	public async Task<IActionResult> Delete(int? id)
-	{
-		//if (id == null || db.InsuredPerson == null)
-		//{
-		//	return NotFound();
-		//}
+			await db.SaveChangesAsync();
 
-		//var insuredPerson = await db.InsuredPerson
-		//	.FirstOrDefaultAsync(m => m.InsuredPersonID == id);
-		//if (insuredPerson == null)
-		//{
-		//	return NotFound();
-		//}
-
-		//return View(insuredPerson);
-
-		InsuredPerson insuredPerson = await db.InsuredPerson.FirstOrDefaultAsync(p => p.InsuredPersonID == id);
-
-		if (insuredPerson.IsNull()) // if (insurance == null) or if (insurance is null)
-		{
-			return NotFound();
+			return RedirectToAction(nameof(Index)).WithSuccess("Pojištěnec", "bylo úspěšně přidán.");
 		}
 
-		InsuredPersonViewModel viewModel = new InsuredPersonViewModel
+
+		// GET: InsuredPersons/Edit/5
+		public async Task<IActionResult> Edit(int? id)
 		{
-			InsuredPersonItem = InsuredPersonItem.GetInsuredPersonItem(insuredPerson),
-			//InsuranceItems = insuredPerson.Insurances.Select(i => InsuranceItem.GetInsuranceItem(i)).ToList()
-		};
+			InsuredPerson insuredPerson = await db.InsuredPerson.FirstOrDefaultAsync(p => p.InsuredPersonID == id);
 
-		return View(viewModel);
-	}
+			if (insuredPerson.IsNull()) // if (insurance == null) or if (insurance is null)
+			{
+				return NotFound();
+			}
 
-	// POST: InsuredPersons/Delete/5
-	[HttpPost, ActionName("Delete")]
-	[ValidateAntiForgeryToken]
-	public async Task<IActionResult> DeleteConfirmed(InsuredPersonViewModel viewModel)
-	{
-		//if (db.InsuredPerson == null)
-		//{
-		//	return Problem("Entity set 'ApplicationDbContext.InsuredPersonItem'  is null.");
-		//}
-		//var insuredPerson = await db.InsuredPerson.FindAsync(id);
+			InsuredPersonViewModel viewModel = new InsuredPersonViewModel
+			{
+				InsuredPersonItem = InsuredPersonItem.GetInsuredPersonItem(insuredPerson),
+			};
 
-		if (!ModelState.IsValid)
-		{
 			return View(viewModel);
 		}
 
-		InsuredPerson insuredPerson = new InsuredPerson
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public async Task<IActionResult> Edit(InsuredPersonViewModel viewModel)
 		{
-			// InsuredPersonItem data
-			InsuredPersonID = viewModel.InsuredPersonItem.InsuredPersonID,
-			FirstName = viewModel.InsuredPersonItem.FirstName,
-			LastName = viewModel.InsuredPersonItem.LastName,
-			Email = viewModel.InsuredPersonItem.Email,
-			PhoneNumber = viewModel.InsuredPersonItem.PhoneNumber,
-			StreetAndNumber = viewModel.InsuredPersonItem.StreetAndNumber,
-			City = viewModel.InsuredPersonItem.City,
-			ZipCode = viewModel.InsuredPersonItem.ZipCode
-		};
+			if (!ModelState.IsValid)
+			{
+				return View(viewModel);
+			}
 
-		if (insuredPerson != null)
-		{
-			db.InsuredPerson.Remove(insuredPerson);
+			InsuredPerson insuredPerson = new InsuredPerson
+			{
+				// InsuredPersonItem data
+				InsuredPersonID = viewModel.InsuredPersonItem.InsuredPersonID,
+				FirstName = viewModel.InsuredPersonItem.FirstName,
+				LastName = viewModel.InsuredPersonItem.LastName,
+				Email = viewModel.InsuredPersonItem.Email,
+				PhoneNumber = viewModel.InsuredPersonItem.PhoneNumber,
+				StreetAndNumber = viewModel.InsuredPersonItem.StreetAndNumber,
+				City = viewModel.InsuredPersonItem.City,
+				ZipCode = viewModel.InsuredPersonItem.ZipCode
+			};
+
+			db.InsuredPerson.Update(insuredPerson);
+			await db.SaveChangesAsync();
+
+			return RedirectToAction(nameof(Index)).WithSuccess("Data pojištěnce", "byla úspěšně upravena.");
 		}
 
-		await db.SaveChangesAsync();
-		return RedirectToAction(nameof(Index)).WithSuccess("Všechna data pojištěnce", "byla úspěšně odstraněna, včetně pojištění.");
-	}
 
-	private bool InsuredPersonExists(int id)
-	{
-		return db.InsuredPerson.Any(e => e.InsuredPersonID == id);
+		// GET: InsuredPersons/Delete/5
+		public async Task<IActionResult> Delete(int? id)
+		{
+			//if (id == null || db.InsuredPerson == null)
+			//{
+			//	return NotFound();
+			//}
+
+			InsuredPerson insuredPerson = await db.InsuredPerson.FirstOrDefaultAsync(p => p.InsuredPersonID == id);
+
+			if (insuredPerson.IsNull()) // if (insurance == null) or if (insurance is null)
+			{
+				return NotFound();
+			}
+
+			InsuredPersonViewModel viewModel = new InsuredPersonViewModel
+			{
+				InsuredPersonItem = InsuredPersonItem.GetInsuredPersonItem(insuredPerson)
+			};
+
+
+		return View(viewModel);
+		}
+
+		// POST: InsuredPersons/Delete/5
+		[HttpPost, ActionName("Delete")]
+		[ValidateAntiForgeryToken]
+		public async Task<IActionResult> DeleteConfirmed(InsuredPersonViewModel viewModel)
+		{
+
+			//if (!ModelState.IsValid)
+			//{
+			//	return View(viewModel);
+			//}
+
+			InsuredPerson insuredPerson = new InsuredPerson
+			{
+				// InsuredPersonItem data
+				InsuredPersonID = viewModel.InsuredPersonItem.InsuredPersonID,
+				FirstName = viewModel.InsuredPersonItem.FirstName,
+				LastName = viewModel.InsuredPersonItem.LastName,
+				Email = viewModel.InsuredPersonItem.Email,
+				PhoneNumber = viewModel.InsuredPersonItem.PhoneNumber,
+				StreetAndNumber = viewModel.InsuredPersonItem.StreetAndNumber,
+				City = viewModel.InsuredPersonItem.City,
+				ZipCode = viewModel.InsuredPersonItem.ZipCode
+			};
+
+			if (insuredPerson != null)
+			{
+				db.InsuredPerson.Remove(insuredPerson);
+			}
+
+			await db.SaveChangesAsync();
+			return RedirectToAction(nameof(Index)).WithSuccess("Všechna data pojištěnce", "byla úspěšně odstraněna, včetně pojištění.");
+		}
+
+		private bool InsuredPersonExists(int id)
+		{
+			return db.InsuredPerson.Any(e => e.InsuredPersonID == id);
+		}
 	}
-}
 }

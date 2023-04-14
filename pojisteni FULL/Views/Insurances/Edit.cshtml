@@ -20,50 +20,53 @@
 </div>
 
 <hr />
+
 <div class="row">
-	<div class="col-md-4">
+	<div class="col">
 		<form asp-action="Edit">
-			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
-			<input type="hidden" asp-for="InsuranceItem.InsuranceID" />
-			<div class="form-group">
-				<label asp-for="InsuranceItem.InsuranceName" class="control-label"></label>
-				<input asp-for="InsuranceItem.InsuranceName" class="form-control" />
-				<span asp-validation-for="InsuranceItem.InsuranceName" class="text-danger"></span>
-			</div>
-			<div class="form-group">
-				<label asp-for="InsuranceItem.InsuranceDescription" class="control-label"></label>
-				<input asp-for="InsuranceItem.InsuranceDescription" class="form-control" />
-				<span asp-validation-for="InsuranceItem.InsuranceDescription" class="text-danger"></span>
-			</div>
-			<div class="form-group">
-				<label asp-for="InsuranceItem.InsuranceAmount" class="control-label"></label>
-				<input asp-for="InsuranceItem.InsuranceAmount" class="form-control" />
-				<span asp-validation-for="InsuranceItem.InsuranceAmount" class="text-danger"></span>
-			</div>
-			<div class="form-group">
-				<label asp-for="InsuranceItem.SubjectOfInsurance" class="control-label"></label>
-				<input asp-for="InsuranceItem.SubjectOfInsurance" class="form-control" />
-				<span asp-validation-for="InsuranceItem.SubjectOfInsurance" class="text-danger"></span>
-			</div>
-			<div class="form-group">
-				<label asp-for="InsuranceItem.ValidFrom" class="control-label"></label>
-				<input asp-for="InsuranceItem.ValidFrom" class="form-control" />
-				<span asp-validation-for="InsuranceItem.ValidFrom" class="text-danger"></span>
-			</div>
-			<div class="form-group">
-				<label asp-for="InsuranceItem.ValidTo" class="control-label"></label>
-				<input asp-for="InsuranceItem.ValidTo" class="form-control" />
-				<span asp-validation-for="InsuranceItem.ValidTo" class="text-danger"></span>
-			</div>
-			<input type="hidden" asp-for="InsuredPersonItem.InsuredPersonID" />
-			@*<div class="form-group">
-			<label asp-for="InsuredPersonId" class="control-label"></label>
-			<input asp-for="InsuredPersonId" value="@Model.InsuredPersonId" class="form-control" />
-			<span asp-validation-for="InsuredPersonId" class="text-danger"></span>
-			</div>*@
-			<div class="form-group py-2">
-				<input type="submit" value="Uložit" class="btn btn-success" />
-				<a class="btn btn-primary" onclick="javascript:history.back();">Zpět na seznam</a>
+			<div class="d-flex flex-wrap">
+				<div class="col-md-6">
+					<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+					<input type="hidden" asp-for="InsuranceItem.InsuranceID" />
+					<div class="form-group">
+						<label asp-for="InsuranceItem.InsuranceName" class="control-label"></label>
+						<input asp-for="InsuranceItem.InsuranceName" class="form-control" />
+						<span asp-validation-for="InsuranceItem.InsuranceName" class="text-danger"></span>
+					</div>
+					<div class="form-group">
+						<label asp-for="InsuranceItem.InsuranceDescription" class="control-label"></label>
+						<textarea asp-for="InsuranceItem.InsuranceDescription" class="form-control"></textarea>
+						<span asp-validation-for="InsuranceItem.InsuranceDescription" class="text-danger"></span>
+					</div>
+					<div class="form-group">
+						<label asp-for="InsuranceItem.InsuranceAmount" class="control-label"></label>
+						<input asp-for="InsuranceItem.InsuranceAmount" class="form-control" />
+						<span asp-validation-for="InsuranceItem.InsuranceAmount" class="text-danger"></span>
+					</div>
+				</div>
+
+				<div class="col-md-6">
+					<div class="form-group">
+						<label asp-for="InsuranceItem.SubjectOfInsurance" class="control-label"></label>
+						<textarea asp-for="InsuranceItem.SubjectOfInsurance" class="form-control"></textarea>
+						<span asp-validation-for="InsuranceItem.SubjectOfInsurance" class="text-danger"></span>
+					</div>
+					<div class="form-group">
+						<label asp-for="InsuranceItem.ValidFrom" class="control-label"></label>
+						<input asp-for="InsuranceItem.ValidFrom" class="form-control" />
+						<span asp-validation-for="InsuranceItem.ValidFrom" class="text-danger"></span>
+					</div>
+					<div class="form-group">
+						<label asp-for="InsuranceItem.ValidTo" class="control-label"></label>
+						<input asp-for="InsuranceItem.ValidTo" class="form-control" />
+						<span asp-validation-for="InsuranceItem.ValidTo" class="text-danger"></span>
+					</div>
+					<input type="hidden" asp-for="InsuredPersonItem.InsuredPersonID" />
+					<div class="form-group d-flex justify-content-end">
+						<input type="submit" value="Uložit" class="btn btn-success mr-1" />
+						<a class="btn btn-primary" onclick="javascript:history.back();">Zpět na seznam</a>
+					</div>
+				</div>
 			</div>
 		</form>
 	</div>

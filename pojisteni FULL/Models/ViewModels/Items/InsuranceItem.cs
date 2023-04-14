@@ -6,25 +6,32 @@ namespace pojisteni_FULL.Models.ViewModels.Items
 {
 	public class InsuranceItem
 	{
-		[Display(Name = "Název pojištění")]
+		[Display(Name = "Pojištění ID")]
+	
 		public int InsuranceID { get; set; }
 
 		[Display(Name = "Název pojištění")]
+		[Required(ErrorMessage = "Vyberte název pojištění ze seznamu")]
 		public string InsuranceName { get; set; } = "";
 
 		[Display(Name = "Popis")]
+		[Required(ErrorMessage = "Vyplňte stručný popis")]
 		public string InsuranceDescription { get; set; } = "";
 
 		[Display(Name = "Pojistná částka")]
+		[Required(ErrorMessage = "Vyplňte pojistnouo částku")]
 		public int InsuranceAmount { get; set; }
 
 		[Display(Name = "Předmět pojištění")]
+		[Required(ErrorMessage = "Vyplňte, co je předmětem pojištění")]
 		public string SubjectOfInsurance { get; set; } = "";
 
 		[Display(Name = "Platné od")]
+		[Required(ErrorMessage = "Upravte začátek platnosti")]
 		public DateTime ValidFrom { get; set; } = DateTime.Today.AddHours(24).AddMinutes(01);
 
 		[Display(Name = "Platné do")]
+		[Required(ErrorMessage = "Upravte konec platnosti")]
 		public DateTime ValidTo { get; set; } = DateTime.Today.AddYears(1).AddHours(23).AddMinutes(59);
 
 		[Display(Name = "Pojištěnec ID")]

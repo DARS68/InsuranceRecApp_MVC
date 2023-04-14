@@ -22,33 +22,22 @@
 @*<p>
 	<a class="btn btn-primary" asp-action="Create">Nové pojištění</a>
 </p>*@
+
 <table class="table">
 	<thead>
 		<tr>
 			<th>
-				@*@Html.DisplayNameFor(model => model.InsuranceItem.InsuranceName)											*@
+			@Extensions.GetDisplayName(typeof(InsuranceItem), nameof(InsuranceItem.InsuranceID))
+			</th>
+			<th>
 				@Extensions.GetDisplayName(typeof(InsuranceItem), nameof(InsuranceItem.InsuranceName))
 			</th>
-			@*			<th>
-			@Html.DisplayNameFor(model => model.InsuranceDescription)
-			</th>*@
 			<th>
-				@*@Html.DisplayNameFor(model => model.InsuranceItem.InsuranceAmount)*@
 				@Extensions.GetDisplayName(typeof(InsuranceItem), nameof(InsuranceItem.InsuranceAmount))
 			</th>
 			<th>
-				@*@Html.DisplayNameFor(model => model.InsuranceItem.SubjectOfInsurance)*@
 				@Extensions.GetDisplayName(typeof(InsuranceItem), nameof(InsuranceItem.SubjectOfInsurance))
 			</th>
-			@*			<th>
-			@Html.DisplayNameFor(model => model.ValidFrom)
-			</th>
-			<th>
-			@Html.DisplayNameFor(model => model.ValidTo)
-			</th>*@
-@*			<th>
-				@Extensions.GetDisplayName(typeof(InsuranceItem), nameof(InsuranceItem.InsuredPersonId))
-			</th>*@
 			<th>
 				@Extensions.GetDisplayName(typeof(InsuranceItem), nameof(InsuranceItem.InsuredPersonName))
 			</th>
@@ -63,20 +52,21 @@
 		{
 			<tr>
 				<td>
+					@Html.DisplayFor(modelItem => item.InsuranceID)
+				</td>
+				<td>
 					<a asp-action="Details" asp-route-id="@item.InsuranceID">@item.InsuranceName</a>
 				</td>
 				<td>
 					@Html.DisplayFor(modelItem => item.InsuranceAmount)
 					Kč
 				</td>
-				<td>
+				<td class="col-4">
 					@Html.DisplayFor(modelItem => item.SubjectOfInsurance)
 				</td>
-				@*				<td>
-			@Html.DisplayFor(modelItem => item.InsuredPersonId)
-			</td>*@
 				<td>
 					@Html.DisplayFor(modelItem => item.InsuredPersonName)
+					
 				</td>
 				<td class="d-flex justify-content-end">
 					<a class="btn btn-sm btn-warning mr-1" asp-action="Edit" asp-route-id="@item.InsuranceID">Upravit</a>

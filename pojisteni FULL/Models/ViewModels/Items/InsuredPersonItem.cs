@@ -8,29 +8,38 @@ namespace pojisteni_FULL.Models.ViewModels.Items
     // této třídy databázová tabulka mapuje
     public class InsuredPersonItem
     {
-        [Display(Name = "Pojištěnec")]
+        [Display(Name = "Pojištěnec ID")]
         public int InsuredPersonID { get; set; }
 
         [Display(Name = "Jméno")]
+		[Required(ErrorMessage = "Vyplňte jméno")]
         public string FirstName { get; set; }
-
-        [Display(Name = "Příjmení")]
+		
+		[Display(Name = "Příjmení")]
+        [Required(ErrorMessage = "Vyplňte příjmení")]
         public string LastName { get; set; }
 
-        [Display(Name = "Email")]
+		[Display(Name = "Email")]
+		[Required(ErrorMessage = "Vyplňte kontaktní email")]
         public string Email { get; set; } = "";
 
         [Display(Name = "Telefonní číslo")]
-        public int PhoneNumber { get; set; }
+		[Required(ErrorMessage = "Vyplňte kontaktní mobilní telefon")]
+		public int PhoneNumber { get; set; }
 
         [Display(Name = "Ulice a číslo popisné")]
-        public string StreetAndNumber { get; set; } = "";
+		[Required(ErrorMessage = "Vyplňte adresu")]
+		public string StreetAndNumber { get; set; } = "";
 
         [Display(Name = "Město")]
-        public string City { get; set; } = "";
+		[Required(ErrorMessage = "Vyplňte město")]
+		public string City { get; set; } = "";
 
         [Display(Name = "PSČ")]
-        public string ZipCode { get; set; } = "";
+		[Required(ErrorMessage = "Vyplňte PSČ")]
+		[RegularExpression("^\\d{3} ?\\d{2}$", ErrorMessage = "Zadejte prosím validní PSČ")]
+		[StringLength(6, MinimumLength = 5)]
+		public string ZipCode { get; set; } = "";
 
         public static InsuredPersonItem GetInsuredPersonItem(InsuredPerson dbPerson)
         {

@@ -25,14 +25,13 @@
 	<thead>
 		<tr>
 			<th>
+				@Extensions.GetDisplayName(typeof(InsuranceItem), nameof(InsuranceItem.InsuredPersonId))
+			</th>
+			<th>
 				@Extensions.GetDisplayName(typeof(InsuranceItem), nameof(InsuranceItem.InsuredPersonName))
-				@*	@Html.DisplayNameFor(model => model.InsuredPersonItem.FirstName) a
-				@Html.DisplayNameFor(model => model.InsuredPersonItem.LastName)*@
 			</th>
 			<th>
 				@Extensions.GetDisplayName(typeof(InsuranceItem), nameof(InsuranceItem.InsuredPersonStreetNumberCity))
-				@*				@Html.DisplayNameFor(model => model.InsuredPersonItem.StreetAndNumber) a
-				@Html.DisplayNameFor(model => model.InsuredPersonItem.City)*@
 			</th>
 			<th></th>
 		</tr>
@@ -41,6 +40,9 @@
 		@foreach (var item in Model.InsuredPersonItems)
 		{
 			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.InsuredPersonID)
+				</td>
 				<td>
 					<a asp-action="Details" asp-route-id="@item.InsuredPersonID">
 						@item.FirstName @item.LastName
