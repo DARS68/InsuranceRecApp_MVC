@@ -4,9 +4,9 @@ using System.Xml.Linq;
 
 namespace pojisteni_FULL.Models.ViewModels.Items
 {
-	[Display(Name = "Název pojištění")]
 	public class InsuranceItem
 	{
+		[Display(Name = "Název pojištění")]
 		public int InsuranceID { get; set; }
 
 		[Display(Name = "Název pojištění")]
@@ -53,6 +53,8 @@ namespace pojisteni_FULL.Models.ViewModels.Items
 
 			};
 		}
+
+		//list of Insurance names, it is used in web form, new insurance
 		public static List<SelectListItem> GetInsuranceNames()
 		{
 			var insuranceNames = new List<SelectListItem>();

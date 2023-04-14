@@ -8,8 +8,13 @@
 }
 
 <div class="col">
-	<div class="my-3 p-4 bg-light rounded">
+	<div class="row mb-3 p-4 bg-light rounded border">
 		<h1 class="display-6">@ViewData["Title"]</h1>
+		<div class="col">
+			<span class="badge badge-pill badge-warning">
+				@Html.DisplayFor(model => model.InsuranceItems.Count)
+			</span>
+		</div>
 	</div>
 </div>
 
@@ -41,18 +46,15 @@
 			<th>
 			@Html.DisplayNameFor(model => model.ValidTo)
 			</th>*@
-			<th>
-				@*Pro pojištěnce (ID)*@
+@*			<th>
 				@Extensions.GetDisplayName(typeof(InsuranceItem), nameof(InsuranceItem.InsuredPersonId))
-				@*@Html.DisplayNameFor(model => model.InsuredPerson.FirstName) a
-				@Html.DisplayNameFor(model => model.InsuredPerson.LastName)*@
-			</th>
+			</th>*@
 			<th>
 				@Extensions.GetDisplayName(typeof(InsuranceItem), nameof(InsuranceItem.InsuredPersonName))
 			</th>
 
 			<th>
-				 
+
 			</th>
 		</tr>
 	</thead>
@@ -63,9 +65,6 @@
 				<td>
 					<a asp-action="Details" asp-route-id="@item.InsuranceID">@item.InsuranceName</a>
 				</td>
-				@*				<td>
-			@Html.DisplayFor(modelItem => item.InsuranceDescription)
-			</td>*@
 				<td>
 					@Html.DisplayFor(modelItem => item.InsuranceAmount)
 					Kč
@@ -74,31 +73,28 @@
 					@Html.DisplayFor(modelItem => item.SubjectOfInsurance)
 				</td>
 				@*				<td>
-			@Html.DisplayFor(modelItem => item.ValidFrom)
-			</td>
-			<td>
-			@Html.DisplayFor(modelItem => item.ValidTo)
+			@Html.DisplayFor(modelItem => item.InsuredPersonId)
 			</td>*@
-				<td>
-					@*@Model.InsuredPersonItem.FirstName @Model.InsuredPersonItem.LastName*@
-
-					@Html.DisplayFor(modelItem => item.InsuredPersonId)
-
-					@*	@Html.DisplayFor(model => model.InsuredPersonItem.FirstName)*@
-					@*@Html.DisplayFor(modelItem => item.InsuredPerson.FirstName)*@
-					@*@Html.DisplayFor(Model.InsuredPersonItem.FirstName)
-				@Html.DisplayFor(Model.InsuredPersonItem.LastName)*@
-					@*<a asp-controller="InsuredPerson" asp-action="Details" asp-route-id="InsuredPersonItem.InsuredPersonID"
-				>Přidat pojištění</a>*@
-				</td>
 				<td>
 					@Html.DisplayFor(modelItem => item.InsuredPersonName)
 				</td>
-				<td>
-					<a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.InsuranceID">Upravit</a>
-					<a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.InsuranceID">Odstranit</a>
+				<td class="d-flex justify-content-end">
+					<a class="btn btn-sm btn-warning mr-1" asp-action="Edit" asp-route-id="@item.InsuranceID">Upravit</a>
+					<a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@item.InsuranceID">Odstranit</a>
 				</td>
 			</tr>
 		}
 	</tbody>
 </table>
+
+<div class="container">
+	<p class="text-center text-warning mt-5" style="font-style: italic">« stránkování zatím není zprovozněno »</p>
+	<ul class="pagination justify-content-center">
+		<li class="page-item disabled"><a class="page-link " href="javascript:void(0);">předchozí</a></li>
+		<li class="page-item active"><a class="page-link" href="javascript:void(0);">1</a></li>
+		<li class="page-item"><a class="page-link" href="javascript:void(0);">2</a></li>
+		<li class="page-item"><a class="page-link" href="javascript:void(0);">3</a></li>
+		<li class="page-item"><a class="page-link" href="javascript:void(0);">další</a></li>
+	</ul>
+
+</div>

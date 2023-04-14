@@ -7,13 +7,15 @@
 }
 
 <div class="col">
-	<div class="my-3 p-4 bg-light rounded">
-		<h1 class="display-6">@ViewData["Title"]</h1>
-		<div class="col-6 bg-default text-succes text-left">
-			« pro pojištěnce
-			@Html.DisplayFor(model => model.InsuredPersonItem.FirstName)
-			@Html.DisplayFor(model => model.InsuredPersonItem.LastName) »
-			»</>
+	<div class="row">
+		<div class="col-12 mb-3 p-4 bg-light rounded border">
+			<h1 class="display-6">@ViewData["Title"]</h1>
+			<div class="text-left">
+				« pro pojištěnce
+				@Html.DisplayFor(model => model.InsuredPersonItem.FirstName)
+				@Html.DisplayFor(model => model.InsuredPersonItem.LastName) »
+				»</>
+			</div>
 		</div>
 	</div>
 </div>
@@ -54,11 +56,11 @@
 				<span asp-validation-for="InsuranceItem.ValidTo" class="text-danger"></span>
 			</div>
 			<input type="hidden" asp-for="InsuredPersonItem.InsuredPersonID" />
-@*			<div class="form-group">
-				<label asp-for="InsuredPersonItem.InsuredPersonID" class="control-label"></label>
-				<input asp-for="InsuredPersonItem.InsuredPersonID"
-					   value="@Model.InsuredPersonItem.InsuredPersonID" class="form-control" />
-				<span asp-validation-for="InsuredPersonItem.InsuredPersonID" class="text-danger"></span>
+			@*			<div class="form-group">
+			<label asp-for="InsuredPersonItem.InsuredPersonID" class="control-label"></label>
+			<input asp-for="InsuredPersonItem.InsuredPersonID"
+			value="@Model.InsuredPersonItem.InsuredPersonID" class="form-control" />
+			<span asp-validation-for="InsuredPersonItem.InsuredPersonID" class="text-danger"></span>
 			</div>*@
 			<div class="form-group py-2">
 				<input type="submit" value="Založit smlouvu" class="btn btn-success" />

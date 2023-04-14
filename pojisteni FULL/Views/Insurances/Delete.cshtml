@@ -2,68 +2,70 @@
 @model InsuredPersonInsuranceViewModel
 
 @{
-    ViewData["Title"] = "Vymazání";
+	ViewData["Title"] = "Vymazání";
 }
 
 <div class="col">
-    <div class="my-3 p-4 bg-light rounded">
-        <h1 class="display-6">@ViewData["Title"]</h1>
-        <div class="col-6 bg-default text-succes text-left">
-            «
-            Opravdu si přejete vymazat pojištění pro pojištěnce
-            @Html.DisplayFor(model => model.InsuredPersonItem.FirstName)
-            @Html.DisplayFor(model => model.InsuredPersonItem.LastName)?
-            »</>
-        </div>
-    </div>
+	<div class="row">
+		<div class="col-12 p-4 bg-light rounded border">
+			<h1 class="display-6">@ViewData["Title"]</h1>
+			<div class="text-left">
+				«
+				Opravdu si přejete vymazat pojištění pro pojištěnce
+				@Html.DisplayFor(model => model.InsuredPersonItem.FirstName)
+				@Html.DisplayFor(model => model.InsuredPersonItem.LastName)?
+				»</>
+			</div>
+		</div>
+	</div>
 </div>
 
 <div>
-    
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.InsuranceItem.InsuranceName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.InsuranceItem.InsuranceName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.InsuranceItem.InsuranceDescription)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.InsuranceItem.InsuranceDescription)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.InsuranceItem.InsuranceAmount)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.InsuranceItem.InsuranceAmount)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.InsuranceItem.SubjectOfInsurance)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.InsuranceItem.SubjectOfInsurance)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.InsuranceItem.ValidFrom)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.InsuranceItem.ValidFrom)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.InsuranceItem.ValidTo)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.InsuranceItem.ValidTo)
-        </dd>
-    </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="InsuranceItem.InsuranceID" />
-        <input type="submit" value="Delete" class="btn btn-danger" />
-        @*<a asp-action="Index">Back to List</a>*@
-        <a class="btn btn-primary" onclick="javascript:history.back();">Zpět</a>
-    </form>
+
+	<hr />
+	<dl class="row">
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.InsuranceItem.InsuranceName)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.InsuranceItem.InsuranceName)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.InsuranceItem.InsuranceDescription)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.InsuranceItem.InsuranceDescription)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.InsuranceItem.InsuranceAmount)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.InsuranceItem.InsuranceAmount)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.InsuranceItem.SubjectOfInsurance)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.InsuranceItem.SubjectOfInsurance)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.InsuranceItem.ValidFrom)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.InsuranceItem.ValidFrom)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.InsuranceItem.ValidTo)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.InsuranceItem.ValidTo)
+		</dd>
+	</dl>
+
+	<form asp-action="Delete">
+		<input type="hidden" asp-for="InsuranceItem.InsuranceID" />
+		<input type="submit" value="Delete" class="btn btn-danger" />
+		@*<a asp-action="Index">Back to List</a>*@
+		<a class="btn btn-primary" onclick="javascript:history.back();">Zpět</a>
+	</form>
 </div>

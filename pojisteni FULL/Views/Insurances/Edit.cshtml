@@ -6,13 +6,15 @@
 }
 
 <div class="col">
-	<div class="my-3 p-4 bg-light rounded">
-		<h1 class="display-6">@ViewData["Title"]</h1>
-		<div class="col-6 bg-default text-succes text-left">
-			«
-			@Html.DisplayFor(model => model.InsuredPersonItem.FirstName)
-			@Html.DisplayFor(model => model.InsuredPersonItem.LastName)
-			»</>
+	<div class="row">
+		<div class="col-12 p-4 bg-light rounded border">
+			<h1 class="display-6">@ViewData["Title"]</h1>
+			<div class="text-left">
+				«
+				@Html.DisplayFor(model => model.InsuredPersonItem.FirstName)
+				@Html.DisplayFor(model => model.InsuredPersonItem.LastName)
+				»</>
+			</div>
 		</div>
 	</div>
 </div>

@@ -7,25 +7,18 @@ namespace pojisteni_FULL.Models
 	{
 		public int InsuredPersonID { get; set; }
 
-		[Display(Name = "Jméno")]
 		public string FirstName { get; set; } = "";
 
-		[Display(Name = "Příjmení")]
 		public string LastName { get; set; } = "";
 
-		[Display(Name = "Email")]
 		public string Email { get; set; } = "";
 
-		[Display(Name = "Telefonní číslo")]
 		public int PhoneNumber { get; set; }
 		
-		[Display(Name = "Ulice + číslo popisné")]
 		public string StreetAndNumber { get; set; } = "";
 		
-		[Display(Name = "Město")]
 		public string City { get; set; } = "";
 		
-		[Display(Name = "PSČ")]
 		public string ZipCode { get; set; } = "";
 
 

@@ -6,57 +6,65 @@
 	<meta name="author" content="DARS" />
 	<title>@ViewData["Title"]</title>
 	<link rel="shortcut icon" href="~/images/runner.ico" />
-	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+	@*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true" />*@
 	<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 	@*<link rel="stylesheet" href="~/pojisteni_FULL.styles.css" asp-append-version="true" />*@
 </head>
 <body>
-	<header>
-		<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-light border-bottom box-shadow mb-3">
-			<div class="container-fluid">
-				<a class="navbar-brand btn btn-default" asp-area="" asp-controller="Home" asp-action="Index">PojištěníAPP</a>
-				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-						aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-				<div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-					<ul class="navbar-nav flex-grow-1">
-						<li class="nav-item">
-							<a class="nav-link text-dark" asp-area="" asp-controller="InsuredPersons" asp-action="Index">Pojištěnci</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link text-dark" asp-area="" asp-controller="Insurances" asp-action="Index">Pojištění</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Event">Události</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="AboutApp">O aplikaci ...</a>
-						</li>
-					</ul>
-					<partial name="_LoginPartial" />
+
+		<header>
+			<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-light border-bottom box-shadow mb-3">
+				<div class="container-fluid">
+					<a class="navbar-brand btn btn-default" asp-area="" asp-controller="Home" asp-action="Index">PojištěníAPP</a>
+					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+							aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+						<ul class="navbar-nav flex-grow-1">
+							<li class="nav-item">
+								<a class="nav-link text-dark" asp-area="" asp-controller="InsuredPersons" asp-action="Index">
+									Pojištěnci
+								</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link text-dark" asp-area="" asp-controller="Insurances" asp-action="Index">Pojištění</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Event">Události</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="AboutApp">O aplikaci ...</a>
+							</li>
+						</ul>
+					@*	<partial name="_LoginPartial" />*@
+					</div>
 				</div>
-			</div>
-		</nav>
-	</header>
+			</nav>
+		</header>
 
-	@Html.Partial("_StatusMessages")
+		@Html.Partial("_StatusMessages")
 
 
-	<div class="container">
-		<main role="main" class="pb-3">
-			@RenderBody()
-		</main>
-	</div>
-
-	<footer class="footer bg-light text-dark border-top">
+		<div class="container">
+			<main role="main" class="pb-3">
+				@RenderBody()
+			</main>
+		</div>
+	
+	<footer class="footer bg-light text-dark border-top fixed-bottom">
 		<div class="container py-2 text-left">
 			&copy; 2023 - aplikace Pojištění, DARS
 		</div>
 	</footer>
+	@*	<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>*@
 	<script src="~/lib/jquery/dist/jquery.min.js"></script>
 	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="~/js/site.js" asp-append-version="true"></script>
 	@await RenderSectionAsync("Scripts", required: false)
+
 </body>
 </html>

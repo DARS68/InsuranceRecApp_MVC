@@ -15,6 +15,7 @@ namespace pojisteni_FULL.Controllers
 
         public IActionResult Index()
         {
+
             return View();
         }
 

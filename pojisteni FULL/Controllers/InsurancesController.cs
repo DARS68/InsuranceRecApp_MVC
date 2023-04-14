@@ -17,11 +17,11 @@ namespace pojisteni_FULL.Controllers
 {
 	public class InsurancesController : Controller
 	{
-		private readonly ApplicationDbContext DB;
+		private readonly ApplicationDbContext db;
 
 		public InsurancesController(ApplicationDbContext context)
 		{
-			DB = context;
+			db = context;
 		}
 
 		// GET: InsuranceItems
@@ -32,7 +32,7 @@ namespace pojisteni_FULL.Controllers
 			 			// Zobrazíme seznam všech pojištění
 			List<InsuranceItem> insurances = new List<InsuranceItem>();
 
-			foreach (Insurance dbInsurance in DB.Insurance)
+			foreach (Insurance dbInsurance in db.Insurance)
 			{
 				insurances.Add(InsuranceItem.GetInsuranceItem(dbInsurance));
 			}
@@ -47,7 +47,7 @@ namespace pojisteni_FULL.Controllers
 
 			// === Option 2 ===
 			/*
-			List<InsuranceItem> insurances = DB.Insurance.Select((Insurance i) => InsuranceItem.GetInsuranceItem(i)).ToList();
+			List<InsuranceItem> insurances = db.Insurance.Select((Insurance i) => InsuranceItem.GetInsuranceItem(i)).ToList();
 
 			InsuranceListViewModel viewModel = new InsuranceListViewModel
 			{
@@ -60,7 +60,7 @@ namespace pojisteni_FULL.Controllers
 			// === Option 3 ====
 			InsuranceListViewModel viewModel = new InsuranceListViewModel
 			{
-				InsuranceItems = await DB.Insurance.Select((Insurance i) => InsuranceItem.GetInsuranceItem(i)).ToListAsync()
+				InsuranceItems = await db.Insurance.Select((Insurance i) => InsuranceItem.GetInsuranceItem(i)).ToListAsync()
 			};
 
 			return View(viewModel);
@@ -71,12 +71,12 @@ namespace pojisteni_FULL.Controllers
 		public async Task<IActionResult> Details(int? id)
 		{
 			/*
-			if (id == null || DB.Insurance == null)
+			if (id == null || db.Insurance == null)
 			{
 				return NotFound();
 			}
 
-			Insurance insurance = await DB.Insurance
+			Insurance insurance = await db.Insurance
 				.Include(i => i.InsuredPersonItem)
 				.FirstOrDefaultAsync(m => m.InsuranceID == id);
 			
@@ -84,7 +84,7 @@ namespace pojisteni_FULL.Controllers
 
 			// Keep TempData alive
 			TempData.Keep();
-			InsuredPersonItem insuredPerson = DB.InsuredPersonItem.Find(insuredPersonId);
+			InsuredPersonItem insuredPerson = db.InsuredPersonItem.Find(insuredPersonId);
 		
 
 			if (insurance == null)
@@ -109,7 +109,7 @@ namespace pojisteni_FULL.Controllers
 			//};
 			*/
 
-			Insurance insurance = await DB.Insurance.FirstOrDefaultAsync(i => i.InsuranceID == id);
+			Insurance insurance = await db.Insurance.FirstOrDefaultAsync(i => i.InsuranceID == id);
 
 			if (insurance.IsNull()) // if (insurance == null) or if (insurance is null)
 			{
@@ -130,7 +130,7 @@ namespace pojisteni_FULL.Controllers
 		public IActionResult Create(int? id)
 		{
 			// Access the database and get the insured person for whom we are creating the insurance
-			InsuredPerson insuredPerson = DB.InsuredPerson.FirstOrDefault(p => p.InsuredPersonID == id);
+			InsuredPerson insuredPerson = db.InsuredPerson.FirstOrDefault(p => p.InsuredPersonID == id);
 
 			// Check if the the insured person is in the database
 			if (insuredPerson.IsNull()) // if (insurance == null) or if (insurance is null)
@@ -171,9 +171,9 @@ namespace pojisteni_FULL.Controllers
 				InsuredPersonId = viewModel.InsuredPersonItem.InsuredPersonID
 			};
 
-			DB.Insurance.Add(insurance);
+			db.Insurance.Add(insurance);
 
-			await DB.SaveChangesAsync();
+			await db.SaveChangesAsync();
 
 			return RedirectToAction(nameof(Index)).WithSuccess("Pojištění", "bylo úspěšně přidáno.");
 		}
@@ -182,7 +182,7 @@ namespace pojisteni_FULL.Controllers
 		// GET: InsuranceItems/Edit/5
 		public async Task<IActionResult> Edit(int? id)
 		{
-			Insurance insurance = await DB.Insurance.FirstOrDefaultAsync(i => i.InsuranceID == id);
+			Insurance insurance = await db.Insurance.FirstOrDefaultAsync(i => i.InsuranceID == id);
 
 			if (insurance.IsNull()) // if (insurance == null) or if (insurance is null)
 			{
@@ -220,9 +220,9 @@ namespace pojisteni_FULL.Controllers
 				InsuredPersonId = viewModel.InsuredPersonItem.InsuredPersonID
 			};
 
-			DB.Insurance.Update(insurance);
+			db.Insurance.Update(insurance);
 
-			await DB.SaveChangesAsync();
+			await db.SaveChangesAsync();
 
 			return RedirectToAction(nameof(Index)).WithSuccess("Pojištění", "bylo úspěšně upraveno.");
 		}
@@ -230,7 +230,7 @@ namespace pojisteni_FULL.Controllers
 		// GET: InsuranceItems/Delete/5
 		public async Task<IActionResult> Delete(int? id)
 		{
-			Insurance insurance = await DB.Insurance.FirstOrDefaultAsync(i => i.InsuranceID == id);
+			Insurance insurance = await db.Insurance.FirstOrDefaultAsync(i => i.InsuranceID == id);
 
 			if (insurance.IsNull()) // if (insurance == null) or if (insurance is null)
 			{
@@ -270,17 +270,17 @@ namespace pojisteni_FULL.Controllers
 
 			if (insurance != null)
 			{
-				DB.Insurance.Remove(insurance);
+				db.Insurance.Remove(insurance);
 			}
 
-			await DB.SaveChangesAsync();
+			await db.SaveChangesAsync();
 			return RedirectToAction(nameof(Index)).WithSuccess("Pojištění", "bylo úspěšně odstraněno.");
 		}
 
 
 		private bool InsuranceExists(int id)
 		{
-			return DB.Insurance.Any(e => e.InsuranceID == id);
+			return db.Insurance.Any(e => e.InsuranceID == id);
 		}
 	}
 }

@@ -24,7 +24,7 @@ namespace pojisteni_FULL.Models
 		[Display(Name = "Pojištěnec")]
 		public int InsuredPersonId { get; set; }  // Foreign key to entity InsuredPersonItem
 
-		// Virtual = won´t be in DB table
+		// Virtual = won´t be in db table
 		public virtual InsuredPerson InsuredPerson { get; set; }  // Link to InsuredPersonItem
 	}
 }

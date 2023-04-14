@@ -8,22 +8,24 @@
 }
 
 <div class="col">
-	<div class="d-flex justify-content-start flex-wrap bg-light">
-		<div class="col-md-2 pe-5">
-			<img src="~/images/avatar.png" alt="Obrázek" class="img-fluid img-thumbnail m-3" />
-		</div>
-		<div class="col-md-10 p-4">
-			<h1 class="display-6">@Model.InsuredPersonItem.FirstName @Model.InsuredPersonItem.LastName</h1>
+	<div class="row">
+		<div class="col-12 mb-3 d-flex bg-light rounded border">
+			<div class="col-md-2">
+				<img src="~/images/avatar.png" alt="Obrázek" class="img img-thumbnail mt-2" />
+			</div>
+			<div class="col-md-10 p-2">
+				<h1 class="display-6">@Model.InsuredPersonItem.FirstName @Model.InsuredPersonItem.LastName</h1>
 
-			<div class="d-flex justify-content-start flex-wrap">
-				<div class="col-md-6 pe-5">
-					<p class="mb-1">@Model.InsuredPersonItem.StreetAndNumber</p>
-					<p class="mb-1">@Model.InsuredPersonItem.City</p>
-					<p class="mb-1">@Model.InsuredPersonItem.ZipCode</p>
-				</div>
-				<div class="col-md-6">
-					<p class="mb-1 me-1">@Model.InsuredPersonItem.Email</p>
-					<p class="mb-1">@Model.InsuredPersonItem.PhoneNumber</p>
+				<div class="d-flex justify-content-start flex-wrap">
+					<div class="col-md-6">
+						<p class="mb-1">@Model.InsuredPersonItem.StreetAndNumber</p>
+						<p class="mb-1">@Model.InsuredPersonItem.City</p>
+						<p class="mb-1">@Model.InsuredPersonItem.ZipCode</p>
+					</div>
+					<div class="col-md-6">
+						<p class="mb-1 me-1">@Model.InsuredPersonItem.Email</p>
+						<p class="mb-1">@Model.InsuredPersonItem.PhoneNumber</p>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -33,42 +35,41 @@
 
 @if (Model.InsuranceItems.Count > 0)
 {
-	<div class="table-responsive">
-		<table class="table">
-			<thead>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>
+					@*Druh pojištění*@
+					@Extensions.GetDisplayName(typeof(InsuranceItem), nameof(InsuranceItem.InsuranceName))
+				</th>
+				<th>
+					@*Pojistná částka*@
+					@Extensions.GetDisplayName(typeof(InsuranceItem), nameof(InsuranceItem.InsuranceAmount))
+				</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var insurance in Model.InsuranceItems)
+			{
 				<tr>
-					<th>
-						@*Druh pojištění*@
-						@Extensions.GetDisplayName(typeof(InsuranceItem), nameof(InsuranceItem.InsuranceName))
-					</th>
-					<th>
-						@*Pojistná částka*@
-						@Extensions.GetDisplayName(typeof(InsuranceItem), nameof(InsuranceItem.InsuranceAmount))
-					</th>
-					<th></th>
+					<td>
+						@*@Html.DisplayFor(modelItem => insurance.InsuranceName)*@
+						<a asp-controller="Insurances" asp-action="Details" asp-route-id="@insurance.InsuranceID">@insurance.InsuranceName</a>
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => insurance.InsuranceAmount)
+						Kč
+					</td>
+					<td class="d-flex justify-content-end">
+						<a asp-controller="Insurances" asp-action="Edit" asp-route-id="@insurance.InsuranceID" class="btn btn-sm btn-warning mr-1">Upravit</a>
+						<a asp-controller="Insurances" asp-action="Delete" asp-route-id="@insurance.InsuranceID" class="btn btn-sm btn-danger">Odstranit</a>
+					</td>
 				</tr>
-			</thead>
-			<tbody>
-				@foreach (var insurance in Model.InsuranceItems)
-				{
-					<tr>
-						<td>
-							@*@Html.DisplayFor(modelItem => insurance.InsuranceName)*@
-							<a asp-controller="Insurances" asp-action="Details" asp-route-id="@insurance.InsuranceID">@insurance.InsuranceName</a>
-						</td>
-						<td>
-							@Html.DisplayFor(modelItem => insurance.InsuranceAmount)
-							Kč
-						</td>
-						<td>
-							<a asp-controller="Insurances" asp-action="Edit" asp-route-id="@insurance.InsuranceID" class="btn btn-sm btn-warning me-1">Upravit</a>
-							<a asp-controller="Insurances" asp-action="Delete" asp-route-id="@insurance.InsuranceID" class="btn btn-sm btn-danger">Odstranit</a>
-						</td>
-					</tr>
-				}
-			</tbody>
-		</table>
-	</div>
+			}
+		</tbody>
+	</table>
+
 }
 
 <div>

@@ -6,17 +6,20 @@
 }
 
 <div class="col">
-	<div class="my-3 p-4 bg-light rounded">
-		<h1 class="display-6">@ViewData["Title"]</h1>
-		<div class="col-6 bg-default text-succes text-left">
-			«
-			nového pojištěnce
-			»</>
+	<div class="row">
+		<div class="col-12 p-4 bg-light rounded border">
+			<h1 class="display-6">@ViewData["Title"]</h1>
+			<div class="text-left">
+				«
+				nového pojištěnce
+				»</>
+			</div>
 		</div>
 	</div>
 </div>
 
 <hr />
+
 <div class="row">
 	<div class="col-md-4">
 		<form asp-action="Create">
