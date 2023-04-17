@@ -19,8 +19,8 @@ namespace pojisteni_FULL.Models.ViewModels.Items
 		public string InsuranceDescription { get; set; } = "";
 
 		[Display(Name = "Pojistná částka")]
-		[Required(ErrorMessage = "Vyplňte pojistnouo částku")]
-		public int InsuranceAmount { get; set; }
+		[Required(ErrorMessage = "Vyplňte pojistnou částku")]
+		public int InsuranceAmount { get; set; } = 0;
 
 		[Display(Name = "Předmět pojištění")]
 		[Required(ErrorMessage = "Vyplňte, co je předmětem pojištění")]

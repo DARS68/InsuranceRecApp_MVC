@@ -59,12 +59,6 @@ namespace pojisteni_FULL.Controllers
 		// GET: InsuredPersons/Create
 		public IActionResult Create()
 		{
-			//if (insuredPerson.IsNull())
-			//{
-			//	return View();
-			//	// Considet this: return NotFound();
-			//}
-
 			InsuredPersonViewModel viewModel = new InsuredPersonViewModel
 			{
 				InsuredPersonItem = new InsuredPersonItem()
@@ -153,10 +147,10 @@ namespace pojisteni_FULL.Controllers
 		// GET: InsuredPersons/Delete/5
 		public async Task<IActionResult> Delete(int? id)
 		{
-			//if (id == null || db.InsuredPerson == null)
-			//{
-			//	return NotFound();
-			//}
+			if (id == null || db.InsuredPerson == null)
+			{
+				return NotFound();
+			}
 
 			InsuredPerson insuredPerson = await db.InsuredPerson.FirstOrDefaultAsync(p => p.InsuredPersonID == id);
 
@@ -171,7 +165,7 @@ namespace pojisteni_FULL.Controllers
 			};
 
 
-		return View(viewModel);
+			return View(viewModel);
 		}
 
 		// POST: InsuredPersons/Delete/5

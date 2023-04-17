@@ -39,45 +39,6 @@ namespace pojisteni_FULL.Controllers
 		// GET: InsuranceItems/Details/5
 		public async Task<IActionResult> Details(int? id)
 		{
-			/*
-			if (id == null || db.Insurance == null)
-			{
-				return NotFound();
-			}
-
-			Insurance insurance = await db.Insurance
-				.Include(i => i.InsuredPersonItem)
-				.FirstOrDefaultAsync(m => m.InsuranceID == id);
-			
-			int insuredPersonId = Convert.ToInt32(TempData["InsuredPersonID"].ToString());
-
-			// Keep TempData alive
-			TempData.Keep();
-			InsuredPersonItem insuredPerson = db.InsuredPersonItem.Find(insuredPersonId);
-		
-
-			if (insurance == null)
-			{
-				return NotFound();
-			}
-
-			// DEPRECATED -> use the bellow example
-			//InsuredPersonInsuranceViewModel viewModel = new InsuredPersonInsuranceViewModel
-			//{
-			//	InsuranceID = insurance.InsuranceID,
-			//	InsuranceName = insurance.InsuranceName,
-			//	InsuranceDescription = insurance.InsuranceDescription,
-			//	InsuranceAmount = insurance.InsuranceAmount,
-			//	SubjectOfInsurance = insurance.SubjectOfInsurance,
-			//	ValidFrom = insurance.ValidFrom,
-			//	ValidTo = insurance.ValidTo,
-			//	InsuredPersonID = insurance.InsuredPersonId,
-			//	//InsuredPersonID = insuredPerson.InsuredPersonID,
-			//	FirstName = insuredPerson.FirstName,
-			//	LastName = insuredPerson.LastName,
-			//};
-			*/
-
 			Insurance insurance = await db.Insurance.FirstOrDefaultAsync(i => i.InsuranceID == id);
 
 			if (insurance.IsNull()) // if (insurance == null) or if (insurance is null)
@@ -123,10 +84,10 @@ namespace pojisteni_FULL.Controllers
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> Create(InsuredPersonInsuranceViewModel viewModel)
 		{
-			//if (!ModelState.IsValid)
-			//{
-			//	return View(viewModel);
-			//}
+			if (!ModelState.IsValid)
+			{
+				return View(viewModel);
+			}
 
 			Insurance insurance = new Insurance
 			{
@@ -153,7 +114,7 @@ namespace pojisteni_FULL.Controllers
 		{
 			Insurance insurance = await db.Insurance.FirstOrDefaultAsync(i => i.InsuranceID == id);
 
-			if (insurance.IsNull()) 
+			if (insurance.IsNull())
 			{
 				return NotFound();
 			}
@@ -235,6 +196,7 @@ namespace pojisteni_FULL.Controllers
 				SubjectOfInsurance = viewModel.InsuranceItem.SubjectOfInsurance,
 				ValidFrom = viewModel.InsuranceItem.ValidFrom,
 				ValidTo = viewModel.InsuranceItem.ValidTo,
+				//InsuredPersonId = viewModel.InsuredPersonItem.InsuredPersonID
 			};
 
 			if (insurance != null)

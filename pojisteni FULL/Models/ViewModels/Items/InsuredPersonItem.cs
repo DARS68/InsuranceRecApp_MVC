@@ -24,8 +24,8 @@ namespace pojisteni_FULL.Models.ViewModels.Items
         public string Email { get; set; } = "";
 
         [Display(Name = "Telefonní číslo")]
-		[Required(ErrorMessage = "Vyplňte kontaktní mobilní telefon")]
-		public int PhoneNumber { get; set; }
+        [Required(ErrorMessage = "Vyplňte kontaktní mobilní telefon")]
+        public int PhoneNumber { get; set; } = 0;
 
         [Display(Name = "Ulice a číslo popisné")]
 		[Required(ErrorMessage = "Vyplňte adresu")]

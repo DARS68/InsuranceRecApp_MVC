@@ -61,6 +61,16 @@
 						<span asp-validation-for="InsuranceItem.ValidTo" class="text-danger"></span>
 					</div>
 					<input type="hidden" asp-for="InsuredPersonItem.InsuredPersonID" />
+					<input type="hidden" asp-for="InsuredPersonItem.FirstName" />
+					<input type="hidden" asp-for="InsuredPersonItem.LastName" />
+					<input type="hidden" asp-for="InsuredPersonItem.Email" />
+					<input type="hidden" asp-for="InsuredPersonItem.PhoneNumber" />
+					<input type="hidden" asp-for="InsuredPersonItem.StreetAndNumber" />
+					<input type="hidden" asp-for="InsuredPersonItem.City" />
+					<input type="hidden" asp-for="InsuredPersonItem.ZipCode" />
+					<input type="hidden" asp-for="InsuranceItem.InsuredPersonName" />
+					<input type="hidden" asp-for="InsuranceItem.InsuredPersonStreetNumberCity" />
+					<input type="hidden" asp-for="InsuranceItem.InsuredPersonId" />
 					<div class="form-group d-flex justify-content-end">
 						<input type="submit" value="Založit smlouvu" class="btn btn-success mr-1" />
 						<a class="btn btn-primary" onclick="javascript:history.back();">Zpět na seznam</a>

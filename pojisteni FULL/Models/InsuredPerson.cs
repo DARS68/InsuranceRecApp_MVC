@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace pojisteni_FULL.Models
 {
+	/// <summary>
+	/// InsuredPerson is used as database class
+	/// </summary>
 	public class InsuredPerson
 	{
 		public int InsuredPersonID { get; set; }
@@ -22,7 +25,7 @@ namespace pojisteni_FULL.Models
 		public string ZipCode { get; set; } = "";
 
 
-		public virtual ICollection<Insurance> Insurances { get; set; }
+		public virtual ICollection<Insurance> Insurances { get; set; } = new HashSet<Insurance>();
 		//public virtual Insurance Insurances { get; set; }  // Link to InsuranceItem
 
 

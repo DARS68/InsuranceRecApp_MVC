@@ -5,6 +5,9 @@ using System.Xml.Linq;
 
 namespace pojisteni_FULL.Models.ViewModels
 {
+	/// <summary>
+	/// ViewModel (used in Insurances Create, Edit, Detail, Delete)
+	/// </summary>
 	public class InsuredPersonInsuranceViewModel
 	{
 		public InsuranceItem InsuranceItem { get; set; }

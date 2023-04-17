@@ -4,6 +4,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace pojisteni_FULL.Models
 {
+	/// <summary>
+	/// Insurance is used as database class
+	/// </summary>
 	public class Insurance
 	{
 		public int InsuranceID { get; set; }

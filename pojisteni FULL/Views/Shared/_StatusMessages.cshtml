@@ -4,12 +4,15 @@
     var body = (string)TempData["_alert.body"];
 }
 
+@*message for success of saving InsuredPerson or Insurance*@
 @if (!string.IsNullOrEmpty(type))
 {
     <div class="alert alert-@type alert-dismissible fade show" role="alert" id="myAlert">
         <strong>@title</strong> @body
         <button type="button" class="btn btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
+
+// script for delay of hide the message, 5sec
     <script>
         window.setTimeout(function () {
             document.querySelector('#myAlert').remove();
